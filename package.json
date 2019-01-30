@@ -1,0 +1,22 @@
+{
+  "name": "scl007-social-network",
+  "version": "0.0.1",
+  "description": "Proyecto social-networ HappyWithAllergies",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeslieSaVa/SCL007-Social-Network.git"
+  },
+  "author": "Gloria Moraga/ Ana Paula Monsalve/ Leslie Sabattin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeslieSaVa/SCL007-Social-Network/issues"
+  },
+  "homepage": "https://github.com/LeslieSaVa/SCL007-Social-Network#readme",
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
+}
