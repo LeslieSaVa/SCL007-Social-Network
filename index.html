@@ -5,39 +5,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles/grid.css">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Happy with Allergies</title>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+    <title>Document Social Network</title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4 logoBox">
-                    <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+        <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-4 logoBox">
+                            <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+                        </div>
+                        <div class="col-4 logoutBtnBox">
+                        <button class="logoutBtn hide" >LogOut</button>
+                        </div>
+        
+                    </div>
                 </div>
-                <div class="col-4 logoutBtnBox">
-                <button class="logoutBtn hide" >LogOut</button>
-                </div>
+            </header>
 
-            </div>
-        </div>
-    </header>
+<div id="loginRegister">
 
-    <main>
-       <div class="container">
-           
-       </div>
+    <form action="javascript.void(0)"></form>
+    <p>Email</p>
+    <input type= "email" id="textEmail" placeholder="email">
+    <p>Contraseña</p>
+    <input type= "password" id="password" placeholder="password">
+    <button id="btnLogin"> Log In</button>
+    <button id="btnSignUp"> Sign Up</button>   
+    <button id="btnFacebook"> Facebook</button>
+    <button id="btnGoogle"> Google</button>
+</div>
+<button id="btnLogout"> Logout</button>
 
+<script>
+ // Initialize Firebase
+ var config = {
+    apiKey: "AIzaSyBXLQzCiEyb7vvphcZm0-MV2XU7UZSftkQ",
+    authDomain: "happywithallergies.firebaseapp.com",
+    databaseURL: "https://happywithallergies.firebaseio.com",
+    projectId: "happywithallergies",
+    storageBucket: "happywithallergies.appspot.com",
+    messagingSenderId: "1019053243627"
+  };
+  firebase.initializeApp(config);
+</script>
 
-    </main>
-
-
-
-
-<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-<script src="js/main.js"></script>
-<script src="js/app.js"></script>
+<script src="js/auth.js" type="module"></script>
+<script src="js/main.js" type="module"></script>
+<script src="js/app.js" type="module"></script>
 </body>
 </html>
