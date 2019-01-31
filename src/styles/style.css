@@ -1,0 +1,28 @@
+
+header{
+
+    background-color: beige;
+
+}
+
+/* logo caja e imagen*/
+
+.logoBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoImg{
+    width: 150px;
+    
+}
+
+/* boton logout */
+.logoutBtnBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
