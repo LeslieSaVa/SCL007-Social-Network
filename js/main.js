@@ -1,5 +1,6 @@
-import {checkAuthState, register, exit, google, facebook} from  './auth.js'
-   
+import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
+
+ 
 window.onload = () =>{
  
     checkAuthState((firebaseUser) => {
@@ -29,11 +30,11 @@ const loginWithEmail =()=>{
     const loginEmail = textEmail.value;
     const loginPass = password.value;
 
-    register(loginEmail,loginPass);
+    login(loginEmail,loginPass);
 
 };
 
-btnLogin.addEventListener('click', registerWithEmail);
+btnLogin.addEventListener('click', loginWithEmail);
 
 const LogOut =() =>{
 
@@ -55,3 +56,4 @@ const loginFacebook =()=>{
     facebook()
 }
 btnFacebook.addEventListener('click', facebook)
+

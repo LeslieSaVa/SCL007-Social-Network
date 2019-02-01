@@ -1,3 +1,5 @@
+import {writeUserData} from './app.js'
+
 window.onload = () =>{
     checkAuthState();
 };
@@ -5,7 +7,8 @@ window.onload = () =>{
 export const checkAuthState =(callback) =>{
     firebase.auth().onAuthStateChanged((firebaseUser) => {
         if (firebaseUser){
-            console.log("Hay un usuario >" + JSON.stringify(firebaseUser) );
+            console.log("Hay un usuario >" //+ JSON.stringify(firebaseUser)
+            );
             callback(firebaseUser)
         }else{
             console.log('No está logueado')
@@ -18,19 +21,22 @@ export const checkAuthState =(callback) =>{
 export const register = (email,pass) =>{
  firebase.auth().createUserWithEmailAndPassword(email, pass)
 .then((firebaseUser)=>{
-    console.log("usuario >" + JSON.stringify(firebaseUser) )
+    console.log("usuario >" + JSON.stringify(firebaseUser.uid) )
 })
 .catch(e =>console.log(e.message))
 };
 
 
-export const login = (email,pass) => {
-
+export const login = (email, pass) => {
     firebase.auth().signInWithEmailAndPassword(email, pass)
-    .then ((firebaseUser)=>{
-        console.log("usuario >" + JSON.stringify(firebaseUser) )
-    })
-    .catch(e =>console.log(e.message))
+        .then((firebaseUser) => {
+            console.log("usuario >" + JSON.stringify(firebaseUser))
+        })
+        .then(() =>{
+            writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
+
+        })
+        .catch(e => console.log(e.message))
 };
 
 export const exit = () =>{
