@@ -1,6 +1,6 @@
 
   /* global no border no marhi no padding */
-  
+
   *{
     box-sizing: border-box;
     margin: 0;
@@ -92,3 +92,12 @@
     /* (12 / 12) x 100 */
     width: 100%;
   }
+
+
+
+
+  @media (max-width: 600px){
+    [class *="col-"]{
+      width: 100%;
+    }
+ }
