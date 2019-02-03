@@ -1,5 +1,5 @@
 
-/* logo caja e imagen*/
+/* css for login and register*/
 
 .logoBox{
     display: flex;
@@ -23,7 +23,10 @@
 .hide{
     display: none;
 }
+.marginContainer{
+margin-top: 100px;
 
+}
 /* formulario */
 
 .form {
@@ -68,3 +71,33 @@
     background: #AF7AC5;
   }
 
+/* css for  header, main and footer page*/
+
+header{
+    background-color: bisque;
+
+}
+ .logoImgMain{
+    width: 100px;
+  }
+
+  /* media queries for css style */
+
+  @media (max-width: 850px){
+  
+}
+
+
+
+
+ @media (max-width: 500px){
+.form {
+    box-shadow:none;
+
+    }
+.marginContainer{
+     margin-top: 40px;
+        
+        }
+  
+}

@@ -6,9 +6,10 @@ window.onload = () =>{
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
             loginRegister.style.display ="none";
-
+            contentPage.style.display="block"
         }else{
            loginRegister.style.display ="block";
+           contentPage.style.display="none"
         }
     });
 

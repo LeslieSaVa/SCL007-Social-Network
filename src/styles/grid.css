@@ -1,5 +1,5 @@
 
-  /* global no border no marhi no padding */
+  /* global no border no margin no padding */
 
   *{
     box-sizing: border-box;
@@ -25,6 +25,7 @@
 }
 
 /* toma todas las clases con col y les da estas propiedades*/
+
 [class*="col-"]{
     min-height: 7px;
     padding: 7px;
@@ -95,8 +96,15 @@
 
 
 
+/* media queries for Grid system */
+  @media (max-width: 850px){
+  
+ }
 
-  @media (max-width: 600px){
+
+
+
+  @media (max-width: 500px){
     [class *="col-"]{
       width: 100%;
     }

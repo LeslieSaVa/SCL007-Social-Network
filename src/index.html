@@ -11,58 +11,71 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
-
-  
-
-    <title>Happy with Allergies</title>
+ <title>Happy with Allergies</title>
 </head>
+
 <body>
-        <header>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4 logoBox">
-                            <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
-                        </div>
-                        <div class="col-4 logoutBtnBox">
-                        <button class="logoutBtn hide" >LogOut</button>
-                        </div>
+ <!-- Login Page Contant -->
+    <div id="loginRegister" class="container">
+        <div class="row">
+            <div class="col-4"></div>
+
+             <div class="col-4 col-m-1  marginContainer">
+                           
+                            <div class="form">
+                                    <div class="logoBox">
+                                     <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+                                    </div>
+                                    <form  action="javascript.void(0)"></form>
+                                    <input type= "email" id="textEmail" placeholder="email">
+                                    <input type= "password" id="password" placeholder="password">
+                                    <div class="row">
+                                    <div class="col-6"> <button class="formSignBtn" id="btnLogin"> Log In</button></div>
+                                    <div class="col-6"><button class="formSignBtn" id="btnSignUp"> Sign Up</button>  </div>
+                                    </div> 
+                                    <button id="btnFacebook"> Facebook</button>
+                                    <button id="btnGoogle"> Google</button>
+                            </div>
+            </div>
+            <div class="col-4"> </div>
         
-                    </div>
+        </div>
+    </div>
+                
+
+
+<!-- Page Content -->
+<div id="contentPage">
+<header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="logoBoxMain">
+                 <img class="logoImgMain" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
                 </div>
-            </header>
-
-         <main>
-             <div class="container">
-                 <div class="row">
-                     <div class="col-4"></div>
-
-                     <div class="col-4">
-
-                          <div class="form" id="loginRegister">
-                          <form  action="javascript.void(0)"></form>
-                          <input type= "email" id="textEmail" placeholder="email">
-                          <input type= "password" id="password" placeholder="password">
-                          <div class="row">
-                          <div class="col-6"> <button class="formSignBtn" id="btnLogin"> Log In</button></div>
-                          <div class="col-6"><button class="formSignBtn" id="btnSignUp"> Sign Up</button>  </div>
-                          </div> 
-                          <button id="btnFacebook"> Facebook</button>
-                          <button id="btnGoogle"> Google</button>
-                          </div>
-                          <button id="btnLogout"> Logout</button>
-                        
-                      </div>
-                         <div class="col-4"></div>
-                </div>
-            </div>   
-         </main>
+            </div> 
+            <div class="col-4"></div>
+            <div class="col-4">
+                <button id="btnLogout"> Logout</button>
+            </div> 
+        </div>
+    </div>
+</header>
 
 
+<main>
+        
 
-        <footer> </footer>
+</main>
 
 
+<footer>
+      
+
+</footer>
+
+</div>
 
 <script>
  // Initialize Firebase
