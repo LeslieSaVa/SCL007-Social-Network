@@ -30,8 +30,14 @@ const loginWithEmail =()=>{
 
     const loginEmail = textEmail.value;
     const loginPass = password.value;
+    if(loginEmail != "" && loginPass != ""){
+        login(loginEmail,loginPass);
+    }else{
+        document.getElementById('loginError').innerHTML = "Debes ingresar tu email y password"
 
-    login(loginEmail,loginPass);
+    }
+
+    
 
 };
 
