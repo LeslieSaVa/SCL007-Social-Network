@@ -219,6 +219,13 @@ header{
   }
   footer{
     background-color: #f2f2f2;
+    width: 100%;
+    position: absolute;
+    clear: both;
+    margin-top: 0px;
+    padding-top: 0px;
+    overflow: visible;
+    top:93%;
  
 
   }
