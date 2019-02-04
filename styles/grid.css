@@ -93,11 +93,9 @@
     width: 100%;
   }
 
-
-
-
   @media (max-width: 600px){
     [class *="col-"]{
       width: 100%;
     }
  }
+ 
