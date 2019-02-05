@@ -5,11 +5,16 @@ window.onload = () =>{
  
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
-            loginRegister.style.display ="none";
-            contentPage.style.display="block"
+            loginPageContent.style.display ="none";
+            headerPage.style.display="block";
+            footerPage.style.display="block";
+            indexPage.style.display="block";
+          
         }else{
-           loginRegister.style.display ="block";
-           contentPage.style.display="none"
+            loginPageContent.style.display ="block";
+            headerPage.style.display="none";
+            footerPage.style.display="none";
+            indexPage.style.display="none";
         }
     });
 
@@ -64,3 +69,19 @@ const loginFacebook =()=>{
 }
 btnFacebook.addEventListener('click', facebook)
 
+const showUserInfo = () => {
+    indexPage.style.display="none";
+    const userInfo = firebase.auth().currentUser;
+    console.log(userInfo)
+    if(userInfo.photoURL != null){
+               
+    perfilContainer.innerHTML =`<h3>${userInfo.email}</h3>
+            <img src="${userInfo.photoURL}" style="width:300px"/>`;
+           
+       }else{
+        perfilContainer.innerHTML =`<h3>${userInfo.email}</h3>
+         <img src="IMG/avatar-default.png" style="width:300px"/>`;
+    }
+    }
+
+showUser.addEventListener('click', showUserInfo);    
