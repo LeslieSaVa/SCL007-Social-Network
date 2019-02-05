@@ -6,9 +6,10 @@ window.onload = () =>{
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
             loginRegister.style.display ="none";
-
+            contentPage.style.display="block"
         }else{
            loginRegister.style.display ="block";
+           contentPage.style.display="none"
         }
     });
 
@@ -29,8 +30,14 @@ const loginWithEmail =()=>{
 
     const loginEmail = textEmail.value;
     const loginPass = password.value;
+    if(loginEmail != "" && loginPass != ""){
+        login(loginEmail,loginPass);
+    }else{
+        document.getElementById('loginError').innerHTML = "Debes ingresar tu email y password"
 
-    login(loginEmail,loginPass);
+    }
+
+    
 
 };
 
