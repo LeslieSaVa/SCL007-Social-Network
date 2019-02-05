@@ -1,4 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
+import {createComents} from './app.js'
 
  
 window.onload = () =>{
@@ -7,11 +8,13 @@ window.onload = () =>{
         if (firebaseUser){
             loginRegister.style.display ="none";
             contentPage.style.display="block"
+            inicializar()
         }else{
            loginRegister.style.display ="block";
            contentPage.style.display="none"
         }
     });
+
 
 }
 
@@ -63,4 +66,5 @@ const loginFacebook =()=>{
     facebook()
 }
 btnFacebook.addEventListener('click', facebook)
+
 
