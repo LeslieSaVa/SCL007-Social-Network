@@ -97,7 +97,7 @@
 
 
 /* media queries for Grid system */
-  @media (max-width: 900px){
+  @media (max-width: 868px){
 
     .col-m-1 {
       /* (1 / 12) x 100 */
@@ -164,7 +164,7 @@
 
 
 
- @media screen and (max-width: 600px) {
+ @media screen and (max-width: 580px) {
   .row {
       margin-top: 0;
   }

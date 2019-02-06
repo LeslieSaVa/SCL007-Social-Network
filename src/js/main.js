@@ -6,13 +6,18 @@ window.onload = () =>{
  
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
-            loginRegister.style.display ="none";
-            contentPage.style.display="block"
+
+            loginPageContent.style.display ="none";
+            headerPage.style.display="block";
+            footerPage.style.display="block";
+            indexPage.style.display="block";
             readPostFromDatabase();
-            
+
         }else{
-           loginRegister.style.display ="block";
-           contentPage.style.display="none"
+            loginPageContent.style.display ="block";
+            headerPage.style.display="none";
+            footerPage.style.display="none";
+            indexPage.style.display="none";
         }
     });
     
@@ -103,4 +108,55 @@ const readPostFromDatabase = () => {
   
  
   
+
+
+const showUserInfo = () => {
+    indexPage.style.display="none";
+    const userInfo = firebase.auth().currentUser;
+    console.log(userInfo)
+    if(userInfo.photoURL != null){
+               
+    perfilContainer.innerHTML =`
+     <div class="card card-one">
+           <div class="headerCard">
+           <div class="avatar"><img src="${userInfo.photoURL}" alt="Jhon Doe" /></div>
+           </div>
+           <h3>${userInfo.email}</h3>
+           <div class="desc">
+           Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
+           </div>
+           <div class="contacts">
+           <a href=""><i class="fa fa-plus"></i></a>
+           <a href=""><i class="fa fa-whatsapp"></i></a>
+           <a href=""><i class="fa fa-envelope"></i></a>
+           <div class="clear"></div>
+           </div>
+           <div class="footerCard"></div>
+     </div>
+            `;
+           
+       }else{
+        perfilContainer.innerHTML =
+        `
+     <div class="card card-one">
+           <div class="headerCard">
+           <div class="avatar"><img src="IMG/avatar-default.png" alt="Jhon Doe" /></div>
+           </div>
+           <h3>${userInfo.email}</h3>
+           <div class="desc">
+           Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
+           </div>
+           <div class="contacts">
+           <a href=""><i class="fa fa-plus"></i></a>
+           <a href=""><i class="fa fa-whatsapp"></i></a>
+           <a href=""><i class="fa fa-envelope"></i></a>
+           <div class="clear"></div>
+           </div>
+           <div class="footerCard"></div>
+     </div>`;
+    
+    }
+    }
+
+showUser.addEventListener('click', showUserInfo);    
 
