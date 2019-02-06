@@ -19,7 +19,21 @@ import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
          }
      });
 
- }
+            login_pagecontent.style.display ="none";
+            header_page.style.display="block";
+            footer_page.style.display="block";
+            index_page.style.display="block";
+            readPostFromDatabase();
+
+        }else{
+            login_pagecontent.style.display ="block";
+            header_page.style.display="none";
+            footer_page.style.display="none";
+            index_page.style.display="none";
+        }
+    });
+    
+}
 
  const registerWithEmail = () => {
 
@@ -104,8 +118,38 @@ import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
      console.log(userInfo)
      if (userInfo.photoURL != null) {
 
-         perfilContainer.innerHTML = `
-     <div class="card card-one">
+ }
+btnComents.addEventListener('click', guardarComentarios)
+
+
+const readPostFromDatabase = () => {
+    root.style.display="block"
+    readPost((coment)=>{            
+        newcoments.innerHTML  += 
+      `<div id= ${coment.key}>
+      <h3>${coment.val().title}</h3>
+       <p>${coment.val().body}</p>
+       <button id=" ${coment.key}">borrar</button>
+       </div>
+       `;  document.getElementById(coment.key).addEventListener('click', deletePost)
+    });     
+  }
+
+
+const showUserInfo = () => {
+    index_page.style.display="none";
+    recipes_container.style.display ="none";
+    profile_container.style.display ="block";
+    search_container.style.display ="none";
+    addpost_container.style.display ="none";
+
+    const userInfo = firebase.auth().currentUser;
+    //console.log(userInfo)
+    if(userInfo.photoURL != null){
+               
+    profile_container.innerHTML =`
+    <div class="container"><div class="row"><div class="col-12">
+    <div class="card card-one">
            <div class="headerCard">
            <div class="avatar"><img src="${userInfo.photoURL}" alt="Jhon Doe" /></div>
            </div>
@@ -121,12 +165,14 @@ import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
            </div>
            <div class="footerCard"></div>
      </div>
+     </div></div></div>
             `;
-
-     } else {
-         perfilContainer.innerHTML =
-             `
-     <div class="card card-one">
+           
+       }else{
+        profile_container.innerHTML =
+        `
+        <div class="container"><div class="row"><div class="col-12">
+        <div class="card card-one">
            <div class="headerCard">
            <div class="avatar"><img src="IMG/avatar-default.png" alt="Jhon Doe" /></div>
            </div>
@@ -141,9 +187,53 @@ import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
            <div class="clear"></div>
            </div>
            <div class="footerCard"></div>
-     </div>`;
+     </div>
+     </div></div></div>`;
+    
+    }
+    }
 
      }
  }
 
- showUser.addEventListener('click', showUserInfo);
+document.getElementById("addPost").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="block";
+    document.getElementById("index_page").style.display="none";
+    document.getElementById("search_container").style.display ="none";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="none";
+
+})
+
+
+document.getElementById("index").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="none";
+    document.getElementById("index_page").style.display="block";
+    document.getElementById("search_container").style.display ="none";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="none";
+
+})
+
+document.getElementById("search").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="none";
+    document.getElementById("index_page").style.display="none";
+    document.getElementById("search_container").style.display ="block";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="none";
+
+})
+
+
+document.getElementById("recipes").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="none";
+    document.getElementById("index_page").style.display="none";
+    document.getElementById("search_container").style.display ="none";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="block";
+
+})
