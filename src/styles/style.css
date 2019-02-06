@@ -563,3 +563,6 @@ h3::after{
   margin: 10px;
 }
 
+#addpost_container{
+  display: none;
+}

@@ -7,17 +7,17 @@ window.onload = () =>{
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
 
-            loginPageContent.style.display ="none";
-            headerPage.style.display="block";
-            footerPage.style.display="block";
-            indexPage.style.display="block";
+            login_pagecontent.style.display ="none";
+            header_page.style.display="block";
+            footer_page.style.display="block";
+            index_page.style.display="block";
             readPostFromDatabase();
 
         }else{
-            loginPageContent.style.display ="block";
-            headerPage.style.display="none";
-            footerPage.style.display="none";
-            indexPage.style.display="none";
+            login_pagecontent.style.display ="block";
+            header_page.style.display="none";
+            footer_page.style.display="none";
+            index_page.style.display="none";
         }
     });
     
@@ -106,12 +106,17 @@ const readPostFromDatabase = () => {
 
 
 const showUserInfo = () => {
-    indexPage.style.display="none";
+    index_page.style.display="none";
+    recipes_container.style.display ="none";
+    profile_container.style.display ="block";
+    search_container.style.display ="none";
+    addpost_container.style.display ="block";
+
     const userInfo = firebase.auth().currentUser;
-    console.log(userInfo)
+    //console.log(userInfo)
     if(userInfo.photoURL != null){
                
-    perfilContainer.innerHTML =`
+    profile_container.innerHTML =`
      <div class="card card-one">
            <div class="headerCard">
            <div class="avatar"><img src="${userInfo.photoURL}" alt="Jhon Doe" /></div>
@@ -131,7 +136,7 @@ const showUserInfo = () => {
             `;
            
        }else{
-        perfilContainer.innerHTML =
+        profile_container.innerHTML =
         `
      <div class="card card-one">
            <div class="headerCard">
@@ -155,3 +160,11 @@ const showUserInfo = () => {
 
 showUser.addEventListener('click', showUserInfo);    
 
+document.getElementById("addPost").addEventListener("click", () =>{
+    document.getElementById("addPostContainer").style.display ="block";
+    document.getElementById("indexPage").style.display ="none";
+    document.getElementById("searchContainer").style.display ="none";
+    document.getElementById("perfilContainer").style.display ="none";
+    document.getElementById("recipesContainer").style.display ="none";
+
+})
