@@ -110,14 +110,15 @@ const showUserInfo = () => {
     recipes_container.style.display ="none";
     profile_container.style.display ="block";
     search_container.style.display ="none";
-    addpost_container.style.display ="block";
+    addpost_container.style.display ="none";
 
     const userInfo = firebase.auth().currentUser;
     //console.log(userInfo)
     if(userInfo.photoURL != null){
                
     profile_container.innerHTML =`
-     <div class="card card-one">
+    <div class="container"><div class="row"><div class="col-12">
+    <div class="card card-one">
            <div class="headerCard">
            <div class="avatar"><img src="${userInfo.photoURL}" alt="Jhon Doe" /></div>
            </div>
@@ -133,12 +134,14 @@ const showUserInfo = () => {
            </div>
            <div class="footerCard"></div>
      </div>
+     </div></div></div>
             `;
            
        }else{
         profile_container.innerHTML =
         `
-     <div class="card card-one">
+        <div class="container"><div class="row"><div class="col-12">
+        <div class="card card-one">
            <div class="headerCard">
            <div class="avatar"><img src="IMG/avatar-default.png" alt="Jhon Doe" /></div>
            </div>
@@ -153,18 +156,52 @@ const showUserInfo = () => {
            <div class="clear"></div>
            </div>
            <div class="footerCard"></div>
-     </div>`;
+     </div>
+     </div></div></div>`;
     
     }
     }
 
 showUser.addEventListener('click', showUserInfo);    
 
-document.getElementById("addPost").addEventListener("click", () =>{
-    document.getElementById("addPostContainer").style.display ="block";
-    document.getElementById("indexPage").style.display ="none";
-    document.getElementById("searchContainer").style.display ="none";
-    document.getElementById("perfilContainer").style.display ="none";
-    document.getElementById("recipesContainer").style.display ="none";
+document.getElementById("addPost").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="block";
+    document.getElementById("index_page").style.display="none";
+    document.getElementById("search_container").style.display ="none";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="none";
+
+})
+
+
+document.getElementById("index").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="none";
+    document.getElementById("index_page").style.display="block";
+    document.getElementById("search_container").style.display ="none";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="none";
+
+})
+
+document.getElementById("search").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="none";
+    document.getElementById("index_page").style.display="none";
+    document.getElementById("search_container").style.display ="block";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="none";
+
+})
+
+
+document.getElementById("recipes").addEventListener('click', () =>{
+
+    document.getElementById("addpost_container").style.display ="none";
+    document.getElementById("index_page").style.display="none";
+    document.getElementById("search_container").style.display ="none";
+    document.getElementById("profile_container").style.display ="none";
+    document.getElementById("recipes_container").style.display ="block";
 
 })
