@@ -48,10 +48,6 @@ export function deletePost(){
   firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
     null:null
   })
-
-  
-
-
 };
 
 
