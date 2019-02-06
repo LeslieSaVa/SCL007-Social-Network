@@ -208,7 +208,7 @@ header{
     color: #884EA0;
   }
 
-  .boxiconNav{
+  .boxicon_nav{
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -564,5 +564,14 @@ h3::after{
 }
 
 #addpost_container{
+  display: none;
+}
+#recipes_container{
+  display: none;
+}
+#profile_container{
+  display: none;
+}
+#search_container{
   display: none;
 }
