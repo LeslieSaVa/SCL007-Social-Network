@@ -88,7 +88,8 @@ btnComents.addEventListener('click', guardarComentarios)
 
 const readPostFromDatabase = () => {
     root.style.display="block"
-    readPost((coment)=>{            
+    readPost((coment)=>{   
+        document.getElementById('newcoments')= "" ;        
         newcoments.innerHTML  += 
       `<div id= ${coment.key}>
       <h3>${coment.val().title}</h3>

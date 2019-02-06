@@ -34,7 +34,7 @@ export const enviarConvalidacionAFirebase =(uid, username,title, body)=>{
 
 export const readPost = (onpostChange) => {
   var postRef = firebase.database().ref('posts');
-  postRef.on('child_added', (coment)=> {
+  postRef.on('child_added',(coment)=> {
     onpostChange(coment);
   });
 };
@@ -48,6 +48,9 @@ export function deletePost(){
   firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
     null:null
   })
+
+  
+
 
 };
 
