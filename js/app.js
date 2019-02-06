@@ -1,6 +1,3 @@
-
-
-
 export const writeUserData = (uid, name, email, imageUrl) => {
   firebase.database().ref('users/'+uid).set({
     "perfil": {
@@ -41,8 +38,7 @@ export const readPost = (onpostChange) => {
 };
 
 
-export function deletePost(){
- 
+export function deletePost(){ 
   firebase.database().ref('posts/'+ this.id).set({
     null:null
   })
@@ -50,6 +46,7 @@ export function deletePost(){
     null:null
   })
 };
+
 
 
 

@@ -64,7 +64,7 @@ export const google = () =>{
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
       });
-
+      writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
 }
 
 export const facebook =() =>{
@@ -87,5 +87,5 @@ export const facebook =() =>{
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
       });
-      
+      writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
 }
