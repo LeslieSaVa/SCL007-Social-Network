@@ -17,135 +17,171 @@
 </head>
 
 <body>
- <!-- Login Page Contant -->
-    <div id="loginRegister" class="container">
-        <div class="row">
-            <div class="col-3 col-m-2 col-s-12"></div>
-
-             <div class="col-6 col-m-8 col-s-12 marginContainer">
-                           
-                            <div class="form">
-                                    <div class="logoBox">
-                                     <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
-                                    </div>
-                                    <form  action="javascript.void(0)"></form>
-                                    <p id="loginError"></p>
-                                    <input type= "email" id="textEmail" placeholder="email">
-                                    <input type= "password" id="password" placeholder="password">
-                                    <div class="row">
-                                    <div class="col-6"> <button class="formSignBtn" id="btnLogin"> Log In</button></div>
-                                    <div class="col-6"><button class="formSignBtn" id="btnSignUp"> Sign Up</button>  </div>
-                                    </div> 
-                                    <div class="row">
-                                        <div class="col-6 col-s-12"> 
-                                         <button id="btnGoogle" type="button" class="google-button">
-                                            <span class="google-button__icon">
-                                              <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg"><path d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z" id="Shape" fill="#EA4335"/><path d="M20.6 102.4c20.3 15.8 40.6 31.5 61 47.3-8 23.3-8 49.2 0 72.4-20.3 15.8-40.6 31.6-60.9 47.3C1.9 232.7-3.8 189.6 4.4 149.2c3.3-16.2 8.7-32 16.2-46.8z" id="Shape" fill="#FBBC05"/><path d="M361.7 151.1c5.8 32.7 4.5 66.8-4.7 98.8-8.5 29.3-24.6 56.5-47.1 77.2l-59.1-45.9c19.5-13.1 33.3-34.3 37.2-57.5H186.6c.1-24.2.1-48.4.1-72.6h175z" id="Shape" fill="#4285F4"/><path d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z" fill="#34A853"/></svg>
-                                            </span>
-                                            <span class="google-button__text">Login with Google</span>
-                                         </button>
-                                        </div>
-                                        <div class="col-6 col-s-12">   
-                                          <button id="btnFacebook" class="loginBtn loginBtn--facebook">Login with Facebook </button>
-                                        </div>
-                                    </div>
-                                    
-                            </div>
-                      </div>
-            <div class="col-3 col-m-2 col-s-12"> </div>
-        
-        </div>
-    </div>
-                
-
 
 <!-- Page Content -->
-<div id="contentPage">
-<header>
+<header id="headerPage">
   <nav>
     <div class="container">
         <div class="row boxiconNav">
-            <div class="col-12">
+            <div class="col-6 col-m-12">
                 <div class="logoBox">
                  <img class="logoImgMain" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
                 </div>
             </div> 
+            <div class="col-6 menuHeader">
+                    <ul>
+                        <li>Home</li>
+                        <li>Buscar</li>
+                        <li>Publicar</li>
+                        <li>Perfil</li>
+                        <li><button id="btnLogout">Cerrar</button></li>
+                    </ul>
+   
+            </div>
         
         </div>
     </div>
         
-    <div class="logout-btn"><button id="btnLogout">logout</button></div>
+   
  </nav>
 </header>
 
+<!-- Login Page Contant -->
+<section id="loginPageContent"> 
+    <div id="loginRegister" class="container">
+       <div class="row">
+           <div class="col-4 col-m-3 col-s-12"></div>
+   
+            <div class="col-4 col-m-6 col-s-12 marginContainer">
+                          
+                           <div class="form">
+                                   <div class="logoBox">
+                                    <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+                                   </div>
+                                   <form  action="javascript.void(0)"></form>
+                                   <p id="loginError"></p>
+                                   <input type= "email" id="textEmail" placeholder="email">
+                                   <input type= "password" id="password" placeholder="password">
+                                   <div class="row">
+                                   <div class="col-6"> <button class="formSignBtn" id="btnLogin"> Log In</button></div>
+                                   <div class="col-6"><button class="formSignBtn" id="btnSignUp"> Sign Up</button>  </div>
+                                   </div> 
+                                   <div class="row">
+                                       <div class="col-12 "> 
+                                        <button id="btnGoogle" type="button" class="google-button">
+                                           <span class="google-button__icon">
+                                             <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg"><path d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z" id="Shape" fill="#EA4335"/><path d="M20.6 102.4c20.3 15.8 40.6 31.5 61 47.3-8 23.3-8 49.2 0 72.4-20.3 15.8-40.6 31.6-60.9 47.3C1.9 232.7-3.8 189.6 4.4 149.2c3.3-16.2 8.7-32 16.2-46.8z" id="Shape" fill="#FBBC05"/><path d="M361.7 151.1c5.8 32.7 4.5 66.8-4.7 98.8-8.5 29.3-24.6 56.5-47.1 77.2l-59.1-45.9c19.5-13.1 33.3-34.3 37.2-57.5H186.6c.1-24.2.1-48.4.1-72.6h175z" id="Shape" fill="#4285F4"/><path d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z" fill="#34A853"/></svg>
+                                           </span>
+                                           <span class="google-button__text">Login with Google</span>
+                                        </button>
+                                       </div>
+                                       <div class="col-12">   
+                                         <button id="btnFacebook" class="loginBtn loginBtn--facebook">Login with Facebook </button>
+                                       </div>
+                                   </div>
+                                   
+                           </div>
+                     </div>
+           <div class="col-4 col-m-3 col-s-12"> </div>
+       
+       </div>
+   </div>
+ </section>
+ <!-- End Login Page Contant -->  
 
-<main>
 
-    <div id="root">
-    <div id="newcoments"></div>    
-    </div>
-
-    <form action="javascript.void(0)" id="form-information"></form>
-        
+<section id="indexPage">
     <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <label for="name">Nombre</label>
-                <input type="text" name="nombre" id="nombreaconvalidar">
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <label for="title">Titulo</label>
-                <input type="text" name="titulo" id="tituloaconvalidar">
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <textarea name="comentario" id="coments" cols="30" rows="10" placeholder="Escribe aqui tu comentario..."></textarea>
-                <br>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4">
-                           <label class="custom-file-upload">
-                            <input type="file" name="fichero" value="" id="fichero"/>
-                            <i class="material-icons">add</i>
-                           </label> 
+         <!-- comentar y publicar -->  
+            <div id="root">
+                    <div id="newcoments"></div>    
+                    </div>
+                
+                    <form action="javascript.void(0)" id="form-information"></form>
+                        
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="name">Nombre</label>
+                                <input type="text" name="nombre" id="nombreaconvalidar">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button id="btnImg">+</button>
-                <button id="btnComents">Crear Post</button>
-               <!-- <input type="submit" value="Crear Comentario" id="btn-coments"> -->
-            </div>
-        </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="title">Titulo</label>
+                                <input type="text" name="titulo" id="tituloaconvalidar">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <textarea name="comentario" id="coments" cols="30" rows="10" placeholder="Escribe aqui tu comentario..."></textarea>
+                                <br>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                           <label class="custom-file-upload">
+                                            <input type="file" name="fichero" value="" id="fichero"/>
+                                            <i class="material-icons">add</i>
+                                           </label> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="btnImg">+</button>
+                                <button id="btnComents">Crear Post</button>
+                               <!-- <input type="submit" value="Crear Comentario" id="btn-coments"> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+      <!-- estructura publicacion -->             
+                    <div class="box text">
+                        <div class="box-header">
+                          <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" />Roswell Parian</a>
+                          </h3>
+                         </div>
+                        <div class="box-content">
+                          <div class="content">
+                            <p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.</p>
+                          </div>
+                        </div>
+                        <div class="box-buttons">
+                          <div class="row">
+                            <button><span class="fa fa-thumbs-up"></span> Like</button>
+                            <button><span class="ion-chatbox-working"></span> Comment</button>
+                            <button><span class="fas fa-ellipsis-v"></span></button>
+                          </div>
+                        </div>
+                      </div>
     </div>
-    
+</section>
 
-</main>
+<section id="searchContainer"></section>
+
+<section id="recipiesContainer"></section>
 
 
-<footer>
+<section id="perfilContainer"></section>
+
+
+<footer id="footerPage">
+
     <div class="container">
-        <div class="row">
-           <div class="col-s-2 iconsFooter"><i class="fas fa-home"></i></div>
-           <div class="col-s-2 iconsFooter"> <i class="fas fa-search"></i></div>
-           <div class="col-s-4 iconsFooter"><i class="fas fa-plus-circle"></i> </div>
-           <div class="col-s-2 iconsFooter"> <i class="fas fa-utensils"></i></div>
-           <div class="col-s-2 iconsFooter"> <i class="fas fa-user-circle"></i> </div>
+        <div class="row footericons">
+           <div class="col-s-2 col-m-2 iconsFooter"><i class="fas fa-home"></i></div>
+           <div class="col-s-2 col-m-2 iconsFooter"> <i class="fas fa-search"></i></div>
+           <div class="col-s-4 col-m-4 iconsFooter"><i class="fas fa-plus-circle"></i> </div>
+           <div class="col-s-2 col-m-2 iconsFooter"> <i class="fas fa-utensils"></i></div>
+           <div class="col-s-2 col-m-2 iconsFooter"> <i id="showUser" class="fas fa-user-circle"></i> </div>
          </div>
 
     </div>
-
-
 </footer>
 
-</div>
-
+        
 
 <!-- scripts -->
 <script>
