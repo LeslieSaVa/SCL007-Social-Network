@@ -1,5 +1,6 @@
 
 
+
 export const writeUserData = (uid, name, email, imageUrl) => {
   firebase.database().ref('users/'+uid).set({
     "perfil": {
@@ -49,6 +50,7 @@ export function deletePost(){
     null:null
   })
 };
+
 
 
 
