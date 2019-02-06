@@ -195,7 +195,6 @@ document.getElementById("search").addEventListener('click', () =>{
 
 })
 
-
 document.getElementById("recipes").addEventListener('click', () =>{
 
     document.getElementById("addpost_container").style.display ="none";
