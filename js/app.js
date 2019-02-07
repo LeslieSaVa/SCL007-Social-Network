@@ -1,6 +1,3 @@
-
-
-
 export const writeUserData = (uid, name, email, imageUrl) => {
   firebase.database().ref('users/'+uid).set({
     "perfil": {
@@ -12,13 +9,14 @@ export const writeUserData = (uid, name, email, imageUrl) => {
   });
 }
 
-export const enviarConvalidacionAFirebase =(uid, username,title, body)=>{
+export const enviarConvalidacionAFirebase =(uid, username,title, body,imagen)=>{
   // Crear nuevo post
   const postData = {
     author: username,
     uid: uid,
     body: body,
     title: title,
+    imagen: imagen !== null ? imagen : false,
     
   };
 
@@ -35,7 +33,7 @@ export const enviarConvalidacionAFirebase =(uid, username,title, body)=>{
 
 export const readPost = (onpostChange) => {
   var postRef = firebase.database().ref('posts');
-  postRef.on('child_added', (coment)=> {
+  postRef.on('child_added',(coment)=> {
     onpostChange(coment);
   });
 };
@@ -59,6 +57,12 @@ export const readPost = (onpostChange) => {
 //   })
 
 // };
+
+
+
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost} from './app.js'
 
  
 window.onload = () =>{
@@ -45,16 +45,17 @@ const loginWithEmail =()=>{
 
     }
 
+
 };
 
 btnLogin.addEventListener('click', loginWithEmail);
 
-const LogOut =() =>{
+const logOut =() =>{
 
     exit()
 }
 
-btnLogout.addEventListener('click', exit);
+btnLogout.addEventListener('click', logOut);
 
 const loginGoogle =()=>{
 
@@ -62,13 +63,13 @@ const loginGoogle =()=>{
 
 }
 
-btnGoogle.addEventListener('click', google)
+btnGoogle.addEventListener('click', loginGoogle)
 
 const loginFacebook =()=>{
 
     facebook()
 }
-btnFacebook.addEventListener('click', facebook)
+btnFacebook.addEventListener('click', loginFacebook)
 
 
  const guardarComentarios = () => {
@@ -76,11 +77,12 @@ btnFacebook.addEventListener('click', facebook)
     const name = nombreaconvalidar.value;
     const title = tituloaconvalidar.value;
     const coment = coments.value;
+    const photo = fichero.value;
     const userId = firebase.auth().currentUser.uid;
     const post1 = document.getElementById("coments");
     post1.value = "";
 
-    enviarConvalidacionAFirebase(userId, name, title,coment)
+    enviarConvalidacionAFirebase(userId, name, title,coment,photo)
 
  }
 btnComents.addEventListener('click', guardarComentarios)
@@ -99,7 +101,7 @@ const readPostFromDatabase = () => {
                         <div class="box-content">
                           <div class="content">
                             <p>${coment.val().body}</p>
-                            <button userid="${coment.key}" id="btn${coment.key}">borrar</button>
+                            <button  id="btn${coment.key}">borrar</button>
                           </div>
                         </div>
                         <div class="box-buttons">
@@ -112,7 +114,7 @@ const readPostFromDatabase = () => {
                       </div>`
                       ;  
                       
-        document.getElementById("btn" + coment.key).addEventListener('click', deletePost)
+        //document.getElementById("btn" + coment.key).addEventListener('click', deletePost)
         })
     };     
   
