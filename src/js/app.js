@@ -40,17 +40,25 @@ export const readPost = (onpostChange) => {
   });
 };
 
-
-export function deletePost(){
+// export const deletePost = () => {
+//   //var userID = deletePost1.target.getAttribute("userid");
+//   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
+//   firebaseref.remove().then(function(){
+//     alert("hola");
+//   }).catch(function(error){
+//     console.log("remove failed: " + error.message)
+//   })
+// }
+// export function deletePost(){
  
-  firebase.database().ref('posts/'+ this.id).set({
-    null:null
-  })
-  firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
-    null:null
-  })
+//   firebase.database().ref('posts/'+ this.id).set({
+//     null:null
+//   })
+//   firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
+//     null:null
+//   })
 
-};
+// };
 
 
 

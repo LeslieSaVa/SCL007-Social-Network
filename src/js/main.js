@@ -45,7 +45,6 @@ const loginWithEmail =()=>{
 
     }
 
-
 };
 
 btnLogin.addEventListener('click', loginWithEmail);
@@ -72,20 +71,16 @@ const loginFacebook =()=>{
 btnFacebook.addEventListener('click', facebook)
 
 
-const showcoments =()=>{
-
-    
-}
-
  const guardarComentarios = () => {
 
     const name = nombreaconvalidar.value;
     const title = tituloaconvalidar.value;
     const coment = coments.value;
     const userId = firebase.auth().currentUser.uid;
+    const post1 = document.getElementById("coments");
+    post1.value = "";
 
     enviarConvalidacionAFirebase(userId, name, title,coment)
-
 
  }
 btnComents.addEventListener('click', guardarComentarios)
@@ -97,12 +92,30 @@ const readPostFromDatabase = () => {
         newcoments.innerHTML  += 
       `<div id= ${coment.key}>
       <h3>${coment.val().title}</h3>
-       <p>${coment.val().body}</p>
-       <button id=" ${coment.key}">borrar</button>
+      
        </div>
-       `;  document.getElementById(coment.key).addEventListener('click', deletePost)
-    });     
-  }
+
+                    <div class="box text">
+                        <div class="box-content">
+                          <div class="content">
+                            <p>${coment.val().body}</p>
+                            <button userid="${coment.key}" id="btn${coment.key}">borrar</button>
+                          </div>
+                        </div>
+                        <div class="box-buttons">
+                          <div class="row">
+                            <button><span class="fa fa-thumbs-up"></span> Like</button>
+                            <button><span class="ion-chatbox-working"></span> Comment</button>
+                             
+                          </div>
+                        </div>
+                      </div>`
+                      ;  
+                      
+        document.getElementById("btn" + coment.key).addEventListener('click', deletePost)
+        })
+    };     
+  
 
 
 const showUserInfo = () => {
