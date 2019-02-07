@@ -13,7 +13,7 @@ body{
 
 /* css for login and register*/
 
-.logoBox{
+.logobox{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +35,7 @@ body{
 .hide{
     display: none;
 }
-.marginContainer{
+.margin-container{
 margin-top: 100px;
 
 }
@@ -63,7 +63,7 @@ margin-top: 100px;
     box-sizing: border-box;
     font-size: 14px;
   }
-  .formSignBtn {
+  .form-signBtn {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
@@ -189,22 +189,29 @@ header{
     width: 100%;
 
 }
- .logoImgMain{
+ .logo-img-main{
     width: 100px;
   }
 
 
 
-  .iconsFooter{
+  .icons-footer{
     flex-direction: row;
     display: flex;
     justify-content: center;
     font-size: 28px;
+    
+  }
+  .icons-footer a{
+    color: #666;
+
+  }
+  .icons-footer a:focus,
+  .icons-footer a:hover{
+    color: #884EA0;
   }
 
-  .iconsFooter:focus,
-  .iconsFooter:hover,
-  .iconsFooter:active {
+  .active, .btn-act:hover {
     color: #884EA0;
   }
 
@@ -218,10 +225,12 @@ header{
     width: 100%;
     position: fixed;
     clear: both;
+    height:100px;
     margin-top: 0px;
-    padding-top: 0px;
+    padding-top: 10px;
     overflow: visible;
-    top:93%;
+    top:85%;
+    z-index: 100;
  
 
   }
@@ -230,138 +239,11 @@ header{
     display:none;
   }
 
-  
+  #index_page{
+    margin-bottom: 100px;
+  }
   /* caja publicacion */
-  .box {
-    background: #FFF;
-    border-radius: 4px;
-    box-shadow: 0 0 60px 2px rgba(0,0,0,.10);
-    height: auto;
-    margin: 30px auto 40px;
-    max-width: 500px;
-    overflow: hidden;
-    padding: 20px 0 0;
-    position: relative;
-  }
-   .box > [class*="box-"] {
-    margin: 0 auto;
-    padding: 0 30px;
-    position: relative;
-  }
-   .box > [class*="box-"] img {
-    display: block;
-    width: 100%;
-  }
-  .box > .box-header {
-    margin: 0 auto;
-    padding: 0 30px 10px;
-    width: initial;
-  }
-   .box > .box-header > h3 {
-    font-size: 15px;
-    font-weight: 700;
-    height: 60px;
-    margin: 5px auto;
-    overflow: hidden;
-    padding: 5px 0 0;
-    position: relative;
-  }
-  .box > .box-header > h3 > a {
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-  }
   
-  
-  .container > .box > .box-header img {
-    border-radius: 100px;
-    float: left;
-    height: 60px;
-    margin: -5px 20px 0 0;
-    object-fit: cover;
-    width: 60px;
-  }
-   .box > .box-content {
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-    width: initial;
-  }
-   .box > .box-content > .content {
-    height: auto;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-    width: initial;
-  }
-  
-  
-  .box > .box-buttons {
-    margin: 0 auto;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-  }
-   .box > .box-buttons *,*::before,*::after {
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-  }
-  .box > .box-buttons > .row {
-    border-bottom: 1px solid #F4F4F4;
-    border-top: 1px solid #F4F4F4;
-    overflow: hidden;
-    padding: 0;
-    position: relative;
-  }
-   .box > .box-buttons > .row > button:last-child {
-    border: 0;
-  }
-   .box > .box-buttons > .row > button {
-    background: #FFF;
-    border: 0;
-    border-right: 1px solid #F4F4F4;
-    color: #9197A3;
-    font-size: 20px;
-    float: left;
-    height: 60px;
-    line-height: 60px;
-    margin: 0;
-    *outline: 1px #08F;
-    padding: 0;
-    width: 33.33333333333%;
-  }
-   .box > .box-buttons > .row > button:hover {
-    background: #F5F5F5;
-    color: #7D8696;
-  }
-  .box > .box-buttons > .row > button:focus {
-    background: #F0F2F2;
-    color: #6C7588;
-    box-shadow: inset 0 0 10px rgba(0,0,0,.2);
-    outline-color: #08F;
-  }
-  
-  
-  
-  .box-content > .content > p,
-  .box.text > .box-content > .content > p {
-    border-top: 1px solid #F4F4F4;
-    color: #4D5057;
-    font-size: 14px;
-    line-height: 22px;
-    padding: 26px 30px;
-  }
-  
-  .container > .box.text > .box-buttons > .row > button {
-    font-size: 13px;
-  }
-  .container > .box.text > .box-buttons > .row > button > span {
-    font-size: 20px;
-  }
 
 
 
@@ -370,35 +252,34 @@ header{
 /*** CARD STLES ***/
 
 .cards-container{
-  width: 793px;
+
   max-width: 100%;
   margin: 2rem auto;
 }
-.card{
-  float: left;
-  margin: 3rem;
-}
+
 
 .card-one{
   position: relative;
-  width: 300px;
+  width: 80%;
+  margin: 10%;
   background: #fff;
   box-shadow: 0 0 60px 2px rgba(0,0,0,.10);
+
 } 
-.headerCard{
+.header_card{
     position: relative;
     width: 100%;
     height: 60px;
     background-color:#884EA0; 
    }
     
-.headerCard::before, .headerCard::after{
+.header_card::before, .header_card::after{
       content: '';
       position: absolute;
       top: 0;bottom: 0;left: 0;right: 0;
       background: inherit;
     }
-.headerCard::before{
+.header_card::before{
       -webkit-transform: skewY(-8deg);
       -moz-transform: skewY(-8deg);
       -ms-transform: skewY(-8deg);
@@ -410,7 +291,7 @@ header{
       -o-transform-origin: 100% 100%;
       transform-origin: 100% 100%;
     }
-.headerCard::after{
+.header_card::after{
       -webkit-transform: skewY(8deg);
       -moz-transform: skewY(8deg);
       -ms-transform: skewY(8deg);
@@ -447,12 +328,11 @@ header{
         height: auto;
       }
     
-  
-h3{
+ .info-user-p{
     position: relative;
     margin: 80px 0 30px;
     text-align: center;}
-h3::after{
+.info-user-p::after{
       content: '';
       position: absolute;
       bottom: -15px;
@@ -484,13 +364,13 @@ h3::after{
         color: #333;}
 
   
-  .footerCard{
+  .footer_card{
     position: relative;
     padding: 1rem;
     background-color:#884EA0;
     text-align: center;}
 
-.footerCard a{
+.footer_card a{
       padding: 0 1rem;
       color: #e2e2e2;
       -webkit-transition: color .4s;
@@ -499,11 +379,11 @@ h3::after{
       -o-transition: color .4s;
       transition: color .4s;
     }
-.footerCard a:hover{
+.footer_card a:hover{
         color:#c8c;
       }
 
-.footerCard::before{
+.footer_card::before{
       content: '';
       position: absolute;
       top: -27px;
@@ -520,7 +400,7 @@ h3::after{
     .footericons{
       display:block;
     }
-   .menuHeader{
+   .menu-header{
      display:none;
    } 
 
@@ -575,3 +455,64 @@ h3::after{
 #search_container{
   display: none;
 }
+
+
+
+.box_text{
+
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 60px;
+  background: #fff;
+  box-shadow: 0 0 20px 2px rgba(0,0,0,.10);
+  padding: 8px;
+  border: 1px solid #ae71e6;
+  position: relative;
+} 
+.box-header{
+    width: 100%;
+    height: 60px;
+    background-color:#ccc; 
+   }
+.name-post {
+  margin-left: 90px;
+  font-size: 18px;
+  color: #000;
+  padding-top: 10px;
+}  
+   .avatar_post{
+    position: absolute;
+    left: 10%;
+    top: -17px;
+    margin-left: -50px;
+    z-index: 5;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #c8c;
+    border: 3px solid #fff;}
+.avatar_post img{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: auto;
+    }  
+   .box-content{
+     padding: 15px 5px;
+   } 
+
+   .box-buttons{
+    position: relative;
+    padding: 1rem;
+    background-color:rgb(225, 204, 235);
+    text-align: center;}
+
+    
