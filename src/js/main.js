@@ -101,7 +101,7 @@ const readPostFromDatabase = () => {
                         <div class="box-content">
                           <div class="content">
                             <p>${coment.val().body}</p>
-                            <button  id="btn${coment.key}">borrar</button>
+                            <button  id="btn">borrar</button>
                           </div>
                         </div>
                         <div class="box-buttons">
@@ -114,7 +114,7 @@ const readPostFromDatabase = () => {
                       </div>`
                       ;  
                       
-        //document.getElementById("btn" + coment.key).addEventListener('click', deletePost)
+        document.getElementById("btn").addEventListener('click', deletePost)
         })
     };     
   
