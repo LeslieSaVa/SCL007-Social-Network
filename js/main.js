@@ -82,9 +82,19 @@ btnFacebook.addEventListener('click', loginFacebook)
     const post1 = document.getElementById("coments");
     post1.value = "";
 
-    enviarConvalidacionAFirebase(userId, name, title,coment,photo)
-
+    enviarConvalidacionAFirebase(userId, name, title,coment,photo);
+    
+    if ( name == ""){
+        alert(` Se deben rellenar todos los campos para poder publicar` )
+    }if ( title == ""){
+        alert(` Se deben rellenar todos los campos para poder publicar` ) 
+    }if ( coment == ""){
+        alert(` Se deben rellenar todos los campos para poder publicar` )
+    }if ( tags == ""){
+        alert(` Se deben rellenar todos los campos para poder publicar` )
+    }
  }
+ 
 btnComents.addEventListener('click', guardarComentarios)
 
 
