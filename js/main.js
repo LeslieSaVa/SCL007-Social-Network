@@ -161,25 +161,31 @@ const showUserInfo = () => {
            
        }else{
         profile_container.innerHTML =
-        `
-        <div class="container"><div class="row"><div class="col-12">
+        `   <div class="container">
+        <div class="row">
+        <div class="col-4 col-m-2"></div>
+        <div class="col-4 col-m-8 col-s-12">
         <div class="card card-one">
-           <div class="header_card">
-           <div class="avatar"><img src="IMG/avatar-default.png" alt="Jhon Doe" /></div>
-           </div>
-           <h3>${userInfo.email}</h3>
-           <div class="desc">
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
-           </div>
-           <div class="contacts">
-           <a href=""><i class="fa fa-plus"></i></a>
-           <a href=""><i class="fa fa-whatsapp"></i></a>
-           <a href=""><i class="fa fa-envelope"></i></a>
-           <div class="clear"></div>
-           </div>
-           <div class="footer_card"></div>
-     </div>
-     </div></div></div>`;
+               <div class="header_card">
+               <div class="avatar"><img src="IMG/avatar-default.png" alt="Jhon Doe" /></div>
+               </div>
+               <p class="info-user-p">${userInfo.email}</p>
+               <div class="desc">
+               Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
+               </div>
+               <div class="contacts">
+               <a href=""><i class="fa fa-plus"></i></a>
+               <a href=""><i class="fa fa-whatsapp"></i></a>
+               <a href=""><i class="fa fa-envelope"></i></a>
+               <div class="clear"></div>
+               </div>
+               <div class="footer_card"></div>
+         </div>
+         </div>
+         <div class="col-4 col-m-2"></div>
+         </div>
+         </div>
+       `;
     
     }
     }

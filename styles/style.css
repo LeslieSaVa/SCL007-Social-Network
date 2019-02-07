@@ -130,7 +130,6 @@ margin-top: 100px;
     font-family: 'Roboto',arial,sans-serif;
   }
 
-
 /* Facebook button*/
 .loginBtn {
     box-sizing: border-box;
@@ -393,6 +392,94 @@ header{
       border-bottom-color: #884EA0;
     }
 
+    #addpost_container{
+      display: none;
+    }
+    #recipes_container{
+      display: none;
+    }
+    #profile_container{
+      display: none;
+    }
+    #search_container{
+      display: none;
+    }
+    
+    
+    
+    .box_text{
+    
+      width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+      margin-bottom: 60px;
+      background: #fff;
+      box-shadow: 0 0 20px 2px rgba(0,0,0,.10);
+      padding: 8px;
+      border: 1px solid #ae71e6;
+      position: relative;
+    } 
+    .box-header{
+        width: 100%;
+        height: 60px;
+        background-color:#ccc; 
+       }
+    .name-post {
+      margin-left: 110px;
+      font-size: 18px;
+      color: #000;
+      padding-top: 10px;
+    }  
+       .avatar_post{
+        position: absolute;
+        left: 5%;
+        top: -17px;
+        margin-left: -50px;
+        z-index: 5;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #c8c;
+        border: 3px solid #fff;}
+
+    .avatar_post img{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          -moz-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          width: 100px;
+          height: auto;
+        }  
+       .box-content{
+         padding: 15px 5px;
+       } 
+    
+       .box-buttons{
+        position: relative;
+        padding: 1rem;
+        text-align: center;}
+    
+    
+        .btn-likecoment{
+       font-family: "Roboto", sans-serif;
+          text-transform: uppercase;
+          outline: 0;
+          background:rgb(146, 100, 165);
+          width: 100%;
+          border: 0;
+          padding: 10px;
+          color: #FFFFFF;
+          font-size: 12px;
+          -webkit-transition: all 0.3 ease;
+          transition: all 0.3 ease;
+          cursor: pointer;
+      
+        }    
   
   /* media queries for css style */
 
@@ -407,9 +494,6 @@ header{
   
 }
 
-
-
-
 @media screen and (max-width: 580px){
 .form {
     box-shadow:none;
@@ -417,118 +501,9 @@ header{
     }
 .marginContainer{
      margin-top: 40px;
-        
-        }
-  
+ }
+ .avatar_post{
+  left: 10%;
+
+ }
 }
-
-/* Prueba Leslie */
-
-.menu {
-  text-align: center;
-  padding: 2% 4%;
-}
-#fichero{
-  display: none;
-}
-.custom-file-upload{
-  cursor: pointer;
-  display: inline-block;
-  
-}
-.img{
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  margin: 10px;
-}
-
-/**/
-#addpost_container{
-  display: none;
-}
-#recipes_container{
-  display: none;
-}
-#profile_container{
-  display: none;
-}
-#search_container{
-  display: none;
-}
-
-
-
-.box_text{
-
-  width: 90%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 60px;
-  background: #fff;
-  box-shadow: 0 0 20px 2px rgba(0,0,0,.10);
-  padding: 8px;
-  border: 1px solid #ae71e6;
-  position: relative;
-} 
-.box-header{
-    width: 100%;
-    height: 60px;
-    background-color:#ccc; 
-   }
-.name-post {
-  margin-left: 90px;
-  font-size: 18px;
-  color: #000;
-  padding-top: 10px;
-}  
-   .avatar_post{
-    position: absolute;
-    left: 10%;
-    top: -17px;
-    margin-left: -50px;
-    z-index: 5;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: #c8c;
-    border: 3px solid #fff;}
-.avatar_post img{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      -o-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
-      width: 100px;
-      height: auto;
-    }  
-   .box-content{
-     padding: 15px 5px;
-   } 
-
-   .box-buttons{
-    position: relative;
-    padding: 1rem;
-    text-align: center;}
-
-
-    .btn-likecoment{
-   font-family: "Roboto", sans-serif;
-      text-transform: uppercase;
-      outline: 0;
-      background:rgb(146, 100, 165);
-      width: 100%;
-      border: 0;
-      padding: 10px;
-      color: #FFFFFF;
-      font-size: 12px;
-      -webkit-transition: all 0.3 ease;
-      transition: all 0.3 ease;
-      cursor: pointer;
-  
-    }
-    
