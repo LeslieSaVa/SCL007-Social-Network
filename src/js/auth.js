@@ -7,8 +7,11 @@ window.onload = () =>{
 export const checkAuthState =(callback) =>{
     firebase.auth().onAuthStateChanged((firebaseUser) => {
         if (firebaseUser){
-            console.log("Hay un usuario >" //+ JSON.stringify(firebaseUser)
-            );
+            console.log("Hay un usuario >" )//+ JSON.stringify(firebaseUser)
+           
+            writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
+            
+            ;
             callback(firebaseUser)
         }else{
             console.log('No está logueado')
@@ -64,7 +67,8 @@ export const google = () =>{
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
       });
-
+      
+      
 }
 
 export const facebook =() =>{
@@ -87,5 +91,5 @@ export const facebook =() =>{
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
       });
-      
+      writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
 }
