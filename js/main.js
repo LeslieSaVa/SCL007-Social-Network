@@ -113,9 +113,10 @@ const showUserInfo = () => {
     addpost_container.style.display ="none";
 
     const userInfo = firebase.auth().currentUser;
+     console.log(userInfo)   
     //console.log(userInfo)
     if(userInfo.photoURL != null){
-               
+           
     profile_container.innerHTML =`
     <div class="container">
     <div class="row">
