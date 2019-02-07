@@ -39,7 +39,7 @@ export const readPost = (onpostChange) => {
 };
 
 // export const deletePost = () => {
-//   //var userID = deletePost1.target.getAttribute("userid");
+//   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
 //   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
 //   firebaseref.remove().then(function(){
 //     alert("hola");
@@ -48,13 +48,14 @@ export const readPost = (onpostChange) => {
 //   })
 // }
 // export function deletePost(){
- 
-//   firebase.database().ref('posts/'+ this.id).set({
-//     null:null
-//   })
-//   firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
-//     null:null
-//   })
+//  //referencia post publico 
+//   let gg = firebase.database().ref('posts/'+ this.id)
+//   gg.remove();
+//   location.reload();  
+//   //referencia en el perfil del usuario 
+//   // firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
+//   //   null:null
+//   // })
 
 // };
 
