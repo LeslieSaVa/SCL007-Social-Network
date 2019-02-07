@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,11 +23,11 @@
     <div class="container">
         <div class="row boxicon_nav">
             <div class="col-6 col-m-12">
-                <div class="logoBox">
-                 <img class="logoImgMain" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+                <div class="logobox">
+                 <img class="logo-img-main" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
                 </div>
             </div> 
-            <div class="col-6 menuHeader">
+            <div class="col-6 menu-header">
                     <ul>
                         <li>Home</li>
                         <li>Buscar</li>
@@ -52,7 +51,7 @@
        <div class="row">
            <div class="col-4 col-m-3 col-s-12"></div>
    
-            <div class="col-4 col-m-6 col-s-12 marginContainer">
+            <div class="col-4 col-m-6 col-s-12 margin-container">
                           
                            <div class="form">
                                    <div class="logoBox">
@@ -63,8 +62,8 @@
                                    <input type= "email" id="textEmail" placeholder="email">
                                    <input type= "password" id="password" placeholder="password">
                                    <div class="row">
-                                   <div class="col-6"> <button class="formSignBtn" id="btnLogin"> Log In</button></div>
-                                   <div class="col-6"><button class="formSignBtn" id="btnSignUp"> Sign Up</button>  </div>
+                                   <div class="col-6"> <button class="form-signBtn" id="btnLogin"> Log In</button></div>
+                                   <div class="col-6"><button class="form-signBtn" id="btnSignUp"> Sign Up</button>  </div>
                                    </div> 
                                    <div class="row">
                                        <div class="col-12 "> 
@@ -98,12 +97,47 @@
                     </div>
                 
                     
-      
+                    
+      <!-- estructura publicacion --> 
+         
+      <!-- <div class="row">  
+          <div class="col-3 col-m-8 col-s-12"></div>
+          <div class="col-6 col-m-8 col-s-12">  
+                    <div class="box_text">
+                        <div class="box-header">
+                         <div class="avatar_post"><img src="IMG/avatar-default.png"/></div> 
+                          <div class="name-post">Nombre</div>
+                        </div>
+                        <div class="box-content">
+                          <div class="content">
+                            <p>Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos.</p>
+                          </div>
+                          <h3>hashtag:</h3>
+                        </div>
+                        <div class="box-buttons">
+                       <div class="row">
+                        <div class="col-4">
+                            <button class="btn-likecoment"><span class="fa fa-thumbs-up"></span> Like</button></div>
+                         <div class="col-4">
+                            <button  class="btn-likecoment"><span class="ion-chatbox-working"></span>Comentar</button></div>
+                              <div class="col-4"></div>
+
+                            
+                            
+
+                          </div>
+                        </div>
+                 </div>     
+            </div>
+        <div class="col-3 col-m-2 col-s-12"></div>
+         </div>  -->
+
+         <!-- end estructura publicacion -->   
     </div>
 </section>
 <section id="addpost_container">
     <form action="javascript.void(0)" id="form-information"></form>
-                        
+                  <!-- Textarea para publicacion -->       
                     <div class="container">
                         <div class="row">
                             <div class="col-4">
@@ -139,7 +173,7 @@
                             </div>
                         </div>
                     </div>
-
+ <!-- fin Textarea para publicacion -->    
                     
 
 </section>
@@ -163,11 +197,16 @@
 
     <div class="container">
         <div class="row footericons">
-           <div class="col-s-2 col-m-2 iconsFooter"><a id="index" href="#index_page"><i class="fas fa-home"></i></a></div>
-           <div class="col-s-2 col-m-2 iconsFooter"> <a id="search" href="#search_container"><i class="fas fa-search"></i></a></div>
-           <div class="col-s-4 col-m-4 iconsFooter"><a id="addPost" href="#addpost_container"><i class="fas fa-plus-circle"></i></a></div>
-           <div class="col-s-2 col-m-2 iconsFooter"> <a id="recipes" href="#recipes_container"><i class="fas fa-utensils"></i></a></div>
-           <div class="col-s-2 col-m-2 iconsFooter"> <a id="showUser" href="#profile_container"><i  class="fas fa-user-circle"></i></a> </div>
+           <div  class="col-s-2 col-m-2 icons-footer ">
+               <a class="btn-act" id="index" href="#index_page"><i class="fas fa-home btn-act active "></i></a></div>
+           <div   class="col-s-2 col-m-2 icons-footer"> 
+               <a id="search" href="#search_container"><i class="fas fa-search btn-act "></i></a></div>
+           <div class="col-s-4 col-m-4 icons-footer">
+               <a id="addPost" href="#addpost_container"><i class="fas fa-plus-circle btn-act"></i></a></div>
+           <div class="col-s-2 col-m-2 icons-footer"> 
+               <a id="recipes" href="#recipes_container"><i class="fas fa-utensils btn-act"></i></a></div>
+           <div  class="col-s-2 col-m-2 icons-footer"> 
+               <a id="showUser" href="#profile_container"><i  class="fas fa-user-circle btn-act"></i></a> </div>
          </div>
 
     </div>

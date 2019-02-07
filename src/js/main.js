@@ -128,16 +128,20 @@ const showUserInfo = () => {
     addpost_container.style.display ="none";
 
     const userInfo = firebase.auth().currentUser;
+     console.log(userInfo)   
     //console.log(userInfo)
     if(userInfo.photoURL != null){
-               
+           
     profile_container.innerHTML =`
-    <div class="container"><div class="row"><div class="col-12">
+    <div class="container">
+    <div class="row">
+    <div class="col-4 col-m-2"></div>
+    <div class="col-4 col-m-8 col-s-12">
     <div class="card card-one">
-           <div class="headerCard">
+           <div class="header_card">
            <div class="avatar"><img src="${userInfo.photoURL}" alt="Jhon Doe" /></div>
            </div>
-           <h3>${userInfo.email}</h3>
+           <p class="info-user-p">${userInfo.email}</p>
            <div class="desc">
            Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
            </div>
@@ -147,9 +151,12 @@ const showUserInfo = () => {
            <a href=""><i class="fa fa-envelope"></i></a>
            <div class="clear"></div>
            </div>
-           <div class="footerCard"></div>
+           <div class="footer_card"></div>
      </div>
-     </div></div></div>
+     </div>
+     <div class="col-4 col-m-2"></div>
+     </div>
+     </div>
             `;
            
        }else{
@@ -157,7 +164,7 @@ const showUserInfo = () => {
         `
         <div class="container"><div class="row"><div class="col-12">
         <div class="card card-one">
-           <div class="headerCard">
+           <div class="header_card">
            <div class="avatar"><img src="IMG/avatar-default.png" alt="Jhon Doe" /></div>
            </div>
            <h3>${userInfo.email}</h3>
@@ -170,7 +177,7 @@ const showUserInfo = () => {
            <a href=""><i class="fa fa-envelope"></i></a>
            <div class="clear"></div>
            </div>
-           <div class="footerCard"></div>
+           <div class="footer_card"></div>
      </div>
      </div></div></div>`;
     
@@ -214,8 +221,19 @@ document.getElementById("recipes").addEventListener('click', () =>{
 
     document.getElementById("addpost_container").style.display ="none";
     document.getElementById("index_page").style.display="none";
-    document.getElementById("search_container").style.display ="none";
+    document.getElementById("search_container").style.display ="block";
     document.getElementById("profile_container").style.display ="none";
     document.getElementById("recipes_container").style.display ="block";
 
 })
+
+// active buttons footer
+
+let btns = getElementsByClassName("btn-act");
+for (let i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+  let current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}
