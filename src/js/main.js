@@ -80,7 +80,7 @@ btnFacebook.addEventListener('click', loginFacebook)
     const title = tituloaconvalidar.value;
     const coment = coments.value;
     let photoUser = firebase.auth().currentUser.photoURL;
-    let user_photo= photoUser !== null ? photoUser: '/src/IMG/avatar-default.png'
+    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
     const post1 = document.getElementById('coments');

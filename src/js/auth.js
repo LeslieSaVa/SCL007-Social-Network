@@ -67,10 +67,9 @@ export const google = () =>{
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
       })
-       .then(() =>{
-        writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
+      
+      
 
-    })
       
       
 }
