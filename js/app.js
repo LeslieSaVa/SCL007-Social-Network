@@ -1,22 +1,28 @@
 export const writeUserData = (uid, name, email, imageUrl) => {
-  firebase.database().ref('users/'+uid).set({
-    "perfil": {
-      username: name !== null ? name : firebase.auth().currentUser.email,
-      email: email,
-      profile_picture: imageUrl !== null ? imageUrl : false,
+
+  firebase.database().ref("users/"+uid).once("value", function(snapshot) {
+    if (snapshot.val() === null) {
+      firebase.database().ref('users/'+uid).set({
+            "perfil": {
+              username: name !== null ? name : firebase.auth().currentUser.email,
+              email: email,
+              profile_picture: imageUrl !== null ? imageUrl : false,
+            },
+        })
     }
-      
+         
   });
 }
 
-export const enviarConvalidacionAFirebase =(uid, username,title, body,imagen)=>{
+export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,postTag)=>{
   // Crear nuevo post
   const postData = {
-    author: username,
+    profile_picture: imageUrl,
+    author: username !== null ? username : firebase.auth().currentUser.email,
     uid: uid,
     body: body,
     title: title,
-    imagen: imagen !== null ? imagen : false,
+    hashtag: postTag,
     
   };
 
@@ -39,7 +45,7 @@ export const readPost = (onpostChange) => {
 };
 
 // export const deletePost = () => {
-//   //var userID = deletePost1.target.getAttribute("userid");
+//   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
 //   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
 //   firebaseref.remove().then(function(){
 //     alert("hola");
@@ -48,13 +54,14 @@ export const readPost = (onpostChange) => {
 //   })
 // }
 // export function deletePost(){
- 
-//   firebase.database().ref('posts/'+ this.id).set({
-//     null:null
-//   })
-//   firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
-//     null:null
-//   })
+//  //referencia post publico 
+//   let gg = firebase.database().ref('posts/'+ this.id)
+//   gg.remove();
+//   location.reload();  
+//   //referencia en el perfil del usuario 
+//   // firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
+//   //   null:null
+//   // })
 
 // };
 
