@@ -44,15 +44,15 @@ export const readPost = (onpostChange) => {
   });
 };
 
-// export const deletePost = () => {
-//   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
-//   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
-//   firebaseref.remove().then(function(){
-//     alert("hola");
-//   }).catch(function(error){
-//     console.log("remove failed: " + error.message)
-//   })
-// }
+export const deletePost = (deletePost1) => {
+  var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
+  var firebaseref = firebase.database().ref('posts/'+ key).delete();
+  firebaseref.remove().then(function(){
+    alert("hola");
+  }).catch(function(error){
+    console.log("remove failed: " + error.message)
+  })
+}
 // export function deletePost(){
 //  //referencia post publico 
 //   let gg = firebase.database().ref('posts/'+ this.id)
