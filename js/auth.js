@@ -7,8 +7,7 @@ window.onload = () =>{
 export const checkAuthState =(callback) =>{
     firebase.auth().onAuthStateChanged((firebaseUser) => {
         if (firebaseUser){
-            console.log("Hay un usuario >" )//+ JSON.stringify(firebaseUser)
-           
+            console.log("Hay un usuario >" )//+ JSON.stringify(firebaseUser)           
             writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
             
             ;
@@ -34,11 +33,12 @@ export const login = (email, pass) => {
     firebase.auth().signInWithEmailAndPassword(email, pass)
         .then((firebaseUser) => {
             console.log("usuario >" + JSON.stringify(firebaseUser))
-        })
+        }) 
+        
         .then(() =>{
             writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
 
-        })
+        }) 
         .catch(e => console.log(e.message))
 };
 
@@ -66,7 +66,11 @@ export const google = () =>{
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-      });
+      })
+       .then(() =>{
+        writeUserData(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName, firebase.auth().currentUser.email,firebase.auth().currentUser.photoURL)
+
+    })
       
       
 }
