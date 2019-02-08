@@ -13,16 +13,17 @@ body{
 
 /* css for login and register*/
 
-.logobox{
+.logobox-large{
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin-left: 50px;
 }
 
-.logoImg{
-    width: 150px;
+.logoimg-large{
+    width: 130px;
     
 }
+
 
 /* boton logout */
 .logoutBtnBox{
@@ -36,7 +37,7 @@ body{
     display: none;
 }
 .margin-container{
-margin-top: 100px;
+margin-top: 40px;
 
 }
 /* formulario */
@@ -189,9 +190,38 @@ header{
     width: 100%;
 
 }
- .logo-img-main{
-    width: 100px;
-  }
+
+ul {
+  list-style-type: none;
+  margin-right: 50px;
+  padding: 0;
+  overflow: hidden;
+  float: right;
+
+
+
+}
+
+li {
+  float: left;
+  
+ 
+}
+
+li a {
+  display: block;
+  color: #8d57a1;
+  text-align: center;
+  font-weight: 500;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  color: #111;
+}
+
+
 
 
 
@@ -211,7 +241,7 @@ header{
     color: #884EA0;
   }
 
-  .active, .btn-act:hover {
+  .active{
     color: #884EA0;
   }
 
@@ -242,12 +272,11 @@ header{
   #index_page{
     margin-bottom: 100px;
   }
-  /* caja publicacion */
-  
-
-
-
-
+ .font-footer{
+  text-align: center;
+  margin-top: 20px;
+   color:#8d57a1;
+ }
 
 /*** CARD STLES ***/
 
@@ -396,13 +425,24 @@ header{
   
   /* media queries for css style */
 
-  @media (max-width: 868px){
-    .footericons{
+@media (max-width: 868px){
+.footericons{
       display:block;
     }
-   .menu-header{
+.menu-header{
      display:none;
    } 
+.logobox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-img-main{
+  width: 120px;
+}
+.footer-copyright{
+  display:none;
+}
 
   
 }

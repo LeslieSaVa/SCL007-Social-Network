@@ -229,11 +229,11 @@ document.getElementById("recipes").addEventListener('click', () =>{
 
 // active buttons footer
 
-let btns = getElementsByClassName("btn-act");
-for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-  let current = document.getElementsByClassName("active");
-  current[0].className = current[0].className.replace(" active", "");
-  this.className += " active";
-  });
+function toggleActiveState() {
+    this.classList.toggle('active');
 }
+let btns = document.querySelectorAll('.btn-act');
+[].forEach.call(btns, function(btn) {
+  btn.addEventListener('click', toggleActiveState, false);
+  
+});
