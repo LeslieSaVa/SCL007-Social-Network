@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
 
  
 window.onload = () =>{
@@ -129,16 +129,19 @@ const readPostFromDatabase = () => {
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
-                        <div class='col-6'>
+                        <div class='col-4'>
                             <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                         <div class='col-6'>
+                         <div class='col-4'>
                             <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
+                            <div class='col-4'>
+                            <button  id="btn-delete" class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
                                </div>
                         </div>
                  </div>     
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
+         document.getElementById("btn-delete").addEventListener('click', deletePost );
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable'  ) {
@@ -162,11 +165,11 @@ const readPostFromDatabase = () => {
                           </div>
                           <div class='box-buttons'>
                          <div class='row'>
-                          <div class='col-4'>
+                          <div class='col-6'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                           <div class='col-4'>
+                           <div class='col-6'>
                               <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
-                                <div class='col-4'></div>
+                                
                                  </div>
                           </div>
                    </div>     
@@ -177,7 +180,6 @@ const readPostFromDatabase = () => {
         })
     };     
   
-
 
 const showUserInfo = () => {
     index_page.style.display='none';
@@ -295,4 +297,5 @@ for (let i = 0; i < btns.length; i++) {
   this.className += ' active';
   });
 }
+
 
