@@ -38,22 +38,52 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
 }
 
 export const readPost = (onpostChange) => {
-  var postRef = firebase.database().ref('posts');
+  let postRef = firebase.database().ref('posts');
   postRef.on('child_added',(coment)=> {
     onpostChange(coment);
   });
 };
 
-export const deletePost = (deletePost1, key) => {
-  console.log(key);
-  var userID = deletePost1.target.getAttribute("userpp");   //userid="${coment.key}"
-  var firebaseref = firebase.database().ref('posts/'+ key);
-  firebaseref.remove().then(function(){
-    //alert("hola");
-  }).catch(function(error){
-    console.log("remove failed: " + error.message)
-  })
+// export const deletePost = (deletePost1, key) => {
+//   console.log(key);
+//   var userID = deletePost1.target.getAttribute("userpp");   //userid="${coment.key}"
+//   var firebaseref = firebase.database().ref('posts/'+ key);
+//   firebaseref.remove().then(function(){
+//     //alert("hola");
+//   }).catch(function(error){
+//     console.log("remove failed: " + error.message)
+//   })
+// }
+
+export const guardandoComentarios =(key, contenido, author)=>{
+  // Crear nuevo post
+  const postcoment = {
+    author: author !== null ? author : firebase.auth().currentUser.email,
+    contenido: contenido,
+    
+  }; 
+
+  // Llave que identifica el nuevo post
+  var newPostKey = firebase.database().ref().child('posts').push().key;
+
+  // Ingresa el post en publico y en su perfil.
+  var updates = {};
+  updates['/posts/' + key + '/coment/' + newPostKey] = postcoment;
+ // updates['/users/' + uid + '/post/' + key + '/comment/' + newPostKey] = postcoment;
+
+  return firebase.database().ref().update(updates);
 }
+
+
+// export const deletePost = () => {
+//   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
+//   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
+//   firebaseref.remove().then(function(){
+//     alert("hola");
+//   }).catch(function(error){
+//     console.log("remove failed: " + error.message)
+//   })
+// }
 // export function deletePost(){
 //  //referencia post publico 
 //   let gg = firebase.database().ref('posts/'+ this.id)
