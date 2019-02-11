@@ -40,6 +40,7 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
 export const readPost = (onpostChange) => {
   let postRef = firebase.database().ref('posts');
   postRef.on('child_added',(coment)=> {
+    
     onpostChange(coment);
   });
 };
@@ -61,11 +62,7 @@ export const guardandoComentarios =(key, contenido, author)=>{
   updates['/posts/' + key + '/coment/' + newPostKey] = postcoment;
  // updates['/users/' + uid + '/post/' + key + '/comment/' + newPostKey] = postcoment;
 
- firebase.database().ref('/posts/' + key + '/coment/' + newPostKey).once("value", function(snapshot){
-  comentChange(snapshot)
-})
-
-
+ 
   return firebase.database().ref().update(updates);
 }
 
