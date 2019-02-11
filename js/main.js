@@ -129,11 +129,10 @@ const readPostFromDatabase = () => {
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
-                        <div class='col-4'>
+                        <div class='col-6'>
                             <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                         <div class='col-4'>
+                         <div class='col-6'>
                             <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
-                              <div class='col-4'></div>
                                </div>
                         </div>
                  </div>     

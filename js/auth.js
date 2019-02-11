@@ -66,12 +66,7 @@ export const google = () =>{
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-      })
-      
-      
-
-      
-      
+      })      
 }
 
 export const facebook =() =>{
