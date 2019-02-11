@@ -39,6 +39,7 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
 export const readPost = (onpostChange) => {
   let postRef = firebase.database().ref('posts');
   postRef.on('child_added',(coment)=> {
+    
     onpostChange(coment);
   });
 };
@@ -70,11 +71,30 @@ export const guardandoComentarios =(key, contenido, author)=>{
   updates['/posts/' + key + '/coment/' + newPostKey] = postcoment;
  // updates['/users/' + uid + '/post/' + key + '/comment/' + newPostKey] = postcoment;
 
+ 
   return firebase.database().ref().update(updates);
 }
 
+// export const deletePost = () => {
+//   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
+//   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
+//   firebaseref.remove().then(function(){
+//     alert("hola");
+//   }).catch(function(error){
+//     console.log("remove failed: " + error.message)
+//   })
+// }
+// export function deletePost(){
+//  //referencia post publico 
+//   let gg = firebase.database().ref('posts/'+ this.id)
+//   gg.remove();
+//   location.reload();  
+//   //referencia en el perfil del usuario 
+//   // firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
+//   //   null:null
+//   // })
 
-
+// };
 
 
 
