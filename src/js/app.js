@@ -44,11 +44,12 @@ export const readPost = (onpostChange) => {
   });
 };
 
-export const deletePost = (deletePost1) => {
-  var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
-  var firebaseref = firebase.database().ref('posts/'+ key).delete();
+export const deletePost = (deletePost1, key) => {
+  console.log(key);
+  var userID = deletePost1.target.getAttribute("userpp");   //userid="${coment.key}"
+  var firebaseref = firebase.database().ref('posts/'+ key);
   firebaseref.remove().then(function(){
-    alert("hola");
+    //alert("hola");
   }).catch(function(error){
     console.log("remove failed: " + error.message)
   })

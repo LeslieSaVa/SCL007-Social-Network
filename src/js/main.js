@@ -83,8 +83,11 @@ btnFacebook.addEventListener('click', loginFacebook)
     let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
-    const post1 = document.getElementById('coments');
-    post1.value = '';
+    document.getElementById('coments').value ='';
+    document.getElementById('tituloaconvalidar').value='';
+    document.getElementById('hashtagsPost').value='';
+    //alert("tu comentario ha sido creado")
+
     
     if ( name == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
@@ -96,6 +99,7 @@ btnFacebook.addEventListener('click', loginFacebook)
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
     enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags);
+
  }
  
 btnComents.addEventListener('click', guardarComentarios)
@@ -134,14 +138,16 @@ const readPostFromDatabase = () => {
                          <div class='col-4'>
                             <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
                             <div class='col-4'>
-                            <button  id="btn-delete" class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
                                </div>
                         </div>
                  </div>     
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
-         document.getElementById("btn-delete").addEventListener('click', deletePost );
+         document.getElementById("btn"+ coment.key).addEventListener('click', ()=>{
+             deletePost(deletePost1, key);
+         } );
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable'  ) {

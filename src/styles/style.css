@@ -9,20 +9,19 @@ body{
 }
 
 
-
-
 /* css for login and register*/
 
-.logobox{
+.logobox-large{
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin-left: 50px;
 }
 
-.logoImg{
-    width: 150px;
+.logoimg-large{
+    width: 130px;
     
 }
+
 
 /* boton logout */
 .logoutBtnBox{
@@ -36,7 +35,7 @@ body{
     display: none;
 }
 .margin-container{
-margin-top: 100px;
+margin-top: 40px;
 
 }
 /* formulario */
@@ -188,9 +187,38 @@ header{
     width: 100%;
 
 }
- .logo-img-main{
-    width: 100px;
-  }
+
+ul {
+  list-style-type: none;
+  margin-right: 50px;
+  padding: 0;
+  overflow: hidden;
+  float: right;
+
+
+
+}
+
+li {
+  float: left;
+  
+ 
+}
+
+li a {
+  display: block;
+  color: #8d57a1;
+  text-align: center;
+  font-weight: 500;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  color: #111;
+}
+
+
 
 
 
@@ -210,7 +238,7 @@ header{
     color: #884EA0;
   }
 
-  .active, .btn-act:hover {
+  .active{
     color: #884EA0;
   }
 
@@ -224,11 +252,11 @@ header{
     width: 100%;
     position: fixed;
     clear: both;
-    height:100px;
+    height:140px;
     margin-top: 0px;
     padding-top: 10px;
     overflow: visible;
-    top:85%;
+    top:90%;
     z-index: 100;
  
 
@@ -240,13 +268,13 @@ header{
 
   #index_page{
     margin-bottom: 100px;
+    margin-top: 30px;
   }
-  /* caja publicacion */
-  
-
-
-
-
+ .font-footer{
+  text-align: center;
+  margin-top: 20px;
+   color:#8d57a1;
+ }
 
 /*** CARD STLES ***/
 
@@ -397,12 +425,15 @@ header{
     }
     #recipes_container{
       display: none;
+      margin-bottom: 50px;
     }
     #profile_container{
       display: none;
+      margin-bottom: 50px;
     }
     #search_container{
       display: none;
+      margin-bottom: 50px;
     }
     
     
@@ -422,22 +453,34 @@ header{
     .box-header{
         width: 100%;
         height: 60px;
-        background-color:#ccc; 
-       }
+        background-color: #f1f1f1; 
+    }
     .name-post {
-      margin-left: 110px;
-      font-size: 18px;
-      color: #000;
-      padding-top: 10px;
-    }  
+      margin-left: 60px;
+      font-size: 16px;
+      color: #444;
+      padding-top: 15px;
+    }
+
+    .name-post2{
+      font-size: 16px;
+      color:#fff;
+      padding-top: 15px;
+      text-align: center;
+    }
+    .box-header2{
+      width: 100%;
+      height: 60px;
+      background-color: rgb(146, 100, 165); 
+  }  
        .avatar_post{
         position: absolute;
         left: 5%;
-        top: -17px;
-        margin-left: -50px;
+        top: -7px;
+        margin-left: -54px;
         z-index: 5;
-        width: 90px;
-        height: 90px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         overflow: hidden;
         background: #c8c;
@@ -452,7 +495,7 @@ header{
           -ms-transform: translate(-50%, -50%);
           -o-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-          width: 100px;
+          width: 80px;
           height: auto;
         }  
        .box-content{
@@ -483,14 +526,29 @@ header{
   
   /* media queries for css style */
 
-  @media (max-width: 868px){
-    .footericons{
+@media (max-width: 868px){
+.footericons{
       display:block;
     }
-   .menu-header{
+.menu-header{
      display:none;
    } 
+.logobox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-img-main{
+  width: 120px;
+}
+.footer-copyright{
+  display:none;
+}
+footer{
+ height:100px;
 
+
+}
   
 }
 
@@ -507,3 +565,57 @@ header{
 
  }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.text, #coments {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+#container-form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+#coments{
+  height:200px;
+}
+
+.label-coments {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.input-coments {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .label-coments, .input-coments{
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
