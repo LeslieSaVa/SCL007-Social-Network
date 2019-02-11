@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios} from './app.js'
 
  
 window.onload = () =>{
@@ -83,8 +83,11 @@ btnFacebook.addEventListener('click', loginFacebook)
     let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
-    const post1 = document.getElementById('coments');
-    post1.value = '';
+    document.getElementById('coments').value ='';
+    document.getElementById('tituloaconvalidar').value='';
+    document.getElementById('hashtagsPost').value='';
+    //alert("tu comentario ha sido creado")
+
     
     if ( name == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
@@ -96,6 +99,7 @@ btnFacebook.addEventListener('click', loginFacebook)
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
     enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags);
+
  }
  
 btnComents.addEventListener('click', guardarComentarios)
@@ -129,16 +133,21 @@ const readPostFromDatabase = () => {
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
-                        <div class='col-6'>
+                        <div class='col-4'>
                             <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                         <div class='col-6'>
+                         <div class='col-4'>
                             <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
+                            <div class='col-4'>
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
                                </div>
                         </div>
                  </div>     
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
+         document.getElementById("btn"+ coment.key).addEventListener('click', ()=>{
+             deletePost(deletePost1, key);
+         } );
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable'  ) {
@@ -162,21 +171,55 @@ const readPostFromDatabase = () => {
                           </div>
                           <div class='box-buttons'>
                          <div class='row'>
-                          <div class='col-4'>
+                          <div class='col-6'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
                            <div class='col-4'>
-                              <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
+                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Comentar</button></div>
                                 <div class='col-4'></div>
                                  </div>
+                                 <div id='comentPost${coment.key}'> </div>
+                                 <div id='print${coment.key}'> </div>
+
                           </div>
                    </div>     
               </div>
           <div class='col-3 col-m-2 col-s-12'></div>
-           </div>` + recipes_post.innerHTML;
+           </div>` + recipes_post.innerHTML; 
+           document.getElementById(`comentarpost${coment.key}`).addEventListener('click', readComent)
             }
         })
     };     
   
+const readComent =(e) =>{
+const key = e.target.getAttribute("id").slice(12)
+console.log(key)
+
+document.getElementById("comentPost"+key).innerHTML = `    
+   <div class="container" id="">
+    <div class="row">
+        <div class="col-4">
+            <textarea name="comentario" id="comentsPost${key}" cols="30" rows="10"
+                placeholder="Escribe aqui tu comentario..."></textarea>           
+            <button id='btnComent${key}'>Comentar</button>
+        </div>
+    </div>
+</div>
+    ` 
+    document.getElementById(`btnComent${key}`).addEventListener('click', saveComent)
+}
+
+
+const saveComent =(e) =>{
+    const key = e.target.getAttribute("id").slice(9)
+    const name=firebase.auth().currentUser.displayName;
+    const contenido= document.getElementById(`comentsPost${key}`).value
+   
+    console.log(key)
+
+    guardandoComentarios(key,contenido,name)
+
+}
+
 
 
 const showUserInfo = () => {
@@ -295,4 +338,5 @@ for (let i = 0; i < btns.length; i++) {
   this.className += ' active';
   });
 }
+
 
