@@ -187,7 +187,7 @@ const showUserInfo = () => {
     addpost_container.style.display ='none';
 
     const userInfo = firebase.auth().currentUser;
-     console.log(userInfo)   
+  
     //console.log(userInfo)
     if(userInfo.photoURL != null){
            
@@ -247,7 +247,7 @@ showUser.addEventListener('click', showUserInfo);
 document.getElementById('addPost').addEventListener('click', () =>{
 
     document.getElementById('addpost_container').style.display ='block';
-    document.getElementById('index_page').style.display='none';
+    document.getElementById('index_page').style.display='block';
     document.getElementById('search_container').style.display ='none';
     document.getElementById('profile_container').style.display ='none';
     document.getElementById('recipes_container').style.display ='none';
