@@ -9,8 +9,6 @@ body{
 }
 
 
-
-
 /* css for login and register*/
 
 .logobox-large{
@@ -456,13 +454,25 @@ li a:hover:not(.active) {
         width: 100%;
         height: 60px;
         background-color: #f1f1f1; 
-       }
+    }
     .name-post {
       margin-left: 60px;
       font-size: 16px;
       color: #444;
       padding-top: 15px;
-    }  
+    }
+
+    .name-post2{
+      font-size: 16px;
+      color:#fff;
+      padding-top: 15px;
+      text-align: center;
+    }
+    .box-header2{
+      width: 100%;
+      height: 60px;
+      background-color: rgb(146, 100, 165); 
+  }  
        .avatar_post{
         position: absolute;
         left: 5%;
@@ -555,3 +565,57 @@ footer{
 
  }
 }
+
+* {
+  box-sizing: border-box;
+}
+
+.text, #coments {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+#container-form {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+#coments{
+  height:200px;
+}
+
+.label-coments {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.input-coments {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 600px) {
+  .label-coments, .input-coments{
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
