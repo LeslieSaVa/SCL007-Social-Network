@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost,guardandoComentarios} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost} from './app.js'
 
  
 window.onload = () =>{
@@ -83,8 +83,10 @@ btnFacebook.addEventListener('click', loginFacebook)
     let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
-    const post1 = document.getElementById('coments');
-    post1.value = '';
+    document.getElementById('coments').value ='';
+    document.getElementById('tituloaconvalidar').value='';
+    document.getElementById('hashtagsPost').value='';
+    //alert("tu comentario ha sido creado")
     
     if ( name == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
@@ -96,6 +98,7 @@ btnFacebook.addEventListener('click', loginFacebook)
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
     enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags);
+    index.click();
  }
  
 btnComents.addEventListener('click', guardarComentarios)
@@ -132,10 +135,12 @@ const readPostFromDatabase = () => {
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
-                        <div class='col-6'>
+                        <div class='col-4'>
                             <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                         <div class='col-6'>
-                            <button  class='btn-likecoment' id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
+                         <div class='col-4'>
+                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Cometarios</button></div>
+                            <div class='col-4'>
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
                                </div>
 
                                <div id='comentPost'>               
@@ -155,6 +160,7 @@ const readPostFromDatabase = () => {
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
+         document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable' || coment.val().hashtag == '#RECETA' || coment.val().hashtag == '#RECETAS' ) {
@@ -183,7 +189,9 @@ const readPostFromDatabase = () => {
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
                            <div class='col-4'>
                               <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
-                                <div class='col-4'></div>
+                                <div class='col-4'>
+                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button>                                
+                                </div>
                                  </div>
                                  <div id='comentPost${coment.key}'>                         
                                  
@@ -250,7 +258,6 @@ const printComment = (key,contenido,name) =>{
     `+ document.getElementById("print"+key).innerHTML;
     
 }
-
 
 
 
@@ -370,4 +377,5 @@ for (let i = 0; i < btns.length; i++) {
   this.className += ' active';
   });
 }
+
 
