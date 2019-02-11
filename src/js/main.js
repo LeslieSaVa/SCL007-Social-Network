@@ -102,6 +102,7 @@ btnComents.addEventListener('click', guardarComentarios)
 
 
 const readPostFromDatabase = () => {
+   
     root.style.display='block'
     let currentDate = new Date()
     let day = currentDate.getDate() 
@@ -165,10 +166,19 @@ const readPostFromDatabase = () => {
                           <div class='col-4'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
                            <div class='col-4'>
-                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Comentar</button></div>
+                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
                                 <div class='col-4'></div>
                                  </div>
-                                 <div id='comentPost${coment.key}'> </div>
+                                 <div id='comentPost${coment.key}'>                           
+                                 
+                               
+                                         <textarea name="comentario" id="comentsPost${coment.key}" style="width: 100%; /*! height: 85px; */"
+                                             placeholder="Escribe aqui tu comentario..."></textarea>           
+                                         <button  class='btn-likecoment' id='btnComent${coment.key}'>Comentar</button>
+                                
+                        
+                                 </div> 
+
                                  <div id='print${coment.key}'> </div>
 
                           </div>
@@ -176,39 +186,53 @@ const readPostFromDatabase = () => {
               </div>
           <div class='col-3 col-m-2 col-s-12'></div>
            </div>` + recipes_post.innerHTML; 
-           document.getElementById(`comentarpost${coment.key}`).addEventListener('click', readComent)
+          document.getElementById(`comentarpost${coment.key}`).addEventListener('click',readComent)
+          document.getElementById(`btnComent${coment.key}`).addEventListener('click', saveComent)
+           
             }
         })
     };     
   
-const readComent =(e) =>{
-const key = e.target.getAttribute("id").slice(12)
-console.log(key)
+    
+const readComent = (e) => {
+    const key = e.target.getAttribute("id").slice(12)
+    console.log(key)
 
-document.getElementById("comentPost"+key).innerHTML = `    
-   <div class="container" id="">
-    <div class="row">
-        <div class="col-4">
-            <textarea name="comentario" id="comentsPost${key}" cols="30" rows="10"
-                placeholder="Escribe aqui tu comentario..."></textarea>           
-            <button id='btnComent${key}'>Comentar</button>
-        </div>
-    </div>
-</div>
-    ` 
-    document.getElementById(`btnComent${key}`).addEventListener('click', saveComent)
+        document.getElementById("comentPost" + key).innerHTML = `    
+                <div id= ${key} style='border: 1px solid purple'>
+                <p>${author}</p>
+                <h3>${contenido}<h3> 
+                </div>
+    `+ document.getElementById("comentPost" + key).innerHTML;
+    
 }
 
 
 const saveComent =(e) =>{
     const key = e.target.getAttribute("id").slice(9)
-    const name=firebase.auth().currentUser.displayName;
+    const name=firebase.auth().currentUser.displayName; 
     const contenido= document.getElementById(`comentsPost${key}`).value
    
     console.log(key)
 
     guardandoComentarios(key,contenido,name)
+    printComment(key,contenido,name)
 
+}
+
+
+const printComment = (key,contenido,name) =>{ 
+    
+    const nombre = name !== null ? name : firebase.auth().currentUser.email
+    console.log(nombre)      
+
+    document.getElementById(`print${key}`).innerHTML = `
+    <div id= ${key} style='border: 1px solid purple'>
+        <p>${nombre}</p>
+        <h3>${contenido}<h3> 
+    </div>    
+    `+ document.getElementById(`print${key}`).innerHTML;
+    
 }
 
 

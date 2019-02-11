@@ -61,8 +61,17 @@ export const guardandoComentarios =(key, contenido, author)=>{
   updates['/posts/' + key + '/coment/' + newPostKey] = postcoment;
  // updates['/users/' + uid + '/post/' + key + '/comment/' + newPostKey] = postcoment;
 
+ firebase.database().ref('/posts/' + key + '/coment/' + newPostKey).once("value", function(snapshot){
+  comentChange(snapshot)
+})
+
+
   return firebase.database().ref().update(updates);
 }
+
+
+
+
 
 
 // export const deletePost = () => {
