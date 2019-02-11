@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost,guardandoComentarios} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost} from './app.js'
 
  
 window.onload = () =>{
@@ -87,7 +87,6 @@ btnFacebook.addEventListener('click', loginFacebook)
     document.getElementById('tituloaconvalidar').value='';
     document.getElementById('hashtagsPost').value='';
     //alert("tu comentario ha sido creado")
-
     
     if ( name == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
@@ -99,7 +98,7 @@ btnFacebook.addEventListener('click', loginFacebook)
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
     enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags);
-
+    index.click();
  }
  
 btnComents.addEventListener('click', guardarComentarios)
@@ -145,9 +144,7 @@ const readPostFromDatabase = () => {
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
-         document.getElementById("btn"+ coment.key).addEventListener('click', ()=>{
-             deletePost(deletePost1, key);
-         } );
+         document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable'  ) {
