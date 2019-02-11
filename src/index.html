@@ -23,17 +23,17 @@
     <div class="container">
         <div class="row boxicon_nav">
             <div class="col-6 col-m-12">
-                <div class="logobox">
-                 <img class="logo-img-main" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+                <div class="logobox logobox-large">
+                 <img class="logo-img-main logoimg-large" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
                 </div>
             </div> 
             <div class="col-6 menu-header">
                     <ul>
-                        <li>Home</li>
-                        <li>Buscar</li>
-                        <li>Publicar</li>
-                        <li>Perfil</li>
-                        <li><button id="btnLogout">Cerrar</button></li>
+                        <li> <a href="#">Home</a></li>
+                        <li><a href="#">Buscar</a></li>
+                        <li><a href="#">Publicar</a></li>
+                        <li><a href="#">Perfil</a></li>
+                        <li><a href="#"id="btnLogout">Cerrar</a></li>
                     </ul>
    
             </div>
@@ -54,8 +54,8 @@
             <div class="col-4 col-m-6 col-s-12 margin-container">
                           
                            <div class="form">
-                                   <div class="logoBox">
-                                    <img class="logoImg" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
+                                   <div>
+                                    <img class="logoimg-large" src="IMG/logo-happy-alergies.png" alt="logo-happy-alergies">
                                    </div>
                                    <form  action="javascript.void(0)"></form>
                                    <p id="loginError"></p>
@@ -97,14 +97,7 @@
                         <div id="comentPost"></div>
                     </div>    
                     </div>
-                
-                    
-                    
-      <!-- estructura publicacion --> 
-      
-
-         <!-- end estructura publicacion -->   
-    </div>
+   </div>
 </section>
 <section id="addpost_container">
     <form action="javascript.void(0)" id="form-information"></form>
@@ -172,11 +165,12 @@
 
 <footer id="footer_page">
 
+
     <div class="container">
         <div class="row footericons">
             <div class="col-s-1 col-m-1"></div>
            <div  class="col-s-2 col-m-2 icons-footer ">
-               <a class="btn-act" id="index" href="#index_page"><i class="fas fa-home btn-act active "></i></a></div>
+               <a id="index" href="#index_page"><i class="fas fa-home btn-act active "></i></a></div>
            <div   class="col-s-2 col-m-2 icons-footer"> 
                <a id="search" href="#search_container"><i class="fas fa-search btn-act "></i></a></div>
            <div class="col-s-2 col-m-2 icons-footer">
@@ -187,6 +181,14 @@
                <a id="showUser" href="#profile_container"><i  class="fas fa-user-circle btn-act"></i></a> </div>
                <div class="col-s-1 col-m-1"></div>
          </div>
+
+         <div class="row footer-copyright">
+             <div class="col-4"></div>
+             <div class="col-4 font-footer">Happy with Allergies © 2019</div>
+             <div class="col-4"></div>
+            </div>
+
+
 
     </div>
 </footer>
