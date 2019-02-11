@@ -33,7 +33,6 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
   var updates = {};
   updates['/posts/' + newPostKey] = postData;
   updates['/users/' + uid + '/post/' + newPostKey] = postData;
-
   return firebase.database().ref().update(updates);
 }
 
@@ -45,6 +44,16 @@ export const readPost = (onpostChange) => {
   });
 };
 
+export const deletePost = (postdelete) => {
+  //console.log(key);
+  var postID = postdelete.target.getAttribute("userpp");   
+  var firebaseref = firebase.database().ref('posts/'+ postID);
+  firebaseref.remove().then(function(){
+    location.reload();
+  }).catch(function(error){
+    console.log("remove failed: " + error.message)
+  })
+}
 
 export const guardandoComentarios =(key, contenido, author)=>{
   // Crear nuevo post
@@ -65,11 +74,6 @@ export const guardandoComentarios =(key, contenido, author)=>{
  
   return firebase.database().ref().update(updates);
 }
-
-
-
-
-
 
 // export const deletePost = () => {
 //   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
