@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost, deletePost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios} from './app.js'
 
  
 window.onload = () =>{
@@ -173,19 +173,54 @@ const readPostFromDatabase = () => {
                          <div class='row'>
                           <div class='col-6'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                           <div class='col-6'>
-                              <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
-                                
+                           <div class='col-4'>
+                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Comentar</button></div>
+                                <div class='col-4'></div>
                                  </div>
+                                 <div id='comentPost${coment.key}'> </div>
+                                 <div id='print${coment.key}'> </div>
+
                           </div>
                    </div>     
               </div>
           <div class='col-3 col-m-2 col-s-12'></div>
-           </div>` + recipes_post.innerHTML;
+           </div>` + recipes_post.innerHTML; 
+           document.getElementById(`comentarpost${coment.key}`).addEventListener('click', readComent)
             }
         })
     };     
   
+const readComent =(e) =>{
+const key = e.target.getAttribute("id").slice(12)
+console.log(key)
+
+document.getElementById("comentPost"+key).innerHTML = `    
+   <div class="container" id="">
+    <div class="row">
+        <div class="col-4">
+            <textarea name="comentario" id="comentsPost${key}" cols="30" rows="10"
+                placeholder="Escribe aqui tu comentario..."></textarea>           
+            <button id='btnComent${key}'>Comentar</button>
+        </div>
+    </div>
+</div>
+    ` 
+    document.getElementById(`btnComent${key}`).addEventListener('click', saveComent)
+}
+
+
+const saveComent =(e) =>{
+    const key = e.target.getAttribute("id").slice(9)
+    const name=firebase.auth().currentUser.displayName;
+    const contenido= document.getElementById(`comentsPost${key}`).value
+   
+    console.log(key)
+
+    guardandoComentarios(key,contenido,name)
+
+}
+
+
 
 const showUserInfo = () => {
     index_page.style.display='none';
