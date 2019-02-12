@@ -136,12 +136,12 @@ const readPostFromDatabase = () => {
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span> Like</button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span> Like</button></div>
                             <div id= 'countLike${coment.key}'></div>
                             <div class='col-4'>
-                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Cometarios</button></div>
+                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
-                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><i class="material-icons">delete</i>borrar</button></div>   
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                </div>
 
                                <div id='comentPost'>               
@@ -161,10 +161,17 @@ const readPostFromDatabase = () => {
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
-         document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
-         document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
+        //document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
+        //  document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
+        let btnLikes = document.getElementsByClassName('likes');
+        for (let i =0; i< btnLikes.length; i++){
+            btnLikes[i].addEventListener('click', btnLikePost);
+        }
+        let btnBorrar = document.getElementsByClassName('borrar');
+        for (let i =0; i< btnBorrar.length; i++){
+            btnBorrar[i].addEventListener('click', deletePost);
+        }
                       
-       //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable' || coment.val().hashtag == '#RECETA' || coment.val().hashtag == '#RECETAS' ) {
           
         recipes_post.innerHTML =  `
@@ -189,11 +196,11 @@ const readPostFromDatabase = () => {
                          <div class='row'>
                           <div class='col-4'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                             
+
                            <div class='col-4'>
                               <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
                                 <div class='col-4'>
-                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button>                                
+                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><i class="far fa-trash-alt"></i>Borrar</button>                                
                                 </div>
                                  </div>
                                  <div id='comentPost${coment.key}'>                         
@@ -234,12 +241,9 @@ const btnLikePost = (e) =>{
 
 const printLikes =(key, postID) =>{
 
-    console.log('running getLikeCount for post ID:', postID);
     let thisPostRef = firebase.database().ref('posts/'+ key + '/starCount');
     thisPostRef.once('value', function(snapshot) {
-        console.log( key + ' value:', snapshot.val() );
         if ( snapshot.val() ) {
-            console.log( postID + 'contains:', snapshot.val() );
             document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount} likes`;
 
         } else {
