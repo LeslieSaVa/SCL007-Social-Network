@@ -520,6 +520,9 @@ li a:hover:not(.active) {
           cursor: pointer;
       
         }    
+        .icondeskopt{
+          display: none;
+        }
   
   /* media queries for css style */
 .coment-post{
@@ -549,7 +552,6 @@ height: 85px;
 footer{
  height:100px;
 
-
 }
   
 }
@@ -566,6 +568,12 @@ footer{
   left: 10%;
 
  }
+ .iconmovile{
+   display: none;
+ }
+ .icondeskopt{
+  display: block;
+}
 }
 
 * {

@@ -45,14 +45,8 @@ export const readPost = (onpostChange) => {
 };
 
 export const deletePost = (postdelete) => {
-  var postID = postdelete.currentTarget.getAttribute("userpp");   
+  var postID = postdelete.currentTarget.getAttribute("userpp");  
   var firebaseref = firebase.database().ref('posts/'+ postID);
-  // firebaseref.remove().then(function(){
-  //   location.reload();
-  // })
-  // .catch(function(error){
-  //   console.log("remove failed: " + error.message)
-  // })
   let askRemove = confirm("Quieres eliminar este Post?")
   if(askRemove == true){
     firebaseref.remove();
@@ -91,11 +85,13 @@ export const biography = (uid,contenido)=>{
     }
          
 
-export const likePost = (id, uid) => { 
-let postRef = firebase.database().ref('posts/'+ id + '/starCount');
- postRef.child('like-count').once('value', function(snapshot){
-   let currentLikes = snapshot.val() ? snapshot.val() : 0;
-             postRef.update({
+    export const likePost = (id, uid) => { 
+
+      let postRef = firebase.database().ref('posts/'+ id + '/starCount');
+      // get current number of likes here, so we can increment if any exist
+      postRef.child('like-count').once('value', function(snapshot){
+          let currentLikes = snapshot.val() ? snapshot.val() : 0;
+          postRef.update({
              
               'postID': uid,
               'likeCount': currentLikes + 1,
