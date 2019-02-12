@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost, biography} from './app.js'
 
  
 window.onload = () =>{
@@ -105,13 +105,16 @@ btnComents.addEventListener('click', guardarComentarios)
 
 
 const readPostFromDatabase = () => {
+   
     root.style.display='block'
     let currentDate = new Date()
     let day = currentDate.getDate() 
     let month = currentDate.getMonth().toString()
     let year = currentDate.getFullYear()
     
-    readPost((coment)=>{            
+    readPost((coment)=>{ 
+        
+        
         newcoments.innerHTML = 
       `          
       <div class='row' id= ${coment.key}>  
@@ -135,19 +138,33 @@ const readPostFromDatabase = () => {
                         <div class='col-4'>
                             <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
                          <div class='col-4'>
-                            <button  class='btn-likecoment'><span class='ion-chatbox-working'></span>Comentar</button></div>
+                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Cometarios</button></div>
                             <div class='col-4'>
                             <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
                                </div>
+
+                               <div id='comentPost'>               
+                                 
+                               
+                               <textarea name='comentario' id='comentsPostHome${coment.key}' style='width: 100%; /*! height: 85px; */'
+                                   placeholder='Escribe aqui tu comentario...'></textarea>           
+                               <button  class='btn-likecoment' id='btnComentHome${coment.key}'>Comentar</button>
+                      
+              
+                       </div> <br>
+
+                       <div id='printHome${coment.key}'> </div>
+
                         </div>
-                 </div>     
+                 </div> 
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
          document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
-       if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable'  ) {
+       if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable' || coment.val().hashtag == '#RECETA' || coment.val().hashtag == '#RECETAS' ) {
+          
         recipes_post.innerHTML =  `
           
         <div class='row' id= ${coment.key}>  
@@ -168,53 +185,78 @@ const readPostFromDatabase = () => {
                           </div>
                           <div class='box-buttons'>
                          <div class='row'>
-                          <div class='col-6'>
+                          <div class='col-4'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
                            <div class='col-4'>
-                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Comentar</button></div>
-                                <div class='col-4'></div>
+                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
+                                <div class='col-4'>
+                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button>                                
+                                </div>
                                  </div>
-                                 <div id='comentPost${coment.key}'> </div>
-                                 <div id='print${coment.key}'> </div>
+                                 <div id='comentPost${coment.key}'>                         
+                                 
+                               
+                                         <textarea name='comentario' id='comentsPost${coment.key}' style='width: 100%; /*! height: 85px; */'
+                                             placeholder='Escribe aqui tu comentario...'></textarea>           
+                                         <button  class='btn-likecoment' id='btnComent${coment.key}'>Comentar</button>
+                                
+                        
+                                 </div> <br>
+
+                                 <div id='print${coment.key}'></div>
 
                           </div>
                    </div>     
               </div>
           <div class='col-3 col-m-2 col-s-12'></div>
            </div>` + recipes_post.innerHTML; 
-           document.getElementById(`comentarpost${coment.key}`).addEventListener('click', readComent)
+          document.getElementById(`comentarpost${coment.key}`).addEventListener('click',readComents)
+          document.getElementById(`btnComent${coment.key}`).addEventListener('click', saveComent)
+           
             }
         })
     };     
   
-const readComent =(e) =>{
-const key = e.target.getAttribute("id").slice(12)
-console.log(key)
-
-document.getElementById("comentPost"+key).innerHTML = `    
-   <div class="container" id="">
-    <div class="row">
-        <div class="col-4">
-            <textarea name="comentario" id="comentsPost${key}" cols="30" rows="10"
-                placeholder="Escribe aqui tu comentario..."></textarea>           
-            <button id='btnComent${key}'>Comentar</button>
-        </div>
-    </div>
-</div>
-    ` 
-    document.getElementById(`btnComent${key}`).addEventListener('click', saveComent)
+    
+const readComents = (e) => {
+    const key = e.target.getAttribute('id').slice(12)  
+    const comentRef = firebase.database().ref('/posts/' + key + '/coment/')
+    comentRef.once('value', (snapshot)=>{
+        document.getElementById("print"+key).innerHTML =""
+        for (let snap in snapshot.val()) {   
+            console.log(snap)        
+        document.getElementById("print"+key).innerHTML = `            
+            <div id= ${key}  style='border: 1px solid purple'>
+                <p>${snapshot.val()[snap].author}</p>
+                <h3>${snapshot.val()[snap].contenido}<h3> 
+                </div>
+    `+ document.getElementById("print"+key).innerHTML;
+        }
+})
 }
 
 
 const saveComent =(e) =>{
-    const key = e.target.getAttribute("id").slice(9)
-    const name=firebase.auth().currentUser.displayName;
-    const contenido= document.getElementById(`comentsPost${key}`).value
-   
-    console.log(key)
+    const key = e.target.getAttribute('id').slice(9)
+    const name=firebase.auth().currentUser.displayName; 
+    const contenido = document.getElementById(`comentsPost${key}`).value
 
     guardandoComentarios(key,contenido,name)
+    printComment(key,contenido,name)
 
+}
+
+
+const printComment = (key,contenido,name) =>{     
+    const nombre = name !== null ? name : firebase.auth().currentUser.email
+    console.log(nombre)   
+    document.getElementById("print"+key).innerHTML = `
+    <div id= ${key} style='border: 1px solid purple'>
+        <p>${nombre}</p>
+        <h3>${contenido}<h3> 
+    </div>  
+    `+ document.getElementById("print"+key).innerHTML;
+    
 }
 
 
@@ -227,9 +269,15 @@ const showUserInfo = () => {
     addpost_container.style.display ='none';
 
     const userInfo = firebase.auth().currentUser;
+<<<<<<< HEAD
   
+=======
+    let photoUser = firebase.auth().currentUser.photoURL;
+    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
+   
+>>>>>>> ba862da37b5ed97e6310b326693f0750be790c33
     //console.log(userInfo)
-    if(userInfo.photoURL != null){
+    // if(userInfo.photoURL != null){
            
     profile_container.innerHTML =`
     <div class='container'>
@@ -238,49 +286,45 @@ const showUserInfo = () => {
     <div class='col-4 col-m-8 col-s-12'>
     <div class='card card-one'>
            <div class='header_card'>
-           <div class='avatar'><img src='${userInfo.photoURL}' alt='Jhon Doe' /></div>
+           <div class='avatar'><img src='${user_photo}' alt='Jhon Doe' /></div>
            </div>
            <p class='info-user-p'>${userInfo.email}</p>
-           <div class='desc'>
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
+           <div class='desc' id='biography${userInfo.uid}'>
+
+           <textarea name='comentario' id='postBio${userInfo.uid}' style='width: 100%; /*! height: 85px; */'
+           placeholder='Escribe aqui tu comentario...'></textarea>           
+          <button id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
+
+
            </div>
            
            <div class='footer_card'>
-           <button id='btn-logoutA' class='btn-likecoment'>Cerrar Sesión</button>
+           <button id='btn-logout' class='btn-likecoment'>Cerrar Sesión</button>
            </div>
      </div>
      </div>
      <div class='col-4 col-m-2'></div>
      </div>
      </div>
-            `;document.getElementById('btn-logoutA').addEventListener('click', logOut)
-           
-       }else{
-        profile_container.innerHTML =
-        `   <div class='container'>
-        <div class='row'>
-        <div class='col-4 col-m-2'></div>
-        <div class='col-4 col-m-8 col-s-12'>
-        <div class='card card-one'>
-               <div class='header_card'>
-               <div class='avatar'><img src='IMG/avatar-default.png' alt='Jhon Doe' /></div>
-               </div>
-               <p class='info-user-p'>${userInfo.email}</p>
-               <div class='desc'>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
-               </div>               
-               <div class='footer_card'>
-               <button id='btn-logout' class='btn-likecoment'>Cerrar Sesión</button>
-               </div>
-         </div>
-         </div>
-         <div class='col-4 col-m-2'></div>
-         </div>
-         </div>
-       `;document.getElementById('btn-logout').addEventListener('click', logOut)
+            `; document.getElementById('btn-logout').addEventListener('click', logOut)
+               document.getElementById(`btnSaveBiography${userInfo.uid}`).addEventListener('click', saveBiography)
+    }     
+
+    const saveBiography = (e) =>{
+
+    const key = e.target.getAttribute('id').slice(16)
+    console.log (key)
+    const contenido = document.getElementById(`postBio${key}`).value
+
+        document.getElementById(`biography${key}`).innerHTML = `
+        
+        <p> ${contenido}</p>
+
+        `;
+        biography(key,contenido)
+    }
     
-    }
-    }
+    
 
 showUser.addEventListener('click', showUserInfo);    
 
