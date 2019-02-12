@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost, biography} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost, biography,likePost} from './app.js'
 
  
 window.onload = () =>{
@@ -136,8 +136,9 @@ const readPostFromDatabase = () => {
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                         <div class='col-4'>
+                            <button class='btn-likecoment' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span> Like</button></div>
+                            <div id= 'countLike${coment.key}'></div>
+                            <div class='col-4'>
                             <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Cometarios</button></div>
                             <div class='col-4'>
                             <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
@@ -161,6 +162,7 @@ const readPostFromDatabase = () => {
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
          document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
+         document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
                       
        //  document.getElementById('btn').addEventListener('click', deletePost)
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable' || coment.val().hashtag == '#RECETA' || coment.val().hashtag == '#RECETAS' ) {
@@ -187,6 +189,7 @@ const readPostFromDatabase = () => {
                          <div class='row'>
                           <div class='col-4'>
                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
+                             
                            <div class='col-4'>
                               <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
                                 <div class='col-4'>
@@ -212,12 +215,41 @@ const readPostFromDatabase = () => {
            </div>` + recipes_post.innerHTML; 
           document.getElementById(`comentarpost${coment.key}`).addEventListener('click',readComents)
           document.getElementById(`btnComent${coment.key}`).addEventListener('click', saveComent)
-           
+          
             }
         })
     };     
   
-    
+
+const btnLikePost = (e) =>{
+    const key = e.target.getAttribute('id').slice(8)
+    const uid = firebase.auth().currentUser.uid;
+
+    likePost (key,uid)
+    printLikes (key,uid)
+
+} 
+
+
+const printLikes =(key, postID) =>{
+
+    console.log('running getLikeCount for post ID:', postID);
+    let thisPostRef = firebase.database().ref('posts/'+ key + '/starCount');
+    thisPostRef.once('value', function(snapshot) {
+        console.log( key + ' value:', snapshot.val() );
+        if ( snapshot.val() ) {
+            console.log( postID + 'contains:', snapshot.val() );
+            document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount} likes`;
+
+        } else {
+            console.log( postID + '- no data in Firebase' );
+            return 0;
+
+        }
+    });
+
+}
+   
 const readComents = (e) => {
     const key = e.target.getAttribute('id').slice(12)  
     const comentRef = firebase.database().ref('/posts/' + key + '/coment/')
