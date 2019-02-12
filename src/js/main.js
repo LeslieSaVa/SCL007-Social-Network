@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost, biography,likePost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost, biography,likePost, likeCount} from './app.js'
 
  
 window.onload = () =>{
@@ -136,7 +136,7 @@ const readPostFromDatabase = () => {
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span>Like </button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
                             <div class='col-4'>
                             <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
@@ -194,13 +194,14 @@ const readPostFromDatabase = () => {
                           <div class='box-buttons'>
                          <div class='row'>
                           <div class='col-4'>
-                              <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
+                              <button class='btn-likecoment likes' id='likePostRec${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
 
                            <div class='col-4'>
                               <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
-                                <div class='col-4'>
-                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><i class="far fa-trash-alt"></i>Borrar</button>                                
-                                </div>
+                               
+                          <div class='col-4'>
+                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
+                                 
                                  </div>
                                  <div id='comentPost${coment.key}'>                         
                                  
@@ -219,7 +220,15 @@ const readPostFromDatabase = () => {
               </div>
           <div class='col-3 col-m-2 col-s-12'></div>
            </div>` + recipes_post.innerHTML; 
-          document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
+           let btnLikes = document.getElementsByClassName('likes');
+           for (let i =0; i< btnLikes.length; i++){
+               btnLikes[i].addEventListener('click', btnLikePost);
+           }
+           let btnBorrar = document.getElementsByClassName('borrar');
+           for (let i =0; i< btnBorrar.length; i++){
+               btnBorrar[i].addEventListener('click', deletePost);
+           }
+
           document.getElementById(`comentarpost${coment.key}`).addEventListener('click',readComents)
           document.getElementById(`btnComent${coment.key}`).addEventListener('click', saveComent)
           
@@ -229,30 +238,36 @@ const readPostFromDatabase = () => {
   
 
 const btnLikePost = (e) =>{
-    const key = e.target.getAttribute('id').slice(8)
+    const keyA = e.target.getAttribute('id').slice(8) 
+    const key = keyA == null ? keyA :e.target.getAttribute('id').slice(11)
     const uid = firebase.auth().currentUser.uid;
-
+    console.log(key)
     likePost (key,uid)
     printLikes (key,uid)
+    likeCount (key,uid)
 
 } 
 
+const printLikes =(key, uid) =>{
 
-const printLikes =(key, postID) =>{
-
-    let thisPostRef = firebase.database().ref('posts/'+ key + '/starCount');
+    let thisPostRef = firebase.database().ref('posts/'+ key + '/starCount'+ '/likeCount');
     thisPostRef.once('value', function(snapshot) {
+    let printLikeCount = snapshot.val() ? Object.entries(snapshot.val()): 0;
+    const likeFinal = printLikeCount.length ? printLikeCount.length : 0;
+            console.log(likeFinal)
         if ( snapshot.val() ) {
-            document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount}`;
+            document.getElementById(`countLike${key}`).innerHTML = `${ likeFinal }`
+            document.getElementById(`countLikeRec${key}`).innerHTML = `${ likeFinal }`;
 
         } else {
-            console.log( postID + '- no data in Firebase' );
+           console.log( uid + '- no data in Firebase' );
             return 0;
-
         }
     });
 
 }
+
+
    
 const readComents = (e) => {
     const key = e.target.getAttribute('id').slice(12)  
