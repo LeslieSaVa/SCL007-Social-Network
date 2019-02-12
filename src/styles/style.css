@@ -523,6 +523,10 @@ li a:hover:not(.active) {
         .icondeskopt{
           display: none;
         }
+        .coments-post{
+          width: 100%; 
+          height: 85px;
+        }
   
   /* media queries for css style */
 
