@@ -45,14 +45,15 @@ export const readPost = (onpostChange) => {
 };
 
 export const deletePost = (postdelete) => {
-  //console.log(key);
-  var postID = postdelete.target.getAttribute("userpp");   
+  var postID = postdelete.currentTarget.getAttribute("userpp");  
   var firebaseref = firebase.database().ref('posts/'+ postID);
-  firebaseref.remove().then(function(){
+  let askRemove = confirm("Quieres eliminar este Post?")
+  if(askRemove == true){
+    firebaseref.remove();
     location.reload();
-  }).catch(function(error){
-    console.log("remove failed: " + error.message)
-  })
+  }else{
+    return null
+  }
 }
 
 export const guardandoComentarios =(key, contenido, author)=>{
@@ -86,15 +87,10 @@ export const biography = (uid,contenido)=>{
 
     export const likePost = (id, uid) => { 
 
-      console.log('running likePost() for post ID:', id);
       let postRef = firebase.database().ref('posts/'+ id + '/starCount');
       // get current number of likes here, so we can increment if any exist
       postRef.child('like-count').once('value', function(snapshot){
-
-          console.log( 'snapshot.val():', snapshot.val() );
-          var currentLikes = snapshot.val() ? snapshot.val() : 0;
-          console.log( 'currentLikes:', currentLikes );
-
+          let currentLikes = snapshot.val() ? snapshot.val() : 0;
           postRef.update({
              
               'postID': uid,
@@ -119,35 +115,6 @@ export const biography = (uid,contenido)=>{
    
 
  
-
-
-
-
-
-
-
-
-
-// export const deletePost = () => {
-//   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
-//   var firebaseref = firebase.database().ref('posts/'+ userID).delete();
-//   firebaseref.remove().then(function(){
-//     alert("hola");
-//   }).catch(function(error){
-//     console.log("remove failed: " + error.message)
-//   })
-// }
-// export function deletePost(){
-//  //referencia post publico 
-//   let gg = firebase.database().ref('posts/'+ this.id)
-//   gg.remove();
-//   location.reload();  
-//   //referencia en el perfil del usuario 
-//   // firebase.database().ref('/users/' + firebase.auth().currentUser.uid+ '/post/'+ this.id).set({
-//   //   null:null
-//   // })
-
-// };
 
 
 
