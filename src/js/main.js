@@ -138,9 +138,9 @@ const readPostFromDatabase = () => {
                         <div class='col-4'>
                             <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
                          <div class='col-4'>
-                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Cometarios</button></div>
+                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><i class="material-icons">comment</i>comentar</button></div>
                             <div class='col-4'>
-                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button></div>   
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><i class="material-icons">delete</i>borrar</button></div>   
                                </div>
 
                                <div id='comentPost'>               
@@ -210,6 +210,7 @@ const readPostFromDatabase = () => {
               </div>
           <div class='col-3 col-m-2 col-s-12'></div>
            </div>` + recipes_post.innerHTML; 
+          document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
           document.getElementById(`comentarpost${coment.key}`).addEventListener('click',readComents)
           document.getElementById(`btnComent${coment.key}`).addEventListener('click', saveComent)
            
