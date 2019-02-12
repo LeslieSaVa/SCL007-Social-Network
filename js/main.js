@@ -136,8 +136,7 @@ const readPostFromDatabase = () => {
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span> Like</button></div>
-                            <div id= 'countLike${coment.key}'></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span>Like </button></div>
                             <div class='col-4'>
                             <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
@@ -147,7 +146,7 @@ const readPostFromDatabase = () => {
                                <div id='comentPost'>               
                                  
                                
-                               <textarea name='comentario' id='comentsPostHome${coment.key}' style='width: 100%; /*! height: 85px; */'
+                               <textarea class='coments-post' name='comentario' id='comentsPostHome${coment.key}'
                                    placeholder='Escribe aqui tu comentario...'></textarea>           
                                <button  class='btn-likecoment' id='btnComentHome${coment.key}'>Comentar</button>
                       
@@ -244,7 +243,7 @@ const printLikes =(key, postID) =>{
     let thisPostRef = firebase.database().ref('posts/'+ key + '/starCount');
     thisPostRef.once('value', function(snapshot) {
         if ( snapshot.val() ) {
-            document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount} likes`;
+            document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount}`;
 
         } else {
             console.log( postID + '- no data in Firebase' );
