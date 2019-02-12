@@ -113,86 +113,61 @@ const readPostFromDatabase = () => {
     let year = currentDate.getFullYear()
     
     readPost((coment)=>{ 
-         newcoments.innerHTML = 
+        
+        
+        newcoments.innerHTML = 
       `          
       <div class='row' id= ${coment.key}>  
-        <div class='col-3 col-m-2 col-s-12'></div>
-           <div class='col-6 col-m-8 col-s-12'>  
-            <div class='box_text'>
-                <div class='box-header'>
-                         <div class='avatar_post'>
-                         <img src='${coment.val().profile_picture}'/>
-                         </div> 
-                         <div class='name-post'>${coment.val().author}
-                         </div>
-                </div>
-
-                <div class='box-content'>
-                          <h3>${coment.val().title}</h3><br>
+          <div class='col-3 col-m-2 col-s-12'></div>
+          <div class='col-6 col-m-8 col-s-12'>  
+                    <div class='box_text'>
+                        <div class='box-header'>
+                         <div class='avatar_post'><img src='${coment.val().profile_picture}'/></div> 
+                          <div class='name-post'>${coment.val().author}</div>
+                        </div>
+                        <div class='box-content'>
+                        <h3>${coment.val().title}</h3><br>
                           <div class='content'>                          
                             <p>${coment.val().body}</p>
-                          </div>
-                          <br>
+                          </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
                           <span> Creado: ${day} / ${month} / ${year} </span>
-                </div>
-
-                <div class='box-buttons'>
-                         <div class='row'>
-                    
+                        </div>
+                        <div class='box-buttons'>
+                       <div class='row'>
+                        <div class='col-4'>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span>Like </button></div>
                             <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'>
-                            <span class='icondeskopt'><i class='fa fa-thumbs-up'><span id= 'countLike${coment.key}'></span></i>
-                            <p class='iconmovile'>Like</p>
-                            </button>
-                            </div>
-                           
+                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
-                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'>
-                            <span class='icondeskopt'><i class='far fa-comment'></i></span>
-                            <p class="iconmovile">Ver Cometarios</p>
-                            </button>
-                            </div>
-
-                            <div class='col-4'>
-                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span>
-                            <p class='iconmovile'>borrar</p>
-                            </button> 
-                            </div>
-
-                         </div>
-                 </div> 
-
-                            <div id='comentPost'>               
-                            <textarea class="coment-post" name='comentario' id='comentsPostHome${coment.key}' 
-                                   placeholder='Escribe aqui tu comentario...'>
-                            </textarea>
-                            <button  class='btn-likecoment' id='btnComentHome${coment.key}'>Comentar
-                            </button>
-                            <br>
-                            <div id='printHome${coment.key}'> </div>
-                            </div>
-                            
-                            
-                        
-                            </div>
-        </div>
-   <div class='col-3 col-m-2 col-s-12'></div>
-         </div>` + newcoments.innerHTML;  
-        //  document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
-        //  document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
+                               </div>
+                               <div id='comentPost'>               
+                                 
+                               
+                               <textarea class='coments-post' name='comentario' id='comentsPostHome${coment.key}'
+                                   placeholder='Escribe aqui tu comentario...'></textarea>           
+                               <button  class='btn-likecoment' id='btnComentHome${coment.key}'>Comentar</button>
                       
-let btnLikes = document.getElementsByClassName('likes');
-for (let i =0; i< btnLikes.length; i++){
-btnLikes[i].addEventListener('click', btnLikePost);
-       }
-
-let btnBorrar = document.getElementsByClassName('borrar');
-for (let i =0; i< btnBorrar.length; i++){
-btnBorrar[i].addEventListener('click', deletePost);
-       }
-
-     
+              
+                       </div> <br>
+                       <div id='printHome${coment.key}'> </div>
+                        </div>
+                 </div> 
+            </div>
+        <div class='col-3 col-m-2 col-s-12'></div>
+         </div>` + newcoments.innerHTML;  
+        //document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
+        //  document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
+        let btnLikes = document.getElementsByClassName('likes');
+        for (let i =0; i< btnLikes.length; i++){
+            btnLikes[i].addEventListener('click', btnLikePost);
+        }
+        let btnBorrar = document.getElementsByClassName('borrar');
+        for (let i =0; i< btnBorrar.length; i++){
+            btnBorrar[i].addEventListener('click', deletePost);
+        }
+                      
        if ( coment.val().hashtag == '#receta' || coment.val().hashtag == '#recetas' || coment.val().hashtag == '#recetasaludable' || coment.val().hashtag == '#RECETA' || coment.val().hashtag == '#RECETAS' ) {
           
         recipes_post.innerHTML =  `
@@ -201,45 +176,41 @@ btnBorrar[i].addEventListener('click', deletePost);
             <div class='col-3 col-m-2 col-s-12'></div>
             <div class='col-6 col-m-8 col-s-12'>  
                       <div class='box_text'>
-                           <div class='box-header'>
-                            <div class='avatar_post'>
-                            <img src='${coment.val().profile_picture}'/>
-                            </div> 
+                          <div class='box-header'>
+                           <div class='avatar_post'><img src='${coment.val().profile_picture}'/></div> 
                             <div class='name-post'>${coment.val().author}</div>
-                            </div>
-                            <div class='box-content'>
-                            <h3>${coment.val().title}</h3><br>
+                          </div>
+                          <div class='box-content'>
+                          <h3>${coment.val().title}</h3><br>
                             <div class='content'>                            
                               <p>${coment.val().body}</p><br>
                             </div>
                             <h4>${coment.val().hashtag}</h4><br>
                             <span> Creado:${day} / ${month} / ${year} </span>
-                            </div>
+                          </div>
                           <div class='box-buttons'>
-                            <div class='row'>
-                               <div class='col-4'>
-                               <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button>
-                               </div>
-                             
-                               <div class='col-4'>
-                               <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button>
-                               </div>
-
-                               <div class='col-4'>
-                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><span class='ion-chatbox-working'></span>Borrar</button>       </div>
-                            </div>     
-                           </div>     
-                         
-
+                         <div class='row'>
+                          <div class='col-4'>
+                              <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
+                           <div class='col-4'>
+                              <button  class='btn-likecoment' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
+                                <div class='col-4'>
+                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment'><i class="far fa-trash-alt"></i>Borrar</button>                                
+                                </div>
+                                 </div>
                                  <div id='comentPost${coment.key}'>                         
-                                   <textarea name='comentario' class="coment-post" id='comentsPost${coment.key}' 
+                                 
+                               
+                                         <textarea name='comentario' id='comentsPost${coment.key}' style='width: 100%; /*! height: 85px; */'
                                              placeholder='Escribe aqui tu comentario...'></textarea>           
-                                    <button  class='btn-likecoment' id='btnComent${coment.key}'>Comentar</button>
+                                         <button  class='btn-likecoment' id='btnComent${coment.key}'>Comentar</button>
+                                
+                        
                                  </div> <br>
                                  <div id='print${coment.key}'></div>
-
-                </div>          
-              
+                          </div>
+                   </div>     
+              </div>
           <div class='col-3 col-m-2 col-s-12'></div>
            </div>` + recipes_post.innerHTML; 
           document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
@@ -252,7 +223,7 @@ btnBorrar[i].addEventListener('click', deletePost);
   
 
 const btnLikePost = (e) =>{
-    const key = e.target.getAttribute('id').slice(8);
+    const key = e.target.getAttribute('id').slice(8)
     const uid = firebase.auth().currentUser.uid;
 
     likePost (key,uid)
@@ -263,12 +234,9 @@ const btnLikePost = (e) =>{
 
 const printLikes =(key, postID) =>{
 
-    console.log('running getLikeCount for post ID:', postID);
     let thisPostRef = firebase.database().ref('posts/'+ key + '/starCount');
     thisPostRef.once('value', function(snapshot) {
-        console.log( key + ' value:', snapshot.val() );
         if ( snapshot.val() ) {
-            console.log( postID + 'contains:', snapshot.val() );
             document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount}`;
 
         } else {
@@ -348,12 +316,9 @@ const showUserInfo = () => {
            </div>
            <p class='info-user-p'>${userInfo.email}</p>
            <div class='desc' id='biography${userInfo.uid}'>
-
            <textarea name='comentario' id='postBio${userInfo.uid}' style='width: 100%; /*! height: 85px; */'
            placeholder='Escribe aqui tu comentario...'></textarea>           
           <button id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
-
-
            </div>
            
            <div class='footer_card'>
@@ -377,7 +342,6 @@ const showUserInfo = () => {
         document.getElementById(`biography${key}`).innerHTML = `
         
         <p> ${contenido}</p>
-
         `;
         biography(key,contenido)
     }
@@ -389,7 +353,7 @@ showUser.addEventListener('click', showUserInfo);
 document.getElementById('addPost').addEventListener('click', () =>{
 
     document.getElementById('addpost_container').style.display ='block';
-    document.getElementById('index_page').style.display='block';
+    document.getElementById('index_page').style.display='none';
     document.getElementById('search_container').style.display ='none';
     document.getElementById('profile_container').style.display ='none';
     document.getElementById('recipes_container').style.display ='none';
@@ -437,5 +401,3 @@ for (let i = 0; i < btns.length; i++) {
   this.className += ' active';
   });
 }
-
-
