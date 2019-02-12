@@ -73,9 +73,6 @@ export const guardandoComentarios =(key, contenido, author)=>{
 
  
   return firebase.database().ref().update(updates);
-<<<<<<< HEAD
-}
-=======
 }
 
 export const biography = (uid,contenido)=>{
@@ -121,4 +118,3 @@ export const biography = (uid,contenido)=>{
 
 
 
->>>>>>> ba862da37b5ed97e6310b326693f0750be790c33
