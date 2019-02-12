@@ -75,6 +75,17 @@ export const guardandoComentarios =(key, contenido, author)=>{
   return firebase.database().ref().update(updates);
 }
 
+export const biography = (uid,contenido)=>{
+
+ firebase.database().ref('users/'+uid).update({
+            biografía: contenido            
+            
+        })
+    }
+         
+ 
+
+
 // export const deletePost = () => {
 //   var userID = deletePost1.target.getAttribute("userid");   //userid="${coment.key}"
 //   var firebaseref = firebase.database().ref('posts/'+ userID).delete();

@@ -1,5 +1,5 @@
 import {checkAuthState, register, exit, google, facebook, login} from  './auth.js'
-import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost} from './app.js'
+import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost, biography} from './app.js'
 
  
 window.onload = () =>{
@@ -269,9 +269,11 @@ const showUserInfo = () => {
     addpost_container.style.display ='none';
 
     const userInfo = firebase.auth().currentUser;
-     console.log(userInfo)   
+    let photoUser = firebase.auth().currentUser.photoURL;
+    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
+   
     //console.log(userInfo)
-    if(userInfo.photoURL != null){
+    // if(userInfo.photoURL != null){
            
     profile_container.innerHTML =`
     <div class='container'>
@@ -280,49 +282,45 @@ const showUserInfo = () => {
     <div class='col-4 col-m-8 col-s-12'>
     <div class='card card-one'>
            <div class='header_card'>
-           <div class='avatar'><img src='${userInfo.photoURL}' alt='Jhon Doe' /></div>
+           <div class='avatar'><img src='${user_photo}' alt='Jhon Doe' /></div>
            </div>
            <p class='info-user-p'>${userInfo.email}</p>
-           <div class='desc'>
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
+           <div class='desc' id='biography${userInfo.uid}'>
+
+           <textarea name='comentario' id='postBio${userInfo.uid}' style='width: 100%; /*! height: 85px; */'
+           placeholder='Escribe aqui tu comentario...'></textarea>           
+          <button id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
+
+
            </div>
            
            <div class='footer_card'>
-           <button id='btn-logoutA' class='btn-likecoment'>Cerrar Sesión</button>
+           <button id='btn-logout' class='btn-likecoment'>Cerrar Sesión</button>
            </div>
      </div>
      </div>
      <div class='col-4 col-m-2'></div>
      </div>
      </div>
-            `;document.getElementById('btn-logoutA').addEventListener('click', logOut)
-           
-       }else{
-        profile_container.innerHTML =
-        `   <div class='container'>
-        <div class='row'>
-        <div class='col-4 col-m-2'></div>
-        <div class='col-4 col-m-8 col-s-12'>
-        <div class='card card-one'>
-               <div class='header_card'>
-               <div class='avatar'><img src='IMG/avatar-default.png' alt='Jhon Doe' /></div>
-               </div>
-               <p class='info-user-p'>${userInfo.email}</p>
-               <div class='desc'>
-               Lorem ipsum dolor sit amet, consectetur adipisicing elit et cupiditate deleniti.
-               </div>               
-               <div class='footer_card'>
-               <button id='btn-logout' class='btn-likecoment'>Cerrar Sesión</button>
-               </div>
-         </div>
-         </div>
-         <div class='col-4 col-m-2'></div>
-         </div>
-         </div>
-       `;document.getElementById('btn-logout').addEventListener('click', logOut)
+            `; document.getElementById('btn-logout').addEventListener('click', logOut)
+               document.getElementById(`btnSaveBiography${userInfo.uid}`).addEventListener('click', saveBiography)
+    }     
+
+    const saveBiography = (e) =>{
+
+    const key = e.target.getAttribute('id').slice(16)
+    console.log (key)
+    const contenido = document.getElementById(`postBio${key}`).value
+
+        document.getElementById(`biography${key}`).innerHTML = `
+        
+        <p> ${contenido}</p>
+
+        `;
+        biography(key,contenido)
+    }
     
-    }
-    }
+    
 
 showUser.addEventListener('click', showUserInfo);    
 
