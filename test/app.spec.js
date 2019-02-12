@@ -1,5 +1,11 @@
 import {writeUserData,enviarConvalidacionAFirebase, readPost,deletePost, guardandoComentarios,likePost, biography} from '../src/js/app';
 const chai = require('chai');
+const jest = require('jest');
+
+var firebasemock = require('firebase-mock');
+var mockdatabase = new firebasemock.MockFirebase();
+
+  
 
 
 describe( 'La persona debería poder entrar a la app', ()=>{
@@ -9,11 +15,15 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof writeUserData, 'function');
       });
-     
+      it('debería tener una referencia', ()=>{
+        ( writeUserData, (path) => {
+            return path ? mockdatabase.child(path) : mockdatabase;
+          });
+      });
       
     });
 
-  })
+  }),
 
   describe( 'La persona debería poder guardar una publicación', ()=>{
 
@@ -22,10 +32,16 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof enviarConvalidacionAFirebase, 'function');
       });
+      it('debería tener una referencia', ()=>{
+        ( enviarConvalidacionAFirebase, (path) => {
+            return path ? enviarConvalidacionAFirebase.child(path) : mockdatabase;
+          });
       
     });
 
   })  
+
+})
 
   describe( 'La persona debería poder ver una publicación', ()=>{
 
@@ -34,10 +50,14 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof readPost, 'function');
       });
-      
+      it('debería tener una referencia', ()=>{
+        ( readPost, (path) => {
+            return path ? mockdatabase.child(path) : mockdatabase;
+          });
     });
 
   }) 
+})
   describe( 'La persona debería poder borrar una publicación', ()=>{
 
     describe('deletePost', ()=>{
@@ -45,10 +65,16 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof deletePost, 'function');
       });
+      it('debería tener una referencia', ()=>{
+        ( deletePost, (path) => {
+            return path ? mockdatabase.child(path) : mockdatabase;
+          });
       
     });
 
   })
+
+})
 
   describe( 'La persona debería poder comentar una publicación', ()=>{
 
@@ -57,10 +83,15 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof guardandoComentarios, 'function');
       });
+      it('debería tener una referencia', ()=>{
+        ( guardandoComentarios, (path) => {
+            return path ? mockdatabase.child(path) : mockdatabase;
+          });
       
     });
 
   })
+})
 
   describe( 'La persona debería poder dar like a una publicación', ()=>{
 
@@ -69,10 +100,17 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof likePost, 'function');
       });
+      it('debería tener una referencia', ()=>{
+        ( likePost, (path) => {
+            return path ? likePost.child(path) : likePost;
+          });
       
     });
 
   })
+
+})
+
   describe( 'La persona debería poder escribir su biografía en perfil', ()=>{
 
     describe('biography', ()=>{
@@ -80,12 +118,16 @@ describe( 'La persona debería poder entrar a la app', ()=>{
       it('debería ser una función', ()=>{
         chai.assert.equal(typeof biography, 'function');
       });
+      it('debería tener una referencia', ()=>{
+        ( biography, (path) => {
+            return path ? biography.child(path) : biography;
+          });
       
     });
 
   })
 
-
+})
 
 
 
