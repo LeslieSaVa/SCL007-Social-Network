@@ -117,7 +117,7 @@ const readPostFromDatabase = () => {
       `          
       <div class='row' id= ${coment.key}>  
         <div class='col-3 col-m-2 col-s-12'></div>
-        <div class='col-6 col-m-8 col-s-12'>  
+           <div class='col-6 col-m-8 col-s-12'>  
             <div class='box_text'>
                 <div class='box-header'>
                          <div class='avatar_post'>
@@ -142,17 +142,21 @@ const readPostFromDatabase = () => {
                     
                             <div class='col-4'>
                             <button class='btn-likecoment likes' id='likePost${coment.key}'>
-                            <i class='fa fa-thumbs-up'></i> Like <div id= 'countLike${coment.key}'></div>
+                            <span class='icondeskopt'><i class='fa fa-thumbs-up'><span id= 'countLike${coment.key}'></span></i>
+                            <p class='iconmovile'>Like</p>
                             </button>
                             </div>
                            
                             <div class='col-4'>
-                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='ion-chatbox-working'></span>Ver Cometarios
+                            <button  class='btn-likecoment'id='comentarpostHome${coment.key}'>
+                            <span class='icondeskopt'><i class='far fa-comment'></i></span>
+                            <p class="iconmovile">Ver Cometarios</p>
                             </button>
                             </div>
 
                             <div class='col-4'>
-                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><i class="material-icons">delete</i>borrar
+                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span>
+                            <p class='iconmovile'>borrar</p>
                             </button> 
                             </div>
 
@@ -171,20 +175,21 @@ const readPostFromDatabase = () => {
                             
                             
                         
-                
+                            </div>
         </div>
    <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
         //  document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
         //  document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
                       
-        let btnLikes = document.getElementsByClassName('likes');
-       for (let i =0; i< btnLikes.length; i++){
-           btnLikes[i].addEventListener('click', btnLikePost);
+let btnLikes = document.getElementsByClassName('likes');
+for (let i =0; i< btnLikes.length; i++){
+btnLikes[i].addEventListener('click', btnLikePost);
        }
-       let btnBorrar = document.getElementsByClassName('borrar');
-       for (let i =0; i< btnBorrar.length; i++){
-           btnBorrar[i].addEventListener('click', deletePost);
+
+let btnBorrar = document.getElementsByClassName('borrar');
+for (let i =0; i< btnBorrar.length; i++){
+btnBorrar[i].addEventListener('click', deletePost);
        }
 
      
@@ -247,7 +252,7 @@ const readPostFromDatabase = () => {
   
 
 const btnLikePost = (e) =>{
-    const key = e.target.getAttribute('id').slice(8)
+    const key = e.target.getAttribute('id').slice(8);
     const uid = firebase.auth().currentUser.uid;
 
     likePost (key,uid)
@@ -264,7 +269,7 @@ const printLikes =(key, postID) =>{
         console.log( key + ' value:', snapshot.val() );
         if ( snapshot.val() ) {
             console.log( postID + 'contains:', snapshot.val() );
-            document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount} likes`;
+            document.getElementById(`countLike${key}`).innerHTML = `${snapshot.val().likeCount}`;
 
         } else {
             console.log( postID + '- no data in Firebase' );
