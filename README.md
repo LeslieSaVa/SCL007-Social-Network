@@ -1,5 +1,68 @@
 # Creando una Red Social
 
+## Definición del producto 
+
+**Happy With Allergies** es una red social que invita a todos las personas que sufren algún tipo de alergia alimentaria (o que tienen un familiar y/o amigo con este tipo de alergias) a compartir sus datos, recetas, información de locales o incluso solo conocer gente en su misma condición. 
+
+## Investigación
+
+En el mundo durante los últimos 50 años han disminuido drásticamente las enfermedades infecto-contagiosas, y han aumentado mucho las inflamatorias y autoinmunes, esto se debe a que con el paso del tiempo, las personas cada vez tienen menos contacto con bacterias, lo que hace que el sistema inmune tenga "menos trabajo" y se desvíe atacando al propio organismo. Es por esto que se estima que al menos el 10% de la población mundial posea algún tipo de alergia alimentaria y entre 6 a 8% en menores de 3 años. Datos recientes estiman que en chile el 5,5% de los escolares presentan alguna historia compatible (diagnosticada o sintomática) con estas alergias.
+
+En base a nuestra investigación hemos descubierto que para las personas alérgicas o para los familiares/amigos de estos, no existe alguna red social que los identifique ( solo grupos cerrados de facebook) para compartir experiencias ó intercambiar datos informativos respecto al tema.  
+
+Se realizó una encuesta a todas aquellas personas que tuvieran algún cercano con alergia o que padecieran de esta condición para conocer los siguientes datos: 
+
+1. **Las alergias más frecuentes o conocidas fueron**: 
+
+    * ALERGIA A LA PROTEÍNA DE LECHE DE VACA
+    * ALERGIA AL GLUTEN
+
+![Gráfico resultados encuesta pregunta 1](src/IMG/Encuestapreg1.png)
+
+2. **La información más importante que necesitan estas personas** : 
+
+    * LUGARES DONDE IR A COMPRAR ALIMENTOS
+    * LUGARES DONDE SALIR A COMER
+    * RECETAS
+
+![Gráfico resultados encuesta pregunta 2](src/IMG/Encuestapreg2.png)
+
+
+3. **Conocimiento de alguna aplicación que hable de estos temas** : 
+
+    * NO
+    * GRUPOS DE FACEBOOK
+
+## Definición del usuario
+
+El usuario de HappyWithAllergy son todas aquellas personas con alergia alimentaria a la Leche (ó Intolerancia) y al Trigo (Celiaquía) y/o su entorno que deseen pertenecer a una comunidad para compartir información o intercambiar experiencias en base a sus vivencias. 
+ 
+## Historias de Usuario
+
+### Usuario Emprendedor
+
+Juan, un emprendedor amante de la pastelería decide crear una línea saludable de galletas sin alérgenos (Trigo y Lácteos) por lo que quiere publicar su emprendimiento tanto para dar a conocer sus productos y aumentar sus ventas y para ayudar a todas las personas con algún problema de alergia alimentaria a tener acceso fácil y económico de dulces y pasteles que puedan consumir. 
+
+* **Yo**: Usuario Emprendedor
+* **Necesito**: Publicar mi emprendimiento
+* **Para**:
+    * Aumentar mis ventas
+    * Ayudar a que las personas con alergia alimentaria tengan más y mejor acceso a productos sin alérgenos.
+
+
+
+    
+
+
+
+
+
+
+
+   
+
+# Creando una Red Social
+
 ## Preámbulo
 
 Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
