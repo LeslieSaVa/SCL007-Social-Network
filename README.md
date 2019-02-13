@@ -114,10 +114,43 @@ Gabriela, tiene un hijo de 6 años que hace dos semanas le diagnosticaron Celiaq
 ### Sketch y Prototipado
 
 Una vez definido el tema del proyecto se realizó una lluvia de ideas para la ideación a través de los sketch de las distintas vistas que tendrá el producto; a partir del cual se inicia el prototipo de baja fidelidad. 
+Como el proyecto se trata de una red social pensamos en crear un menú con iconos al final de la pantalla, para facilitar el manejo de la aplicación al usuario.
 
 ### - Sketch 1. Pantalla principal
 
-![Sketch 1](IMG/sketch1.png)
+![Sketch 1](src/IMG/sketch1.png)
+
+### - Sketch 2. Pantalla Buscar
+
+![Sketch 1](src/IMG/sketch1.png)
+
+### - Sketch 3. Pantalla Crear Post
+
+![Sketch 1](src/IMG/sketch1.png)
+
+### - Sketch 4. Pantalla Recetas 
+
+![Sketch 1](src/IMG/sketch1.png)
+
+### - Sketch 5. Pantalla Perfil Usuario 
+
+![Sketch 1](src/IMG/sketch1.png)
+
+Una vez analizado los resultados de nuestra investigación y definido el usuario objetivo que queremos abarcar, concretamos el primer prototipo en base a las necesidades de nuestro público. 
+
+![Img Prototipo baja fidelidad](src/IMG/ImgPrototipo.png)
+
+### Consideraciones Diseño 
+
+#### Logo
+
+Considerando las conversaciones con usuarios llegamos a la conclusión de que el vivir con alergias alimentarias no tiene que tener una connotación negativa. Es así como logramos un nombre para nuestra aplicación web y su logo. 
+
+![Img Logo aplicación](src/IMG/logoimg.png)
+
+#### Colores
+
+La paleta de colores que se utilizó para realizar la aplicación tiene su explicación en que el morado en la nutrición es el color del equilibrio. Además los alimentos morados son ricos en antioxidantes que mantienen el sistema inmune protegido. Por lo tanto, las personas que padecen alergias alimentarias tienen que mantener un equilibrio en su alimentación. 
 
 # Creando una Red Social
 
