@@ -342,7 +342,6 @@ const saveComent =(e) =>{
 
 }
 
-
 const printCommentHome = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
      
@@ -434,27 +433,8 @@ document.getElementById('addPost').addEventListener('click', () =>{
 
 })
 
-document.getElementById('addPostDesktop').addEventListener('click', () =>{
-
-    document.getElementById('addpost_container').style.display ='block';
-    document.getElementById('index_page').style.display='none';
-    document.getElementById('search_container').style.display ='none';
-    document.getElementById('profile_container').style.display ='none';
-    document.getElementById('recipes_container').style.display ='none';
-
-})
-
 
 document.getElementById('index').addEventListener('click', () =>{
-
-    document.getElementById('addpost_container').style.display ='none';
-    document.getElementById('index_page').style.display='block';
-    document.getElementById('search_container').style.display ='none';
-    document.getElementById('profile_container').style.display ='none';
-    document.getElementById('recipes_container').style.display ='none';
-
-})
-document.getElementById('indexDesktop').addEventListener('click', () =>{
 
     document.getElementById('addpost_container').style.display ='none';
     document.getElementById('index_page').style.display='block';
@@ -474,26 +454,7 @@ document.getElementById('search').addEventListener('click', () =>{
 
 })
 
-document.getElementById('searchDesktop').addEventListener('click', () =>{
-
-    document.getElementById('addpost_container').style.display ='none';
-    document.getElementById('index_page').style.display='none';
-    document.getElementById('search_container').style.display ='block';
-    document.getElementById('profile_container').style.display ='none';
-    document.getElementById('recipes_container').style.display ='none';
-
-})
-
 document.getElementById('recipes').addEventListener('click', () =>{
-
-    document.getElementById('addpost_container').style.display ='none';
-    document.getElementById('index_page').style.display='none';
-    document.getElementById('search_container').style.display ='block';
-    document.getElementById('profile_container').style.display ='none';
-    document.getElementById('recipes_container').style.display ='block';
-
-})
-document.getElementById('recipesDesktop').addEventListener('click', () =>{
 
     document.getElementById('addpost_container').style.display ='none';
     document.getElementById('index_page').style.display='none';
