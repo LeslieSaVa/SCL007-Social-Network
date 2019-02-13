@@ -115,6 +115,10 @@ Gabriela, tiene un hijo de 6 años que hace dos semanas le diagnosticaron Celiaq
 
 Una vez definido el tema del proyecto se realizó una lluvia de ideas para la ideación a través de los sketch de las distintas vistas que tendrá el producto; a partir del cual se inicia el prototipo de baja fidelidad. 
 
+### - Sketch 1. Pantalla principal
+
+![Sketch 1](IMG/sketch1.png)
+
 # Creando una Red Social
 
 ## Preámbulo
