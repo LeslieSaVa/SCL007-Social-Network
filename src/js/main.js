@@ -139,9 +139,9 @@ const readPostFromDatabase = () => {
                         <div class='col-4'>
                             <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
                             <div class='col-4'>
-                            <button  class='btn-likecoment comments_home'id='${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
+                            <button  class='btn-likecoment comments_home'id='${coment.key}'><span class='icondeskopt'><i class='far fa-comment'></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
-                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
+                            <button  id='btn${coment.key}' userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                </div>
                                <div id='comentPost'>               
                                  
@@ -158,7 +158,7 @@ const readPostFromDatabase = () => {
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
-        //document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
+        //document.getElementById('btn'+ coment.key).addEventListener('click',deletePost);
         //  document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
         let btnLikes = document.getElementsByClassName('likes');
         for (let i =0; i< btnLikes.length; i++){
@@ -206,7 +206,7 @@ const readPostFromDatabase = () => {
                               <button  class='btn-likecoment comments' id='${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
                                
                           <div class='col-4'>
-                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
+                                <button  id='btn${coment.key}' userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                  
                                  </div>
                                  <div id='comentPost${coment.key}'>                         
@@ -285,7 +285,7 @@ const readComentsHome = (e) => {
     
     const keyHome = e.currentTarget.getAttribute('id')    
     const comentRefHome = firebase.database().ref('/posts/' + keyHome + '/coment/');
-    
+    document.getElementById(`printHome${keyHome}` ).innerHTML ='';
     comentRefHome.once('value', (snapshot) => {
 
         if(snapshot.val() === null || snapshot.val() == '' ){
@@ -294,15 +294,17 @@ const readComentsHome = (e) => {
 
        }else{
 
-           for (let snap in snapshot.val()) {                
+           for (let snap in snapshot.val()) { 
 
-             document.getElementById(`printHome${keyHome}` ).innerHTML = `            
+              
+                document.getElementById(`printHome${keyHome}` ).innerHTML = `            
                     <div id= ${keyHome}  style='border: 1px solid purple'>
                     <p>${snapshot.val()[snap].author}</p>
                     <h3>${snapshot.val()[snap].contenido}<h3> 
                     </div>
-             ` + document.getElementById(`printHome${keyHome}`).innerHTML;
-               }}
+             ` + document.getElementById(`printHome${keyHome}`).innerHTML
+           
+            }}
            })
        
    }
@@ -311,25 +313,26 @@ const readComentsHome = (e) => {
        
     const keyRecipes = e.currentTarget.getAttribute('id') 
     const comentRefRecipes = firebase.database().ref('/posts/' + keyRecipes + '/coment/'); 
-
+    document.getElementById(`print${keyRecipes}`).innerHTML ='';
     comentRefRecipes.once('value', (snapshot) => {         
-
+       
             if(snapshot.val() === null || snapshot.val() == '' ){
                
                 alert ('No existen comentarios para ésta publicación') 
 
            }else{
                for (let snap in snapshot.val()) {  
-                
-                 document.getElementById(`print${keyRecipes}`).innerHTML = `            
+                    
+                    document.getElementById(`print${keyRecipes}`).innerHTML = `            
                         <div id= ${keyRecipes}  style='border: 1px solid purple'>
                         <p>${snapshot.val()[snap].author}</p>
                         <h3>${snapshot.val()[snap].contenido}<h3> 
                         </div>
-                 ` + document.getElementById(`print${keyRecipes}`).innerHTML;
-                   }}
-               })
-            
+                 ` + document.getElementById(`print${keyRecipes}`).innerHTML;                 
+                
+               }}   
+        })
+
    }
 
 
@@ -338,7 +341,7 @@ const readComentsHome = (e) => {
     const name=firebase.auth().currentUser.displayName;     
     const contenido = document.getElementById(`comentsPostHome${key}`).value;
 
-    if (contenido === null || contenido === ""){
+    if (contenido === null || contenido === ''){
 
         alert ('Debe completar todos los campos para comentar')
     }else{
@@ -352,7 +355,7 @@ const saveComent =(e) =>{
     const name=firebase.auth().currentUser.displayName; 
     const contenido = document.getElementById(`comentsPostRece${key}`).value;
 
-    if (contenido === null || contenido === ""){
+    if (contenido === null || contenido === ''){
 
         alert ('Debe completar todos los campos para comentar')
     }else{
@@ -367,24 +370,24 @@ const saveComent =(e) =>{
 const printCommentHome = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
 
-    document.getElementById("printHome" + key).innerHTML =""
-    document.getElementById("printHome" + key).innerHTML = `
+    document.getElementById('printHome' + key).innerHTML ='';
+    document.getElementById('printHome' + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
     </div> `
-    + document.getElementById("printHome"+ key).innerHTML;
+    + document.getElementById('printHome'+ key).innerHTML;
 }
 
 const printComment = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
-    document.getElementById("print" + key).innerHTML = ""
-    document.getElementById("print" + key).innerHTML = `
+    document.getElementById('print' + key).innerHTML = '';
+    document.getElementById('print' + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
     </div>`
-    + document.getElementById("print" + key).innerHTML;
+    + document.getElementById('print' + key).innerHTML;
 }
 
 
@@ -525,7 +528,7 @@ inputLoader.addEventListener('change', (e) => {
 //         document.getElementById('container').innerHTML = `
 //     <div>
 //     <h1>${dataImg.data}</h1>
-//       <img src="${url}"/>
+//       <img src='${url}'/>
 //     </div>
 //   ` + document.getElementById('container').innerHTML;
       });
