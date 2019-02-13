@@ -449,3 +449,36 @@ for (let i = 0; i < btns.length; i++) {
   this.className += ' active';
   });
 }
+
+
+// upload image in post
+const inputLoader = document.getElementById('postImgInput');
+
+inputLoader.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const storageRef = firebase.storage().ref('images/' + file.name);
+  const uploadTask = storageRef.put(file);
+
+  uploadTask.on('state_changed', function (snapshot) {
+  },
+    function error(err) {
+    },
+    function complete() {
+      storageRef.getDownloadURL().then(function (url) {
+        const imgKey = firebase.database().ref('myPostImages/').push().key;
+        const updates = {};
+        const dataImg = {
+          url: url,
+          data: document.getElementById('textEmail').value,
+        };
+        updates['/myPostImages/' + imgKey] = dataImg;
+        firebase.database().ref().update(updates);
+//         document.getElementById('container').innerHTML = `
+//     <div>
+//     <h1>${dataImg.data}</h1>
+//       <img src="${url}"/>
+//     </div>
+//   ` + document.getElementById('container').innerHTML;
+      });
+    });
+});
