@@ -83,32 +83,58 @@ export const biography = (uid,contenido)=>{
             
         })
     }
-         
+   
+   
+export const likePost = (id, uid) => {
+//  console.log('running likePost() for post ID:', id);
+  let postRef = firebase.database().ref('posts/'+ id + '/starCount');
+ 
 
-    export const likePost = (id, uid) => { 
+          postRef.once("value", function (snapshot) {
+            let currentLikes = snapshot.child('likeCount').child(uid).val();
+           
+            
+            if (currentLikes == null) {
+              postRef.child('likeCount').child(uid).set('1'),
 
-      let postRef = firebase.database().ref('posts/'+ id + '/starCount');
-      // get current number of likes here, so we can increment if any exist
-      postRef.child('like-count').once('value', function(snapshot){
-          let currentLikes = snapshot.val() ? snapshot.val() : 0;
-          postRef.update({
-             
-              'postID': uid,
-              'likeCount': currentLikes + 1,
-                        
-              }, function(error) {
+              function(error) {
                 if (error) {
                   console.log('Data could not be saved:' + error);
-
+  
                 } else {
                   console.log('Data saved successfully');
+                }  }
 
-                }
+            } else {
+              postRef.child('likeCount').child(uid).remove();
+            }     
 
-              });
+           
+          });
 
-          //getLikeCount(id);
 
-      });
-
+<<<<<<< HEAD
   } 
+=======
+
+} 
+
+
+export const likeCount = (id,uid) =>{  
+  var starCountRef = firebase.database().ref('posts/' + id + '/starCount/' + '/likeCount/' + uid);
+  starCountRef.on('value', function(snapshot) {
+    
+ // console.log (snapshot.val())
+
+});
+}
+
+
+
+
+
+
+
+
+
+>>>>>>> be82f6f629a88ae695ef4b16b558c7fe447d1304
