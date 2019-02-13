@@ -4,7 +4,7 @@
   "description": "Proyecto social-networ HappyWithAllergies",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -17,12 +17,26 @@
   },
   "homepage": "https://github.com/LeslieSaVa/SCL007-Social-Network#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.1.0",
     "chai": "^4.2.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "firebase-mock": "^2.2.10",
+    "jest": "^24.1.0"
   },
   "dependencies": {
     "firebaseui": "^3.5.2"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
   }
 }
