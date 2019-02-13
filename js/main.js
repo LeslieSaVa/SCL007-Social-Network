@@ -4,6 +4,7 @@ import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost,
  
 window.onload = () =>{
  
+// Indica cualquier cambio mostrado en los estados de los usuarios
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
 
@@ -22,6 +23,7 @@ window.onload = () =>{
     });
     
 }
+
 
 const registerWithEmail =()=>{
 
@@ -74,6 +76,8 @@ const loginFacebook =()=>{
 btnFacebook.addEventListener('click', loginFacebook)
 
 
+// Se guardan los post en la base de datos
+
  const guardarComentarios = () => {
 
     const name = firebase.auth().currentUser.displayName;
@@ -108,6 +112,7 @@ btnFacebook.addEventListener('click', loginFacebook)
  
 btnComents.addEventListener('click', guardarComentarios)
 
+// Lee e imprime los comentarios que existen en la base de datos tanto en la pantalla principal como en recetas
 
 const readPostFromDatabase = () => {
    
@@ -245,7 +250,7 @@ const readPostFromDatabase = () => {
         })
     };     
   
-
+// Se guardan los likes en la base de datos
 const btnLikePost = (e) =>{
     const key = e.currentTarget.getAttribute('id').slice(8) 
     //const key = keyA !== null ? keyA :e.currentTarget.getAttribute('id').slice(11)
@@ -256,6 +261,8 @@ const btnLikePost = (e) =>{
     likeCount (key,uid)
 
 } 
+
+// Se imprimen los likes
 
 const printLikes =(key, uid) =>{
 
@@ -280,6 +287,9 @@ const printLikes =(key, uid) =>{
     });
 
 }
+
+
+//Lee  e imprime los comentarios guardados en la base de datos  en la pantalla inicial
 
 const readComentsHome = (e) => {       
     
@@ -309,6 +319,7 @@ const readComentsHome = (e) => {
        
    }
 
+//Lee  e imprime los comentarios guardados en la base de datos  en la pantalla de recetas
    const readComents = (e) => {  
        
     const keyRecipes = e.currentTarget.getAttribute('id') 
@@ -335,7 +346,7 @@ const readComentsHome = (e) => {
 
    }
 
-
+// Se guarda en la base de datos el comentario creado en la página principal
    const saveComentHome =(e) =>{
     const key = e.currentTarget.getAttribute('id')
     const name=firebase.auth().currentUser.displayName;     
@@ -350,6 +361,8 @@ const readComentsHome = (e) => {
     }
 }
 
+
+// Se guarda en la base de datos el comentario creado en la página recetas
 const saveComent =(e) =>{
     const key = e.currentTarget.getAttribute('id')
     const name=firebase.auth().currentUser.displayName; 
@@ -366,7 +379,7 @@ const saveComent =(e) =>{
     }
 }
 
-
+//  Se imprime el comentario creado en la página principal
 const printCommentHome = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
 
@@ -379,6 +392,7 @@ const printCommentHome = (key,contenido,name) => {
     + document.getElementById('printHome'+ key).innerHTML;
 }
 
+// Se imprime el comentario creado en la página de recetas
 const printComment = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
     document.getElementById('print' + key).innerHTML = '';
@@ -390,6 +404,7 @@ const printComment = (key,contenido,name) => {
     + document.getElementById('print' + key).innerHTML;
 }
 
+//Página perfil del Usuario
 
 const showUserInfo = () => {
     index_page.style.display='none';
@@ -451,8 +466,6 @@ const showUserInfo = () => {
 showUser.addEventListener('click', showUserInfo);    
 
 
-
-
 // upload image in post
 const inputLoader = document.getElementById('postImgInput');
 
@@ -484,3 +497,21 @@ inputLoader.addEventListener('change', (e) => {
       });
     });
 });
+
+
+// Buscar Hashtag
+
+document.getElementById("searching").addEventListener("click", () => {
+    let conditionSearch = document.getElementById("search-imput").value
+    principalPage(window.pokemones.pokeSearch(totalData.pokemon, conditionSearch))
+  })
+  
+  
+  pokeSearch: (data, condition) => {
+    const dataSerch= data
+    const result = dataSerch.filter(element => {
+      return element.name.toLowerCase().indexOf(condition.toLowerCase()) !== -1
+      
+    })
+    return result
+  }
