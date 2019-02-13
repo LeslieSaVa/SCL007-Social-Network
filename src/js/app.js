@@ -112,18 +112,3 @@ export const biography = (uid,contenido)=>{
       });
 
   } 
-   
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
