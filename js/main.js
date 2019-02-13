@@ -251,9 +251,10 @@ const readPostFromDatabase = () => {
   
 
 const btnLikePost = (e) =>{
-    const keyA = e.target.getAttribute('id').slice(8) 
-    const key = keyA !== null ? keyA :e.target.getAttribute('id').slice(11)
+    let keyA = e.target.getAttribute('id').slice(8) 
+    let key = keyA !== null ? keyA :e.target.getAttribute('id').slice(11)
     const uid = firebase.auth().currentUser.uid;
+
     console.log(key)
     likePost (key,uid)
     printLikes (key,uid)
@@ -270,7 +271,7 @@ const printLikes =(key, uid) =>{
             console.log(likeFinal)
         if ( snapshot.val() ) {
             document.getElementById(`countLike${key}`).innerHTML = `${ likeFinal }`
-            document.getElementById(`countLikeRec${key}`).innerHTML = `${ likeFinal }`;
+            document.getElementById(`countLikeRec${key}`).innerHTML = `${ likeFinal}`;
 
         } else {
            console.log( uid + '- no data in Firebase' );
@@ -282,9 +283,11 @@ const printLikes =(key, uid) =>{
 
 
    const readComents = (e) => {
-       const keyA = e.target.getAttribute('id').slice(16)
-       const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(12)       
+       let keyA = e.target.getAttribute('id').slice(16)
+       let key = keyA !== null ? keyA: e.target.getAttribute('id').slice(12)       
        const comentRef = firebase.database().ref('/posts/' + key+ '/coment/')
+
+
        comentRef.once('value', (snapshot) => {
         document.getElementById("print" + key).innerHTML = "";
         document.getElementById("printHome" + key).innerHTML = "";
@@ -311,10 +314,9 @@ const printLikes =(key, uid) =>{
 
    }
 
-
 const saveComent =(e) =>{
-    const keyA = e.target.getAttribute('id').slice(13)
-    const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(9)
+    let keyA = e.target.getAttribute('id').slice(13)
+    let key = keyA !== null ? keyA: e.target.getAttribute('id').slice(9)
     const name=firebase.auth().currentUser.displayName; 
     const contenidoA = document.getElementById(`comentsPostHome${key}`).value
     const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPost${key}`).value
