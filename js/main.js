@@ -131,12 +131,12 @@ const readPostFromDatabase = () => {
                             <p>${coment.val().body}</p>
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
-                          <span> Creado: ${day} / ${month} / ${year} </span>
+                          <span> Creado: ${day} / ${month} / ${year} </span>     
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span>Like </button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='icondeskopt'><i class="fa fa-thumbs-up"></i></span>  <span id= 'countLike${coment.key}'></span><p class='iconmovile'>Like</p></button></div>
                             <div class='col-4'>
                             <button  class='btn-likecoment'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
