@@ -131,18 +131,17 @@ const readPostFromDatabase = () => {
                             <p>${coment.val().body}</p>
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
-                          <span> Creado: ${day} / ${month} / ${year} </span>     
+                          <span> Creado: ${day} / ${month} / ${year} </span>
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='icondeskopt'><i class="fa fa-thumbs-up"></i></span>  <span id= 'countLike${coment.key}'></span><p class='iconmovile'>Like</p></button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
                             <div class='col-4'>
                             <button  class='btn-likecoment comments'id='comentinicio${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
                             <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                </div>
-
                                <div id='comentPost'>               
                                  
                                
@@ -152,9 +151,7 @@ const readPostFromDatabase = () => {
                       
               
                        </div> <br>
-
                        <div id='printHome${coment.key}'> </div>
-
                         </div>
                  </div> 
             </div>
@@ -220,9 +217,7 @@ const readPostFromDatabase = () => {
                                 
                         
                                  </div> <br>
-
                                  <div id='print${coment.key}'></div>
-
                           </div>
                    </div>     
               </div>
@@ -293,9 +288,9 @@ const printLikes =(key, uid) =>{
        comentRef.once('value', (snapshot) => {
         document.getElementById("print" + key).innerHTML = "";
         document.getElementById("printHome" + key).innerHTML = "";
-          console.log(key)
+       
            for (let snap in snapshot.val()) {
-               console.log(snap)
+            
                document.getElementById("print" + key).innerHTML = `            
                 <div id= ${key}  style='border: 1px solid purple'>
                 <p>${snapshot.val()[snap].author}</p>
@@ -325,28 +320,27 @@ const saveComent =(e) =>{
     const contenidoA = document.getElementById(`comentsPostHome${key}`).value
     const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPostRece${key}`).value
 
-    guardandoComentarios(key,contenido,name)
-    printComment(key,contenido,name)
+    guardandoComentarios(key,contenido,name);
+    printComment(key,contenido,name);
 
 }
 
 
-const printComment = (key,contenido,name) =>{     
-    const nombre = name !== null ? name : firebase.auth().currentUser.email
-    console.log(nombre)   
-    document.getElementById("print"+key).innerHTML = `
+const printComment = (key,contenido,name) => {     
+    const nombre = name !== null ? name : firebase.auth().currentUser.email;
+    document.getElementById("print" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div>  
-    `+ document.getElementById("print"+key).innerHTML;
+    </div>`
+    + document.getElementById("print" + key).innerHTML;
 
-    document.getElementById("printHome"+key).innerHTML = `
+    document.getElementById("printHome" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div>  
-    `+ document.getElementById("printHome"+key).innerHTML;
+    </div> `
+    + document.getElementById("printHome"+ key).innerHTML;
     
 }
 
@@ -377,12 +371,9 @@ const showUserInfo = () => {
            </div>
            <p class='info-user-p'>${userInfo.email}</p>
            <div class='desc' id='biography${userInfo.uid}'>
-
            <textarea name='comentario' id='postBio${userInfo.uid}' style='width: 100%; /*! height: 85px; */'
            placeholder='Escribe aqui tu comentario...'></textarea>           
           <button id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
-
-
            </div>
            
            <div class='footer_card'>
@@ -406,7 +397,6 @@ const showUserInfo = () => {
         document.getElementById(`biography${key}`).innerHTML = `
         
         <p> ${contenido}</p>
-
         `;
         biography(key,contenido)
     }
@@ -468,3 +458,34 @@ for (let i = 0; i < btns.length; i++) {
 }
 
 
+// upload image in post
+const inputLoader = document.getElementById('postImgInput');
+
+inputLoader.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const storageRef = firebase.storage().ref('images/' + file.name);
+  const uploadTask = storageRef.put(file);
+
+  uploadTask.on('state_changed', function (snapshot) {
+  },
+    function error(err) {
+    },
+    function complete() {
+      storageRef.getDownloadURL().then(function (url) {
+        const imgKey = firebase.database().ref('myPostImages/').push().key;
+        const updates = {};
+        const dataImg = {
+          url: url,
+          data: document.getElementById('textEmail').value,
+        };
+        updates['/myPostImages/' + imgKey] = dataImg;
+        firebase.database().ref().update(updates);
+//         document.getElementById('container').innerHTML = `
+//     <div>
+//     <h1>${dataImg.data}</h1>
+//       <img src="${url}"/>
+//     </div>
+//   ` + document.getElementById('container').innerHTML;
+      });
+    });
+});
