@@ -252,7 +252,7 @@ const readPostFromDatabase = () => {
 
 const btnLikePost = (e) =>{
     const keyA = e.target.getAttribute('id').slice(8) 
-    const key = keyA == null ? keyA :e.target.getAttribute('id').slice(11)
+    const key = keyA !== null ? keyA :e.target.getAttribute('id').slice(11)
     const uid = firebase.auth().currentUser.uid;
     console.log(key)
     likePost (key,uid)
@@ -283,43 +283,41 @@ const printLikes =(key, uid) =>{
 
    const readComents = (e) => {
        const keyA = e.target.getAttribute('id').slice(16)
-       const keyB = e.target.getAttribute('id').slice(12)
-       const comentRefA = firebase.database().ref('/posts/' + keyA + '/coment/')
-       const comentRefB = firebase.database().ref('/posts/' + keyB + '/coment/')
-       comentRefB.once('value', (snapshot) => {
-        document.getElementById("print" + keyB).innerHTML = "";
-          console.log(keyB)
+       const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(12)       
+       const comentRef = firebase.database().ref('/posts/' + key+ '/coment/')
+       comentRef.once('value', (snapshot) => {
+        document.getElementById("print" + key).innerHTML = "";
+        document.getElementById("printHome" + key).innerHTML = "";
+          console.log(key)
            for (let snap in snapshot.val()) {
                console.log(snap)
-               document.getElementById("print" + keyB).innerHTML = `            
-                <div id= ${keyB}  style='border: 1px solid purple'>
+               document.getElementById("print" + key).innerHTML = `            
+                <div id= ${key}  style='border: 1px solid purple'>
                 <p>${snapshot.val()[snap].author}</p>
                 <h3>${snapshot.val()[snap].contenido}<h3> 
                 </div>
-    ` + document.getElementById("print" + keyB).innerHTML
+    ` + document.getElementById("print" + key).innerHTML
+
+    document.getElementById("printHome" + key).innerHTML = `            
+    <div id= ${key}  style='border: 1px solid purple'>
+    <p>${snapshot.val()[snap].author}</p>
+    <h3>${snapshot.val()[snap].contenido}<h3> 
+    </div>
+` + document.getElementById("printHome" + key).innerHTML
+
            }
-       })
-       comentRefA.once('value', (snapshot) => {
-        console.log(keyA)
-         for (let snap in snapshot.val()) {
-             console.log(snap)
-             document.getElementById("printHome" + keyA).innerHTML = `            
-              <div id= ${keyB}  style='border: 1px solid purple'>
-              <p>${snapshot.val()[snap].author}</p>
-              <h3>${snapshot.val()[snap].contenido}<h3> 
-              </div>
-  ` + document.getElementById("printHome" + keyA).innerHTML
-         }
-     })
+       })       
+    
 
    }
 
 
 const saveComent =(e) =>{
-    const keyA = e.target.getAttribute('id').slice(9)
-    const keyB = e.target.getAttribute('id').slice(9)
+    const keyA = e.target.getAttribute('id').slice(13)
+    const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(9)
     const name=firebase.auth().currentUser.displayName; 
-    const contenido = document.getElementById(`comentsPost${key}`).value
+    const contenidoA = document.getElementById(`comentsPostHome${key}`).value
+    const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPost${key}`).value
 
     guardandoComentarios(key,contenido,name)
     printComment(key,contenido,name)
@@ -336,6 +334,13 @@ const printComment = (key,contenido,name) =>{
         <h3>${contenido}<h3> 
     </div>  
     `+ document.getElementById("print"+key).innerHTML;
+
+    document.getElementById("printHome"+key).innerHTML = `
+    <div id= ${key} style='border: 1px solid purple'>
+        <p>${nombre}</p>
+        <h3>${contenido}<h3> 
+    </div>  
+    `+ document.getElementById("printHome"+key).innerHTML;
     
 }
 
