@@ -272,7 +272,13 @@ li a:hover:not(.active) {
   margin-top: 20px;
    color:#8d57a1;
  }
-
+.text-login{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.red{
+  color:red;
+}
 /*** CARD STLES ***/
 
 .cards-container{
