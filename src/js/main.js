@@ -138,11 +138,10 @@ const readPostFromDatabase = () => {
                         <div class='col-4'>
                             <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
                             <div class='col-4'>
-                            <button  class='btn-likecoment comments'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
+                            <button  class='btn-likecoment comments'id='comentinicio${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
                             <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                </div>
-
                                <div id='comentPost'>               
                                  
                                
@@ -152,9 +151,7 @@ const readPostFromDatabase = () => {
                       
               
                        </div> <br>
-
                        <div id='printHome${coment.key}'> </div>
-
                         </div>
                  </div> 
             </div>
@@ -202,7 +199,7 @@ const readPostFromDatabase = () => {
                           <div class='box-buttons'>
                          <div class='row'>
                           <div class='col-4'>
-                              <button class='btn-likecoment likes' id='likePostRec${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
+                              <button class='btn-likecoment likes' id='likPosRe${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
 
                            <div class='col-4'>
                               <button  class='btn-likecoment comments' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
@@ -214,15 +211,13 @@ const readPostFromDatabase = () => {
                                  <div id='comentPost${coment.key}'>                         
                                  
                                
-                                         <textarea name='comentario' id='comentsPost${coment.key}' style='width: 100%; /*! height: 85px; */'
+                                         <textarea name='comentario' id='comentsPostRece${coment.key}' style='width: 100%; /*! height: 85px; */'
                                              placeholder='Escribe aqui tu comentario...'></textarea>           
-                                         <button  class='btn-likecoment save_coment' id='btnComent${coment.key}'>Comentar</button>
+                                         <button  class='btn-likecoment save_coment' id='btnComentRece${coment.key}'>Comentar</button>
                                 
                         
                                  </div> <br>
-
                                  <div id='print${coment.key}'></div>
-
                           </div>
                    </div>     
               </div>
@@ -251,14 +246,13 @@ const readPostFromDatabase = () => {
   
 
 const btnLikePost = (e) =>{
-    let keyA = e.target.getAttribute('id').slice(8) 
-    let key = keyA !== null ? keyA :e.target.getAttribute('id').slice(11)
+    const keyA = e.currentTarget.getAttribute('id').slice(8) 
+    //const key = keyA !== null ? keyA :e.currentTarget.getAttribute('id').slice(11)
     const uid = firebase.auth().currentUser.uid;
-
-    console.log(key)
-    likePost (key,uid)
-    printLikes (key,uid)
-    likeCount (key,uid)
+    console.log(keyA)
+    likePost (keyA,uid)
+    printLikes (keyA,uid)
+    likeCount (keyA,uid)
 
 } 
 
@@ -272,6 +266,11 @@ const printLikes =(key, uid) =>{
         if ( snapshot.val() ) {
             document.getElementById(`countLike${key}`).innerHTML = `${ likeFinal }`
             document.getElementById(`countLikeRec${key}`).innerHTML = `${ likeFinal}`;
+            if(document.getElementById(`countLikeRec${key}`) === null){
+                return
+            }else{
+                document.getElementById(`countLikeRec${key}`).innerHTML = `${ likeFinal }`;
+            }
 
         } else {
            console.log( uid + '- no data in Firebase' );
@@ -283,17 +282,18 @@ const printLikes =(key, uid) =>{
 
 
    const readComents = (e) => {
-       let keyA = e.target.getAttribute('id').slice(16)
-       let key = keyA !== null ? keyA: e.target.getAttribute('id').slice(12)       
+       const keyA = e.currentTarget.getAttribute('id').slice(12)
+       const key = keyA !== null ? keyA: e.currentTarget.getAttribute('id').slice(12)       
+       console.log(key)
        const comentRef = firebase.database().ref('/posts/' + key+ '/coment/')
 
 
        comentRef.once('value', (snapshot) => {
         document.getElementById("print" + key).innerHTML = "";
         document.getElementById("printHome" + key).innerHTML = "";
-          console.log(key)
+       
            for (let snap in snapshot.val()) {
-               console.log(snap)
+            
                document.getElementById("print" + key).innerHTML = `            
                 <div id= ${key}  style='border: 1px solid purple'>
                 <p>${snapshot.val()[snap].author}</p>
@@ -315,34 +315,34 @@ const printLikes =(key, uid) =>{
    }
 
 const saveComent =(e) =>{
-    let keyA = e.target.getAttribute('id').slice(13)
-    let key = keyA !== null ? keyA: e.target.getAttribute('id').slice(9)
+    const keyA = e.target.getAttribute('id').slice(13)
+    const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(9)
+    console.log(key)
     const name=firebase.auth().currentUser.displayName; 
     const contenidoA = document.getElementById(`comentsPostHome${key}`).value
-    const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPost${key}`).value
+    const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPostRece${key}`).value
 
-    guardandoComentarios(key,contenido,name)
-    printComment(key,contenido,name)
+    guardandoComentarios(key,contenido,name);
+    printComment(key,contenido,name);
 
 }
 
 
-const printComment = (key,contenido,name) =>{     
-    const nombre = name !== null ? name : firebase.auth().currentUser.email
-    console.log(nombre)   
-    document.getElementById("print"+key).innerHTML = `
+const printComment = (key,contenido,name) => {     
+    const nombre = name !== null ? name : firebase.auth().currentUser.email;
+    document.getElementById("print" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div>  
-    `+ document.getElementById("print"+key).innerHTML;
+    </div>`
+    + document.getElementById("print" + key).innerHTML;
 
-    document.getElementById("printHome"+key).innerHTML = `
+    document.getElementById("printHome" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div>  
-    `+ document.getElementById("printHome"+key).innerHTML;
+    </div> `
+    + document.getElementById("printHome"+ key).innerHTML;
     
 }
 
@@ -373,12 +373,9 @@ const showUserInfo = () => {
            </div>
            <p class='info-user-p'>${userInfo.email}</p>
            <div class='desc' id='biography${userInfo.uid}'>
-
            <textarea name='comentario' id='postBio${userInfo.uid}' style='width: 100%; /*! height: 85px; */'
            placeholder='Escribe aqui tu comentario...'></textarea>           
           <button id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
-
-
            </div>
            
            <div class='footer_card'>
@@ -402,7 +399,6 @@ const showUserInfo = () => {
         document.getElementById(`biography${key}`).innerHTML = `
         
         <p> ${contenido}</p>
-
         `;
         biography(key,contenido)
     }
@@ -464,3 +460,34 @@ for (let i = 0; i < btns.length; i++) {
 }
 
 
+// upload image in post
+const inputLoader = document.getElementById('postImgInput');
+
+inputLoader.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const storageRef = firebase.storage().ref('images/' + file.name);
+  const uploadTask = storageRef.put(file);
+
+  uploadTask.on('state_changed', function (snapshot) {
+  },
+    function error(err) {
+    },
+    function complete() {
+      storageRef.getDownloadURL().then(function (url) {
+        const imgKey = firebase.database().ref('myPostImages/').push().key;
+        const updates = {};
+        const dataImg = {
+          url: url,
+          data: document.getElementById('textEmail').value,
+        };
+        updates['/myPostImages/' + imgKey] = dataImg;
+        firebase.database().ref().update(updates);
+//         document.getElementById('container').innerHTML = `
+//     <div>
+//     <h1>${dataImg.data}</h1>
+//       <img src="${url}"/>
+//     </div>
+//   ` + document.getElementById('container').innerHTML;
+      });
+    });
+});

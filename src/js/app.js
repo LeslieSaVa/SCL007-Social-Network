@@ -88,7 +88,6 @@ export const biography = (uid,contenido)=>{
 export const likePost = (id, uid) => {
 //  console.log('running likePost() for post ID:', id);
   let postRef = firebase.database().ref('posts/'+ id + '/starCount');
- 
 
           postRef.once("value", function (snapshot) {
             let currentLikes = snapshot.child('likeCount').child(uid).val();
@@ -125,12 +124,3 @@ export const likeCount = (id,uid) =>{
 
 });
 }
-
-
-
-
-
-
-
-
-
