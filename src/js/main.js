@@ -131,12 +131,12 @@ const readPostFromDatabase = () => {
                             <p>${coment.val().body}</p>
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
-                          <span> Creado: ${day} / ${month} / ${year} </span>     
+                          <span> Creado: ${day} / ${month} / ${year} </span>
                         </div>
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='icondeskopt'><i class="fa fa-thumbs-up"></i></span>  <span id= 'countLike${coment.key}'></span><p class='iconmovile'>Like</p></button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
                             <div class='col-4'>
                             <button  class='btn-likecoment comments'id='comentarpostHome${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
@@ -199,12 +199,7 @@ const readPostFromDatabase = () => {
                           <div class='box-buttons'>
                          <div class='row'>
                           <div class='col-4'>
-<<<<<<< HEAD
-                              <button class='btn-likecoment'><span class='fa fa-thumbs-up'></span> Like</button></div>
-=======
                               <button class='btn-likecoment likes' id='likePostRec${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
-
->>>>>>> be82f6f629a88ae695ef4b16b558c7fe447d1304
                            <div class='col-4'>
                               <button  class='btn-likecoment comments' id='comentarpost${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
                                
@@ -268,8 +263,8 @@ const printLikes =(key, uid) =>{
     const likeFinal = printLikeCount.length ? printLikeCount.length : 0;
             console.log(likeFinal)
         if ( snapshot.val() ) {
-            document.getElementById(`countLike${key}`).innerHTML = `${ likeFinal }`
-            document.getElementById(`countLikeRec${key}`).innerHTML = `${ likeFinal }`;
+            document.getElementById(`countLike${key}`).innerHTML = `${likeFinal}`;
+            document.getElementById(`countLikeRec${key}`).innerHTML = `${likeFinal}`;
 
         } else {
            console.log( uid + '- no data in Firebase' );
@@ -281,15 +276,15 @@ const printLikes =(key, uid) =>{
 
 
    const readComents = (e) => {
-       const keyA = e.target.getAttribute('id').slice(16)
-       const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(12)       
-       const comentRef = firebase.database().ref('/posts/' + key+ '/coment/')
+       const keyA = e.target.getAttribute('id');
+       const key = keyA !== null ? keyA: e.target.getAttribute('id');       
+       const comentRef = firebase.database().ref('/posts/' + key+ '/coment/');
        comentRef.once('value', (snapshot) => {
         document.getElementById("print" + key).innerHTML = "";
         document.getElementById("printHome" + key).innerHTML = "";
-          console.log(key)
+       
            for (let snap in snapshot.val()) {
-               console.log(snap)
+            
                document.getElementById("print" + key).innerHTML = `            
                 <div id= ${key}  style='border: 1px solid purple'>
                 <p>${snapshot.val()[snap].author}</p>
@@ -315,31 +310,30 @@ const saveComent =(e) =>{
     const keyA = e.target.getAttribute('id').slice(13)
     const key = keyA !== null ? keyA: e.target.getAttribute('id').slice(9)
     const name=firebase.auth().currentUser.displayName; 
-    const contenidoA = document.getElementById(`comentsPostHome${key}`).value
-    const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPost${key}`).value
+    const contenidoA = document.getElementById(`comentsPostHome${key}`).value;
+    const contenido = contenidoA  !== null ? contenidoA: document.getElementById(`comentsPost${key}`).value;
 
-    guardandoComentarios(key,contenido,name)
-    printComment(key,contenido,name)
+    guardandoComentarios(key,contenido,name);
+    printComment(key,contenido,name);
 
 }
 
 
-const printComment = (key,contenido,name) =>{     
-    const nombre = name !== null ? name : firebase.auth().currentUser.email
-    console.log(nombre)   
-    document.getElementById("print"+key).innerHTML = `
+const printComment = (key,contenido,name) => {     
+    const nombre = name !== null ? name : firebase.auth().currentUser.email;
+    document.getElementById("print" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div>  
-    `+ document.getElementById("print"+key).innerHTML;
+    </div>`
+    + document.getElementById("print" + key).innerHTML;
 
-    document.getElementById("printHome"+key).innerHTML = `
+    document.getElementById("printHome" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div>  
-    `+ document.getElementById("printHome"+key).innerHTML;
+    </div> `
+    + document.getElementById("printHome"+ key).innerHTML;
     
 }
 

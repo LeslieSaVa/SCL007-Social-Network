@@ -113,9 +113,6 @@ export const likePost = (id, uid) => {
           });
 
 
-<<<<<<< HEAD
-  } 
-=======
 
 } 
 
@@ -128,13 +125,3 @@ export const likeCount = (id,uid) =>{
 
 });
 }
-
-
-
-
-
-
-
-
-
->>>>>>> be82f6f629a88ae695ef4b16b558c7fe447d1304
