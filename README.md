@@ -33,13 +33,16 @@ Se realizó una encuesta a todas aquellas personas que tuvieran algún cercano c
     * NO
     * GRUPOS DE FACEBOOK
 
+![Gráfico resultados encuesta pregunta 3](src/IMG/Encuestapreg3.png)
+
+
 ## Definición del usuario
 
 El usuario de HappyWithAllergy son todas aquellas personas con alergia alimentaria a la Leche (ó Intolerancia) y al Trigo (Celiaquía) y/o su entorno que deseen pertenecer a una comunidad para compartir información o intercambiar experiencias en base a sus vivencias. 
  
 ## Historias de Usuario
 
-### Usuario Emprendedor
+### 1. Usuario Emprendedor
 
 Juan, un emprendedor amante de la pastelería decide crear una línea saludable de galletas sin alérgenos (Trigo y Lácteos) por lo que quiere publicar su emprendimiento tanto para dar a conocer sus productos y aumentar sus ventas y para ayudar a todas las personas con algún problema de alergia alimentaria a tener acceso fácil y económico de dulces y pasteles que puedan consumir. 
 
@@ -49,17 +52,68 @@ Juan, un emprendedor amante de la pastelería decide crear una línea saludable 
     * Aumentar mis ventas
     * Ayudar a que las personas con alergia alimentaria tengan más y mejor acceso a productos sin alérgenos.
 
+#### Criterios de aceptación 
+
+1. **Cuando**: Un usuario que aún no se ha registrado quiere publicar
+
+    **Entonces**: Se redirige a la automáticamente a la página de login.
+
+2. **Dado**:Que el usuario ya está registrado
+
+   **Cuando**: El usuario quiera publicar su emprendimiento
+
+   **Entonces**: Se dirige al icono publicar para agregar su post. 
+
+### 2. Usuario Objetivo (Alérgico)
+
+Carolina tiene 25 años y nació con APLV por lo que a lo largo de su vida ha podido recopilar un serie de información, tips, recetas y datos útiles que le gustaría compartir con otras personas que viven su misma condición y no tienen tanto tiempo viviendo con esta alergia. 
+
+* **Yo**:  Alérgica a la PLV 
+
+* **Necesito**: Compartir recetas y/o datos.
+
+* **Para**: Conocer y ayudar a otras personas con la misma condición
 
 
-    
+#### Criterios de aceptación 
+
+1.  **Dado**: Que el usuario ya está registrado
+
+    **Cuando**: El usuario quiera publicar.
+
+    **Entonces**: Elige el tipo de publicación (receta, datos, información para comer).
 
 
+2. **Dado**:Elige el tipo de publicación (receta, datos, información para comer).
+
+   **Cuando**:El usuario escriba la publicación
+
+   **Entonces**: Elige el hashtag de categorización.
+
+### 3. Usuario Buscador
+
+Gabriela, tiene un hijo de 6 años que hace dos semanas le diagnosticaron Celiaquía, esto a sido un cambio en su vida ya que ha tenido que cambiar todo el sistema de alimentación de toda la familia
+
+* **Yo**:  Madre de un niño celíaco
+
+* **Necesito**: Buscar alternativas que sustituyan el pan y otros alimentos.
+
+* **Para**: Mejorar la calidad de vida de mi hijo.
 
 
+#### Criterios de aceptación 
 
+1.  **Dado**: Que el usuario quiere buscar 
 
+    **Cuando**:  El usuaria elija que buscar ( por nombre o por hashtag)
 
-   
+    **Entonces**: Se muestran los resultados de su búsqueda. 
+
+## Consideraciones de Diseño UI
+
+### Sketch y Prototipado
+
+Una vez definido el tema del proyecto se realizó una lluvia de ideas para la ideación a través de los sketch de las distintas vistas que tendrá el producto; a partir del cual se inicia el prototipo de baja fidelidad. 
 
 # Creando una Red Social
 
