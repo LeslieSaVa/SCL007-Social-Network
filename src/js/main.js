@@ -283,12 +283,17 @@ const printLikes =(key, uid) =>{
 
 const readComentsHome = (e) => {       
     
-    const keyHome = e.currentTarget.getAttribute('id')
-    
+    const keyHome = e.currentTarget.getAttribute('id')    
     const comentRefHome = firebase.database().ref('/posts/' + keyHome + '/coment/');
     
     comentRefHome.once('value', (snapshot) => {
-        console.log(keyHome)
+
+        if(snapshot.val() === null || snapshot.val() == '' ){
+               
+            alert ('No existen comentarios para ésta publicación') 
+
+       }else{
+
            for (let snap in snapshot.val()) {                
 
              document.getElementById(`printHome${keyHome}` ).innerHTML = `            
@@ -297,28 +302,34 @@ const readComentsHome = (e) => {
                     <h3>${snapshot.val()[snap].contenido}<h3> 
                     </div>
              ` + document.getElementById(`printHome${keyHome}`).innerHTML;
-               }
+               }}
            })
        
    }
 
-   const readComents = (e) => {        
+   const readComents = (e) => {  
+       
     const keyRecipes = e.currentTarget.getAttribute('id') 
-    const comentRefRecipes = firebase.database().ref('/posts/' + keyRecipes + '/coment/');    
+    const comentRefRecipes = firebase.database().ref('/posts/' + keyRecipes + '/coment/'); 
 
-    comentRefRecipes.once('value', (snapshot) => {
-            console.log(keyRecipes)
-               for (let snap in snapshot.val()) {                
-    
-                 document.getElementById(`print${keyRecipes}` ).innerHTML = `            
+    comentRefRecipes.once('value', (snapshot) => {         
+
+            if(snapshot.val() === null || snapshot.val() == '' ){
+               
+                alert ('No existen comentarios para ésta publicación') 
+
+           }else{
+               for (let snap in snapshot.val()) {  
+                
+                 document.getElementById(`print${keyRecipes}`).innerHTML = `            
                         <div id= ${keyRecipes}  style='border: 1px solid purple'>
                         <p>${snapshot.val()[snap].author}</p>
                         <h3>${snapshot.val()[snap].contenido}<h3> 
                         </div>
                  ` + document.getElementById(`print${keyRecipes}`).innerHTML;
-                   }
+                   }}
                })
-       
+            
    }
 
 
@@ -327,9 +338,13 @@ const readComentsHome = (e) => {
     const name=firebase.auth().currentUser.displayName;     
     const contenido = document.getElementById(`comentsPostHome${key}`).value;
 
+    if (contenido === null || contenido === ""){
+
+        alert ('Debe completar todos los campos para comentar')
+    }else{
     guardandoComentarios(key,contenido,name);
     printCommentHome(key,contenido,name);
-
+    }
 }
 
 const saveComent =(e) =>{
@@ -337,25 +352,33 @@ const saveComent =(e) =>{
     const name=firebase.auth().currentUser.displayName; 
     const contenido = document.getElementById(`comentsPostRece${key}`).value;
 
+    if (contenido === null || contenido === ""){
+
+        alert ('Debe completar todos los campos para comentar')
+    }else{
+      
     guardandoComentarios(key,contenido,name);
     printComment(key,contenido,name);
 
+    }
 }
 
 
 const printCommentHome = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
-     
+
+    document.getElementById("printHome" + key).innerHTML =""
     document.getElementById("printHome" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
     </div> `
     + document.getElementById("printHome"+ key).innerHTML;
-    
 }
+
 const printComment = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
+    document.getElementById("print" + key).innerHTML = ""
     document.getElementById("print" + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
