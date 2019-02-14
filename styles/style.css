@@ -279,6 +279,18 @@ li a:hover:not(.active) {
 .red{
   color:red;
 }
+
+.comentar-post{
+  margin-top:10px;
+border: 1px solid purple;
+padding:5px;
+text-align: left;
+}
+.comentar-post p{
+
+padding:5px;
+
+}
 /*** CARD STLES ***/
 
 .cards-container{
