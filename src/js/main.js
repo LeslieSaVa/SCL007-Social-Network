@@ -76,6 +76,8 @@ btnFacebook.addEventListener('click', loginFacebook)
 
  const guardarComentarios = () => {
 
+    
+
     const name = firebase.auth().currentUser.displayName;
     const title = tituloaconvalidar.value;
     const coment = coments.value;
@@ -102,7 +104,7 @@ btnFacebook.addEventListener('click', loginFacebook)
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags,day , month, year);
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year);
     index.click();
  }
  
@@ -128,6 +130,7 @@ const readPostFromDatabase = () => {
                         </div>
                         <div class='box-content'>
                         <h3>${coment.val().title}</h3><br>
+                        
                           <div class='content'>                          
                             <p>${coment.val().body}</p>
                           </div><br>
@@ -152,7 +155,7 @@ const readPostFromDatabase = () => {
                           
               
                        </div> <br>
-                       <div id='printHome${coment.key}'> </div>
+                       <div  id='printHome${coment.key}'> </div>
                         </div>
                  </div> 
             </div>
@@ -204,12 +207,14 @@ const readPostFromDatabase = () => {
                               <button class='btn-likecoment likes' id='likPosRe${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
 
                            <div class='col-4'>
-                              <button  class='btn-likecoment comments' id='${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button></div>
+                              <button  class='btn-likecoment comments' id='${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button>
+                            </div>
                                
                           <div class='col-4'>
-                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
+                                <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button>
+                            </div>   
                                  
-                                 </div>
+                            </div>
                                  <div id='comentPost${coment.key}'>                         
                                  
                                
@@ -219,7 +224,7 @@ const readPostFromDatabase = () => {
                                 
                         
                                  </div> <br>
-                                 <div id='print${coment.key}'></div>
+                                 <div class="comentarPost" id='print${coment.key}'></div>
                           </div>
                    </div>     
               </div>
@@ -314,9 +319,9 @@ const readComentsHome = (e) => {
            for (let snap in snapshot.val()) {                
 
              document.getElementById(`printHome${keyHome}` ).innerHTML = `            
-                    <div id= ${keyHome}  style='border: 1px solid purple'>
-                    <p>${snapshot.val()[snap].author}</p>
-                    <h3>${snapshot.val()[snap].contenido}<h3> 
+                    <div class="comentar-post" id= ${keyHome}>
+                    <h3>${snapshot.val()[snap].author}</h3>
+                    <p>${snapshot.val()[snap].contenido}<p> 
                     </div>
              ` + document.getElementById(`printHome${keyHome}`).innerHTML;
             
@@ -460,6 +465,7 @@ const showUserInfo = () => {
             `; document.getElementById('btn-logout').addEventListener('click', logOut)
                document.getElementById(`btnSaveBiography${userInfo.uid}`).addEventListener('click', saveBiography)
     }     
+    
 
     const saveBiography = (e) =>{
 
@@ -566,6 +572,7 @@ for (let i = 0; i < btns.length; i++) {
   this.className += ' active';
   });
 }
+
 
 
 // upload image in post
