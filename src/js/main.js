@@ -13,6 +13,7 @@ window.onload = () =>{
             footer_page.style.display='block';
             index_page.style.display='block';
             readPostFromDatabase();
+            searchTag();
 
         }else{
             login_pagecontent.style.display ='block';
@@ -499,19 +500,61 @@ inputLoader.addEventListener('change', (e) => {
 });
 
 
-// Buscar Hashtag
+//Buscar Hashtag
 
-document.getElementById("searching").addEventListener("click", () => {
-    let conditionSearch = document.getElementById("search-imput").value
-    principalPage(window.pokemones.pokeSearch(totalData.pokemon, conditionSearch))
+const searchTag = () => {
+    
+document.getElementById('search-imput').value=''; 
+document.getElementById('searching').addEventListener('click', () => {
+   
+let conditionSearch = document.getElementById('search-imput').value
+
+const ref = firebase.database().ref('posts/');
+document.getElementById('result_search').innerHTML='';
+ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+     let childData = childSnapshot.val();
+    
+     console.log(childData)
+
+        document.getElementById('result_search').innerHTML=`
+        
+        <div class='row'>  
+          <div class='col-3 col-m-2 col-s-12'></div>
+          <div class='col-6 col-m-8 col-s-12'>  
+                    <div class='box_text'>
+                        <div class='box-header'>
+                         <div class='avatar_post'><img src='${childData.profile_picture}'/></div> 
+                          <div class='name-post'>${childData.author}</div>
+                        </div>
+                        <div class='box-content'>
+                        <h3>${childData.title}</h3><br>
+                          <div class='content'>                          
+                            <p>${childData.body}</p>
+                          </div><br>
+                          <h4>${childData.hashtag}</h4><br>
+                          <span> Creado: ${childData.date.d} / ${childData.date.m} / ${childData.date.y} </span>
+                        </div>
+                 </div> 
+            </div>
+        <div class='col-3 col-m-2 col-s-12'></div>
+         </div>` + document.getElementById('result_search').innerHTML;
+
+
+        
+
+    });   
   })
-  
-  
-  pokeSearch: (data, condition) => {
-    const dataSerch= data
-    const result = dataSerch.filter(element => {
-      return element.name.toLowerCase().indexOf(condition.toLowerCase()) !== -1
-      
-    })
-    return result
-  }
+
+
+})
+
+}
+
+
+
+
+
+
+
+
