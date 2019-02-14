@@ -27,9 +27,10 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
       d:day,
       m:month,
       y: year,
-    }
+    },
     
-  };
+    
+  }
 
   // Llave que identifica el nuevo post
   var newPostKey = firebase.database().ref().child('posts').push().key;
@@ -39,7 +40,11 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
   updates['/posts/' + newPostKey] = postData;
   updates['/users/' + uid + '/post/' + newPostKey] = postData;
   return firebase.database().ref().update(updates);
+
 }
+
+
+
 
 export const readPost = (onpostChange) => {
   let postRef = firebase.database().ref('posts');
