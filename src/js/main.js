@@ -152,7 +152,7 @@ const readPostFromDatabase = () => {
                                <textarea class='coments-post' name='comentario' id='comentsPostHome${coment.key}'
                                    placeholder='Escribe aqui tu comentario...'></textarea>           
                                <button  class='btn-likecoment save_homecoment' id='${coment.key}'>Comentar</button>
-                      
+                          
               
                        </div> <br>
                        <div  id='printHome${coment.key}'> </div>
@@ -161,8 +161,9 @@ const readPostFromDatabase = () => {
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
-        //document.getElementById("btn"+ coment.key).addEventListener('click',deletePost);
-        //  document.getElementById(`likePost${coment.key}`).addEventListener('click', btnLikePost)
+
+
+
         let btnLikes = document.getElementsByClassName('likes');
         for (let i =0; i< btnLikes.length; i++){
             btnLikes[i].addEventListener('click', btnLikePost);
@@ -249,7 +250,6 @@ const readPostFromDatabase = () => {
             }
         })
     };     
-  
 
 const btnLikePost = (e) =>{
     const key = e.currentTarget.getAttribute('id').slice(8) 
@@ -286,6 +286,23 @@ const printLikes =(key, uid) =>{
 
 }
 
+  const editComentsFromFirebase = (e) => {
+  var editPostID =  e.currentTarget.getAttribute('id').slice(4);
+  var newPostKey =  e.currentTarget.getAttribute('value');
+  console.log(editPostID);
+  console.log(newPostKey);
+  var firebaserefEdit = firebase.database().ref('posts/' + editPostID +'/coment/' + newPostKey);
+  firebaserefEdit.once('value', function(snap){
+      var datos = snap.val();
+      console.log(datos);
+     document.getElementById(`comentsPostHome${editPostID}`).value = datos.contenido; 
+     
+      //textarea donde se crear el comentario 
+  });
+//   document.getElementById(`${coment.key}`).value = UPDATE;//btn que dice comentar 
+//   modo = UPDATE;
+}
+
 const readComentsHome = (e) => {       
     
     const keyHome = e.currentTarget.getAttribute('id')    
@@ -307,6 +324,7 @@ const readComentsHome = (e) => {
                     <p>${snapshot.val()[snap].contenido}<p> 
                     </div>
              ` + document.getElementById(`printHome${keyHome}`).innerHTML;
+            
                }}
            })
        
@@ -339,7 +357,9 @@ const readComentsHome = (e) => {
 
 
    const saveComentHome =(e) =>{
+    var newPostKey = firebase.database().ref().child('posts').push().key;
     const key = e.currentTarget.getAttribute('id')
+    console.log(key);
     const name=firebase.auth().currentUser.displayName;     
     const contenido = document.getElementById(`comentsPostHome${key}`).value;
 
@@ -347,8 +367,10 @@ const readComentsHome = (e) => {
 
         alert ('Debe completar todos los campos para comentar')
     }else{
-    guardandoComentarios(key,contenido,name);
-    printCommentHome(key,contenido,name);
+    guardandoComentarios(key,contenido,name,newPostKey);
+    printCommentHome(key,contenido,name, newPostKey);
+    //editComentsFromFirebase(newPostKey);
+    document.getElementById(`comentsPostHome${key}`).value='';
     }
 }
 
@@ -368,7 +390,7 @@ const saveComent =(e) =>{
     }
 }
 
-const printCommentHome = (key,contenido,name) => {     
+const printCommentHome = (key,contenido,name,newPostKey) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
 
     document.getElementById("printHome" + key).innerHTML =""
@@ -376,8 +398,18 @@ const printCommentHome = (key,contenido,name) => {
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
-    </div> `
-    + document.getElementById("printHome"+ key).innerHTML;
+        <button  class='btn-likecoment edit' id='edit${key}' value='${newPostKey}'>Editar</button>
+            
+    </div> 
+    `
+   + document.getElementById("printHome"+ key).innerHTML;
+
+   let btnEdit = document.getElementsByClassName('edit');
+   for(let i =0; i<btnEdit.length; i++){
+       btnEdit[i].addEventListener('click', editComentsFromFirebase);
+   }
+   
+
 }
 
 const printComment = (key,contenido,name) => {     
@@ -543,22 +575,35 @@ for (let i = 0; i < btns.length; i++) {
 
 
 
-// //upload image in post
-// const inputLoader = document.getElementById('postImgInput');
+// upload image in post
+const inputLoader = document.getElementById('postImgInput');
 
-// inputLoader.addEventListener('change', (e) => {
-//   const file = e.target.files[0];
-//   const storageRef = firebase.storage().ref('images/' + file.name);
-//   const uploadTask = storageRef.put(file);
-//   uploadTask.on('state_changed', function (snapshot) {
-//   },
-//     function error(err) {
-//     },
+inputLoader.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const storageRef = firebase.storage().ref('images/' + file.name);
+  const uploadTask = storageRef.put(file);
 
-//     function complete() {
-//       storageRef.getDownloadURL().then(function (url) {
-//     console.log
-    
-//       });
-//     });
-// });
+  uploadTask.on('state_changed', function (snapshot) {
+  },
+    function error(err) {
+    },
+    function complete() {
+      storageRef.getDownloadURL().then(function (url) {
+        const imgKey = firebase.database().ref('myPostImages/').push().key;
+        const updates = {};
+        const dataImg = {
+          url: url,
+          data: document.getElementById('textEmail').value,
+        };
+        updates['/myPostImages/' + imgKey] = dataImg;
+        firebase.database().ref().update(updates);
+//         document.getElementById('container').innerHTML = `
+//     <div>
+//     <h1>${dataImg.data}</h1>
+//       <img src="${url}"/>
+//     </div>
+//   ` + document.getElementById('container').innerHTML;
+      });
+    });
+});
+

@@ -55,7 +55,7 @@ export const readPost = (onpostChange) => {
 };
 
 export const deletePost = (postdelete) => {
-  var postID = postdelete.currentTarget.getAttribute("userpp");  
+  var postID = postdelete.currentTarget.getAttribute('userpp');  
   var firebaseref = firebase.database().ref('posts/'+ postID);
   let askRemove = confirm("Quieres eliminar este Post?")
   if(askRemove == true){
@@ -66,7 +66,8 @@ export const deletePost = (postdelete) => {
   }
 }
 
-export const guardandoComentarios =(key, contenido, author)=>{
+
+export const guardandoComentarios =(key, contenido, author, newPostKey)=>{
   // Crear nuevo post
   const postcoment = {
     author: author !== null ? author : firebase.auth().currentUser.email,
@@ -75,7 +76,7 @@ export const guardandoComentarios =(key, contenido, author)=>{
   }; 
 
   // Llave que identifica el nuevo post
-  var newPostKey = firebase.database().ref().child('posts').push().key;
+  //var newPostKey = firebase.database().ref().child('posts').push().key;
 
   // Ingresa el post en publico y en su perfil.
   var updates = {};
