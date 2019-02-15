@@ -21,6 +21,7 @@ window.onload = () =>{
             header_page.style.display='none';
             footer_page.style.display='none';
             index_page.style.display='none';
+            profile_container.style.display='none';
         }
     });
     
@@ -43,11 +44,10 @@ const loginWithEmail =()=>{
     const loginPass = password.value;
     if(loginEmail != '' && loginPass != ''){
         login(loginEmail,loginPass);
-    }if (loginEmail != '@' && loginPass !== ''){
+    }if (loginEmail !== '@' ){
         document.getElementById('loginError').innerHTML = 'Debes ingresar un correo electrónico valido.'
     }else{
         document.getElementById('loginError').innerHTML = 'Debes ingresar tu email y password'
-
     }
 
 
@@ -512,9 +512,9 @@ const showUserInfo = () => {
            </div>
            <p class='info-user-p'>${userInfo.email}</p>
            <div class='desc' id='biography${userInfo.uid}'>
-           <textarea name='comentario' id='postBio${userInfo.uid}' style='width: 100%; /*! height: 85px; */'
+           <textarea name='comentario' id='postBio${userInfo.uid}' class='coment-biograph' 
            placeholder='Escribe aqui tu comentario...'></textarea>           
-          <button id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
+          <button class=' savebiograph' id='btnSaveBiography${userInfo.uid}'> Guardar Biografía </button>
            </div>
            
            <div class='footer_card'>
@@ -603,7 +603,8 @@ const inputLoader = document.getElementById('postImgInput');
 let imgUrl;
 inputLoader.addEventListener('change', (e) => {
   const file = e.target.files[0];
-  const storageRef = firebase.storage().ref('images/' + file.name);
+  const uid = firebase.auth().currentUser.uid;
+  const storageRef = firebase.storage().ref(uid + '/images/' + file.name);
   const uploadTask = storageRef.put(file);
   uploadTask.on('state_changed', function (snapshot) {
   },
