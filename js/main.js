@@ -13,7 +13,8 @@ window.onload = () =>{
             footer_page.style.display='block';
             index_page.style.display='block';
             readPostFromDatabase();
-            searchTag();
+            searchTag()
+            
 
         }else{
             login_pagecontent.style.display ='block';
@@ -77,17 +78,30 @@ const loginFacebook =()=>{
 btnFacebook.addEventListener('click', loginFacebook)
 
 
+// upload image in post
+
+
+
 // Se guardan los post en la base de datos
 
- const guardarComentarios = () => {    
+ const guardarComentarios = () => {  
 
-    const name = firebase.auth().currentUser.displayName;
+
+    
+
+const name = firebase.auth().currentUser.displayName;
     const title = tituloaconvalidar.value;
     const coment = coments.value;
     let photoUser = firebase.auth().currentUser.photoURL;
-    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
+    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png';
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
+
+    let imagen = imgUrl;
+    let imagenDef = 'IMG/blanco.png'
+    let postImg = imagen !== null ? imagen: imagenDef;
+    
+
     document.getElementById('coments').value ='';
     document.getElementById('tituloaconvalidar').value='';
     document.getElementById('hashtagsPost').value='';
@@ -107,8 +121,12 @@ btnFacebook.addEventListener('click', loginFacebook)
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year);
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year,postImg);
     index.click();
+
+
+    
+    
  }
  
 btnComents.addEventListener('click', guardarComentarios)
@@ -120,7 +138,6 @@ const readPostFromDatabase = () => {
     root.style.display='block'
     
     readPost((coment)=>{ 
-        
         
         newcoments.innerHTML = 
       `          
@@ -135,8 +152,10 @@ const readPostFromDatabase = () => {
                         <div class='box-content'>
                         <h3>${coment.val().title}</h3><br>
                         
-                          <div class='content'>                          
+                          <div class='content'>    
+                            <img class="img-post" src='${coment.val().imagen}'>                      
                             <p>${coment.val().body}</p>
+                            
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
                           <span> Creado: ${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>
@@ -198,8 +217,10 @@ const readPostFromDatabase = () => {
                           </div>
                           <div class='box-content'>
                           <h3>${coment.val().title}</h3><br>
-                            <div class='content'>                            
-                              <p>${coment.val().body}</p><br>
+                            <div class='content'>           
+                            <img class="img-post" src='${coment.val().postImage}'>                 
+                             <p>${coment.val().body}</p><br>
+                              
                             </div>
                             <h4>${coment.val().hashtag}</h4><br>
                             <span> Creado:${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>
@@ -498,47 +519,6 @@ const showUserInfo = () => {
 showUser.addEventListener('click', showUserInfo);    
 
 
-// upload image in post
-
-/*
-const saveImg = (newPostKey) => {
-
-    const inputLoader = document.getElementById('postImgInput');
-
-    inputLoader.addEventListener('change', (e) => {
-      const uid = firebase.auth().currentUser.uid
-      const file = e.target.files[0];
-      const storageRef = firebase.storage().ref(uid + '/imagenes/' + file.name);
-      const uploadTask = storageRef.put(file);
-    
-     
-     uploadTask.on('state_changed', function (snapshot) {
-      },
-      function complete() {
-        storageRef.getDownloadURL().then(function (url) {
-
-          const uid = firebase.auth().currentUser.uid
-          //const imgKey = firebase.database().ref('posts').push().key;
-          const urlFoto = url;
-          //const updates = {};
-          //const dataImg = {
-            //url: url,
-            //data: firebase.auth().currentUser.email,
-          //};
-         // updates ['/users/' + uid + '/post/' + newPostKey + '/myImages/'] = dataImg;
-          
-          firebase.database().ref('/users/' + uid + '/post/' + newPostKey + '/myImages/' + urlFoto).push();
-
-        
-
-
-            })
-          });
-        });
-    
-}
-
-*/
 
 //Buscar Hashtag
 
@@ -588,38 +568,20 @@ ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function
 
 }
 
-
-
-// upload image in post
+// Subir imagen a post
 const inputLoader = document.getElementById('postImgInput');
-
+let imgUrl;
 inputLoader.addEventListener('change', (e) => {
-  const uid = firebase.auth().currentUser.uid
   const file = e.target.files[0];
-  const storageRef = firebase.storage().ref(uid + '/images/' + file.name);
+  const storageRef = firebase.storage().ref('images/' + file.name);
   const uploadTask = storageRef.put(file);
-
   uploadTask.on('state_changed', function (snapshot) {
   },
     function error(err) {
     },
     function complete() {
       storageRef.getDownloadURL().then(function (url) {
-        const imgKey = firebase.database().ref('posts').push().key;
-        const updates = {};
-        const dataImg = {
-          url: url,
-          data: firebase.auth().currentUser.email,
-        };
-        updates['/myPostImages/' + imgKey] = dataImg;
-        firebase.database().ref().update(updates);
-//         document.getElementById('container').innerHTML = `
-//     <div>
-//     <h1>${dataImg.data}</h1>
-//       <img src="${url}"/>
-//     </div>
-//   ` + document.getElementById('container').innerHTML;
+        imgUrl = url;
       });
     });
 });
-
