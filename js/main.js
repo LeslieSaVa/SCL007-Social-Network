@@ -81,6 +81,7 @@ btnFacebook.addEventListener('click', loginFacebook)
 
  const guardarComentarios = () => {
 
+   // let newPostKey = firebase.database().ref().child('posts').push().key;
     const name = firebase.auth().currentUser.displayName;
     const title = tituloaconvalidar.value;
     const coment = coments.value;
@@ -107,7 +108,8 @@ btnFacebook.addEventListener('click', loginFacebook)
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags,day , month, year);
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags,day , month, year );
+    saveImg (newPostKey)
     index.click();
  }
  
@@ -468,37 +470,46 @@ showUser.addEventListener('click', showUserInfo);
 
 
 // upload image in post
-const inputLoader = document.getElementById('postImgInput');
 
-inputLoader.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  const storageRef = firebase.storage().ref('images/' + file.name);
-  const uploadTask = storageRef.put(file);
+/*
+const saveImg = (newPostKey) => {
 
-  uploadTask.on('state_changed', function (snapshot) {
-  },
-    function error(err) {
-    },
-    function complete() {
-      storageRef.getDownloadURL().then(function (url) {
-        const imgKey = firebase.database().ref('myPostImages/').push().key;
-        const updates = {};
-        const dataImg = {
-          url: url,
-          data: document.getElementById('textEmail').value,
-        };
-        updates['/myPostImages/' + imgKey] = dataImg;
-        firebase.database().ref().update(updates);
-//         document.getElementById('container').innerHTML = `
-//     <div>
-//     <h1>${dataImg.data}</h1>
-//       <img src='${url}'/>
-//     </div>
-//   ` + document.getElementById('container').innerHTML;
-      });
-    });
-});
+    const inputLoader = document.getElementById('postImgInput');
 
+    inputLoader.addEventListener('change', (e) => {
+      const uid = firebase.auth().currentUser.uid
+      const file = e.target.files[0];
+      const storageRef = firebase.storage().ref(uid + '/imagenes/' + file.name);
+      const uploadTask = storageRef.put(file);
+    
+     
+     uploadTask.on('state_changed', function (snapshot) {
+      },
+      function complete() {
+        storageRef.getDownloadURL().then(function (url) {
+
+          const uid = firebase.auth().currentUser.uid
+          //const imgKey = firebase.database().ref('posts').push().key;
+          const urlFoto = url;
+          //const updates = {};
+          //const dataImg = {
+            //url: url,
+            //data: firebase.auth().currentUser.email,
+          //};
+         // updates ['/users/' + uid + '/post/' + newPostKey + '/myImages/'] = dataImg;
+          
+          firebase.database().ref('/users/' + uid + '/post/' + newPostKey + '/myImages/' + urlFoto).push();
+
+        
+
+
+            })
+          });
+        });
+    
+}
+
+*/
 
 //Buscar Hashtag
 

@@ -23,7 +23,8 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
     body: body,
     title: title,
     hashtag: postTag,
-    'date':{
+    //imagen : url,
+    date:{
       d:day,
       m:month,
       y: year,
