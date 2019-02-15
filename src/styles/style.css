@@ -64,14 +64,13 @@ margin-top: 40px;
   }
   .form-signBtn {
     font-family: "Roboto", sans-serif;
-    text-transform: uppercase;
     outline: 0;
     background: #884EA0;
     width: 100%;
     border: 0;
-    padding: 10px;
+    padding: 5px;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 12px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
@@ -478,9 +477,9 @@ padding:5px;
     }
 
     .name-post2{
-      font-size: 16px;
+      font-size: 14px;
       color:#fff;
-      padding-top: 15px;
+      padding: 10px;
       text-align: center;
     }
     .box-header2{
@@ -550,7 +549,7 @@ padding:5px;
           height: 85px;
         }
         #postImgInput{
-          padding: 12px;
+          font-size: 12px;
         }
 
 .img-post{

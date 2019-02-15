@@ -578,7 +578,8 @@ ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function
                         </div>
                         <div class='box-content'>
                         <h3>${childData.title}</h3><br>
-                          <div class='content'>                          
+                          <div class='content'>   
+                          <img class="img-post" src='${childData.imagen}'>                         
                             <p>${childData.body}</p>
                           </div><br>
                           <h4>${childData.hashtag}</h4><br>
