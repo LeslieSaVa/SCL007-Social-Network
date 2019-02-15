@@ -85,6 +85,8 @@ btnFacebook.addEventListener('click', loginFacebook)
     let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
+    const postImg = imgUrl;
+    console.log(postImg)
     document.getElementById('coments').value ='';
     document.getElementById('tituloaconvalidar').value='';
     document.getElementById('hashtagsPost').value='';
@@ -104,7 +106,7 @@ btnFacebook.addEventListener('click', loginFacebook)
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year);
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg);
     index.click();
  }
  
@@ -116,8 +118,7 @@ const readPostFromDatabase = () => {
     root.style.display='block'
     
     readPost((coment)=>{ 
-        
-        
+    
         newcoments.innerHTML = 
       `          
       <div class='row' id= ${coment.key}>  
@@ -131,8 +132,10 @@ const readPostFromDatabase = () => {
                         <div class='box-content'>
                         <h3>${coment.val().title}</h3><br>
                         
-                          <div class='content'>                          
+                          <div class='content'>  
+
                             <p>${coment.val().body}</p>
+                            <img src='${coment.val().postImage}' style=" width: 100px;">
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
                           <span> Creado: ${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>
@@ -542,23 +545,21 @@ for (let i = 0; i < btns.length; i++) {
 }
 
 
+// upload image in post
+const inputLoader = document.getElementById('postImgInput');
+let imgUrl;
+inputLoader.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const storageRef = firebase.storage().ref('images/' + file.name);
+  const uploadTask = storageRef.put(file);
 
-// //upload image in post
-// const inputLoader = document.getElementById('postImgInput');
-
-// inputLoader.addEventListener('change', (e) => {
-//   const file = e.target.files[0];
-//   const storageRef = firebase.storage().ref('images/' + file.name);
-//   const uploadTask = storageRef.put(file);
-//   uploadTask.on('state_changed', function (snapshot) {
-//   },
-//     function error(err) {
-//     },
-
-//     function complete() {
-//       storageRef.getDownloadURL().then(function (url) {
-//     console.log
-    
-//       });
-//     });
-// });
+  uploadTask.on('state_changed', function (snapshot) {
+  },
+    function error(err) {
+    },
+    function complete() {
+      storageRef.getDownloadURL().then(function (url) {
+        imgUrl = url;
+      });
+    });
+});
