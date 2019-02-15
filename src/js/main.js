@@ -4,6 +4,7 @@ import {enviarConvalidacionAFirebase, readPost,guardandoComentarios, deletePost,
  
 window.onload = () =>{
  
+// Indica cualquier cambio mostrado en los estados de los usuarios
     checkAuthState((firebaseUser) => {
         if (firebaseUser){
 
@@ -12,6 +13,8 @@ window.onload = () =>{
             footer_page.style.display='block';
             index_page.style.display='block';
             readPostFromDatabase();
+            searchTag()
+            
 
         }else{
             login_pagecontent.style.display ='block';
@@ -22,6 +25,7 @@ window.onload = () =>{
     });
     
 }
+
 
 const registerWithEmail =()=>{
 
@@ -74,19 +78,29 @@ const loginFacebook =()=>{
 btnFacebook.addEventListener('click', loginFacebook)
 
 
- const guardarComentarios = () => {
+// upload image in post
+
+
+
+// Se guardan los post en la base de datos
+
+ const guardarComentarios = () => {  
+
 
     
 
-    const name = firebase.auth().currentUser.displayName;
+const name = firebase.auth().currentUser.displayName;
     const title = tituloaconvalidar.value;
     const coment = coments.value;
     let photoUser = firebase.auth().currentUser.photoURL;
-    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png'
+    let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png';
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
-    const postImg = imgUrl;
-    console.log(postImg)
+    let imagen = imgUrl;
+    let imagenDef = 'IMG/blanco.png'
+    let postImg = imagen !== null ? imagen: imagenDef;
+    
+
     document.getElementById('coments').value ='';
     document.getElementById('tituloaconvalidar').value='';
     document.getElementById('hashtagsPost').value='';
@@ -106,13 +120,17 @@ btnFacebook.addEventListener('click', loginFacebook)
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg,);
-
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg);
     index.click();
+
+
+    
+    
  }
  
 btnComents.addEventListener('click', guardarComentarios)
 
+// Lee e imprime los comentarios que existen en la base de datos tanto en la pantalla principal como en recetas
 
 const readPostFromDatabase = () => {
    
@@ -133,10 +151,10 @@ const readPostFromDatabase = () => {
                         <div class='box-content'>
                         <h3>${coment.val().title}</h3><br>
                         
-                          <div class='content'>  
-                          <img class="img-post" src='${coment.val().postImage}'>
-                          <p>${coment.val().body}</p>
-                           
+                          <div class='content'>    
+                            <img class="img-post" src='${coment.val().imagen}'>                      
+                            <p>${coment.val().body}</p>
+                            
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
                           <span> Creado: ${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>
@@ -148,7 +166,7 @@ const readPostFromDatabase = () => {
                             <div class='col-4'>
                             <button  class='btn-likecoment comments_home'id='${coment.key}'><span class='icondeskopt'><i class='far fa-comment'></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
-                            <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
+                            <button  id='btn${coment.key}' userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                </div>
                                <div id='comentPost'>               
                                  
@@ -165,7 +183,6 @@ const readPostFromDatabase = () => {
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
          </div>` + newcoments.innerHTML;  
-
 
 
         let btnLikes = document.getElementsByClassName('likes');
@@ -199,8 +216,10 @@ const readPostFromDatabase = () => {
                           </div>
                           <div class='box-content'>
                           <h3>${coment.val().title}</h3><br>
-                            <div class='content'>  
-                            <img class="img-post" src='${coment.val().postImage}'/>            <p>${coment.val().body}</p><br>
+                            <div class='content'>           
+                            <img class="img-post" src='${coment.val().imagen}'>                 
+                             <p>${coment.val().body}</p><br>
+                              
                             </div>
                             <h4>${coment.val().hashtag}</h4><br>
                             <span> Creado:${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>
@@ -254,7 +273,8 @@ const readPostFromDatabase = () => {
             }
         })
     };     
-
+  
+// Se guardan los likes en la base de datos
 const btnLikePost = (e) =>{
     const key = e.currentTarget.getAttribute('id').slice(8) 
     //const key = keyA !== null ? keyA :e.currentTarget.getAttribute('id').slice(11)
@@ -265,6 +285,8 @@ const btnLikePost = (e) =>{
     likeCount (key,uid)
 
 } 
+
+// Se imprimen los likes
 
 const printLikes =(key, uid) =>{
 
@@ -326,7 +348,7 @@ const readComentsHome = (e) => {
     
     const keyHome = e.currentTarget.getAttribute('id')    
     const comentRefHome = firebase.database().ref('/posts/' + keyHome + '/coment/');
-    
+    document.getElementById(`printHome${keyHome}` ).innerHTML ='';
     comentRefHome.once('value', (snapshot) => {
 
         if(snapshot.val() === null || snapshot.val() == '' ){
@@ -335,7 +357,7 @@ const readComentsHome = (e) => {
 
        }else{
 
-           for (let snap in snapshot.val()) {                
+           for (let snap in snapshot.val()) { 
 
              document.getElementById(`printHome${keyHome}` ).innerHTML = `            
                     <div class="comentar-post" id= ${keyHome}>
@@ -349,32 +371,34 @@ const readComentsHome = (e) => {
        
    }
 
+//Lee  e imprime los comentarios guardados en la base de datos  en la pantalla de recetas
    const readComents = (e) => {  
        
     const keyRecipes = e.currentTarget.getAttribute('id') 
     const comentRefRecipes = firebase.database().ref('/posts/' + keyRecipes + '/coment/'); 
-
+    document.getElementById(`print${keyRecipes}`).innerHTML ='';
     comentRefRecipes.once('value', (snapshot) => {         
-
+       
             if(snapshot.val() === null || snapshot.val() == '' ){
                
                 alert ('No existen comentarios para ésta publicación') 
 
            }else{
                for (let snap in snapshot.val()) {  
-                
-                 document.getElementById(`print${keyRecipes}`).innerHTML = `            
+                    
+                    document.getElementById(`print${keyRecipes}`).innerHTML = `            
                         <div id= ${keyRecipes}  style='border: 1px solid purple'>
                         <p>${snapshot.val()[snap].author}</p>
                         <h3>${snapshot.val()[snap].contenido}<h3> 
                         </div>
-                 ` + document.getElementById(`print${keyRecipes}`).innerHTML;
-                   }}
-               })
-            
+                 ` + document.getElementById(`print${keyRecipes}`).innerHTML;                 
+                
+               }}   
+        })
+
    }
 
-
+// Se guarda en la base de datos el comentario creado en la página principal
    const saveComentHome =(e) =>{
     var newPostKey = firebase.database().ref().child('posts').push().key;
     const key = e.currentTarget.getAttribute('id')
@@ -382,7 +406,7 @@ const readComentsHome = (e) => {
     const name=firebase.auth().currentUser.displayName;     
     const contenido = document.getElementById(`comentsPostHome${key}`).value;
 
-    if (contenido === null || contenido === ""){
+    if (contenido === null || contenido === ''){
 
         alert ('Debe completar todos los campos para comentar')
     }else{
@@ -393,12 +417,14 @@ const readComentsHome = (e) => {
     }
 }
 
+
+// Se guarda en la base de datos el comentario creado en la página recetas
 const saveComent =(e) =>{
     const key = e.currentTarget.getAttribute('id')
     const name=firebase.auth().currentUser.displayName; 
     const contenido = document.getElementById(`comentsPostRece${key}`).value;
 
-    if (contenido === null || contenido === ""){
+    if (contenido === null || contenido === ''){
 
         alert ('Debe completar todos los campos para comentar')
     }else{
@@ -409,11 +435,12 @@ const saveComent =(e) =>{
     }
 }
 
+//  Se imprime el comentario creado en la página principal
 const printCommentHome = (key,contenido,name,newPostKey) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
 
-    document.getElementById("printHome" + key).innerHTML =""
-    document.getElementById("printHome" + key).innerHTML = `
+    document.getElementById('printHome' + key).innerHTML ='';
+    document.getElementById('printHome' + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
@@ -436,17 +463,19 @@ const printCommentHome = (key,contenido,name,newPostKey) => {
 
 }
 
+// Se imprime el comentario creado en la página de recetas
 const printComment = (key,contenido,name) => {     
     const nombre = name !== null ? name : firebase.auth().currentUser.email;
-    document.getElementById("print" + key).innerHTML = ""
-    document.getElementById("print" + key).innerHTML = `
+    document.getElementById('print' + key).innerHTML = '';
+    document.getElementById('print' + key).innerHTML = `
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
     </div>`
-    + document.getElementById("print" + key).innerHTML;
+    + document.getElementById('print' + key).innerHTML;
 }
 
+//Página perfil del Usuario
 
 const showUserInfo = () => {
     index_page.style.display='none';
@@ -504,108 +533,67 @@ const showUserInfo = () => {
         biography(key,contenido)
     }
     
-    showUser.addEventListener('click', showUserInfo);    
-
-    document.getElementById('addPost').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='block';
-        document.getElementById('index_page').style.display='none';
-        document.getElementById('search_container').style.display ='none';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='none';
-    
-    })
-    
-    document.getElementById('addPostDesktop').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='block';
-        document.getElementById('index_page').style.display='none';
-        document.getElementById('search_container').style.display ='none';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='none';
-    
-    })
-    
-    
-    document.getElementById('index').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='none';
-        document.getElementById('index_page').style.display='block';
-        document.getElementById('search_container').style.display ='none';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='none';
-    
-    })
-    document.getElementById('indexDesktop').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='none';
-        document.getElementById('index_page').style.display='block';
-        document.getElementById('search_container').style.display ='none';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='none';
-    
-    })
-    
-    document.getElementById('search').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='none';
-        document.getElementById('index_page').style.display='none';
-        document.getElementById('search_container').style.display ='block';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='none';
-    
-    })
-    
-    document.getElementById('searchDesktop').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='none';
-        document.getElementById('index_page').style.display='none';
-        document.getElementById('search_container').style.display ='block';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='none';
-    
-    })
-    
-    document.getElementById('recipes').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='none';
-        document.getElementById('index_page').style.display='none';
-        document.getElementById('search_container').style.display ='block';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='block';
-    
-    })
-    document.getElementById('recipesDesktop').addEventListener('click', () =>{
-    
-        document.getElementById('addpost_container').style.display ='none';
-        document.getElementById('index_page').style.display='none';
-        document.getElementById('search_container').style.display ='block';
-        document.getElementById('profile_container').style.display ='none';
-        document.getElementById('recipes_container').style.display ='block';
-    
-    })
     
 
-// active buttons footer
+showUser.addEventListener('click', showUserInfo);    
 
-let btns = document.getElementsByClassName('btn-act');
-for (let i = 0; i < btns.length; i++) {
-  btns[i].addEventListener('click', function() {
-  let current = document.getElementsByClassName('active');
-  current[0].className = current[0].className.replace(' active', '');
-  this.className += ' active';
-  });
+
+
+//Buscar Hashtag
+
+const searchTag = () => {
+    
+document.getElementById('search-imput').value=''; 
+document.getElementById('searching').addEventListener('click', () => {
+   
+let conditionSearch = document.getElementById('search-imput').value
+
+const ref = firebase.database().ref('posts/');
+document.getElementById('result_search').innerHTML='';
+ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+     let childData = childSnapshot.val();
+    
+     console.log(childData)
+
+        document.getElementById('result_search').innerHTML=`
+        
+        <div class='row'>  
+          <div class='col-3 col-m-2 col-s-12'></div>
+          <div class='col-6 col-m-8 col-s-12'>  
+                    <div class='box_text'>
+                        <div class='box-header'>
+                         <div class='avatar_post'><img src='${childData.profile_picture}'/></div> 
+                          <div class='name-post'>${childData.author}</div>
+                        </div>
+                        <div class='box-content'>
+                        <h3>${childData.title}</h3><br>
+                          <div class='content'>                          
+                            <p>${childData.body}</p>
+                          </div><br>
+                          <h4>${childData.hashtag}</h4><br>
+                          <span> Creado: ${childData.date.d} / ${childData.date.m} / ${childData.date.y} </span>
+                        </div>
+                 </div> 
+            </div>
+        <div class='col-3 col-m-2 col-s-12'></div>
+         </div>` + document.getElementById('result_search').innerHTML;        
+
+    });   
+  })
+
+
+})
+
 }
 
-
-// upload image in post
+// Subir imagen a post
 const inputLoader = document.getElementById('postImgInput');
 let imgUrl;
 inputLoader.addEventListener('change', (e) => {
   const file = e.target.files[0];
   const storageRef = firebase.storage().ref('images/' + file.name);
   const uploadTask = storageRef.put(file);
-
   uploadTask.on('state_changed', function (snapshot) {
   },
     function error(err) {
