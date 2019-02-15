@@ -144,9 +144,9 @@ const readPostFromDatabase = () => {
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='icondeskopt'><i class='fa fa-thumbs-up'></i></span>  <span id= 'countLike${coment.key}'></span> <p class='iconmovile'>Like </p></button></div>
                             <div class='col-4'>
-                            <button  class='btn-likecoment comments_home'id='${coment.key}'><span class='icondeskopt'><i class="far fa-comment"></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
+                            <button  class='btn-likecoment comments_home'id='${coment.key}'><span class='icondeskopt'><i class='far fa-comment'></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
                             <button  id="btn${coment.key}" userpp=${coment.key} class='btn-likecoment borrar'><span class='icondeskopt'><i class='far fa-trash-alt'></i></span><p class='iconmovile'>borrar</p></button></div>   
                                </div>
@@ -208,10 +208,10 @@ const readPostFromDatabase = () => {
                           <div class='box-buttons'>
                          <div class='row'>
                           <div class='col-4'>
-                              <button class='btn-likecoment likes' id='likPosRe${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
+                              <button class='btn-likecoment likes' id='likPosRe${coment.key}'><span class='icondeskopt'><i class='fa fa-thumbs-up'></i></span> <span id='countLikeRec${coment.key}'></span> <p class='iconmovile'>Like</p> </button></div>
 
                            <div class='col-4'>
-                              <button  class='btn-likecoment comments' id='${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button>
+                              <button  class='btn-likecoment comments' id='${coment.key}'><span class='icondeskopt'><i class='far fa-comment'></i></span><p class='iconmovile'>Ver Comentarios</p></button>
                             </div>
                                
                           <div class='col-4'>
@@ -303,9 +303,25 @@ const printLikes =(key, uid) =>{
      
       //textarea donde se crear el comentario 
   });
-//   document.getElementById(`${coment.key}`).value = UPDATE;//btn que dice comentar 
+  document.getElementById('savechanges').innerHTML = `
+  <button  class='btn-likecoment savechanges' id='btn-savechanges' >Guardar Cambios</button>`
+  let btnSave = document.getElementsByClassName('savechanges');
+  for(let i =0; i<btnSave.length; i++){
+     btnSave[i].addEventListener('click', saveEdition, false);
+  }
 //   modo = UPDATE;
 }
+
+const saveEdition = (e) => {
+    var editPostID =  e.currentTarget.getAttribute('id').slice(4);
+    var newPostKey =  e.currentTarget.getAttribute('value');
+    var firebaserefEdit = firebase.database().ref('posts/' + editPostID +'/coment/' + newPostKey);
+    firebaserefEdit.update({
+     coment: coments.value,
+    });
+}
+
+
 
 const readComentsHome = (e) => {       
     
@@ -402,8 +418,13 @@ const printCommentHome = (key,contenido,name,newPostKey) => {
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
+
+        <div class='row'>
+        <div class='col-6'>
         <button  class='btn-likecoment edit' id='edit${key}' value='${newPostKey}'>Editar</button>
-            
+        </div>
+        <div id='savechanges' class='col-6'></div>
+        </div>   
     </div> 
     `
    + document.getElementById("printHome"+ key).innerHTML;
