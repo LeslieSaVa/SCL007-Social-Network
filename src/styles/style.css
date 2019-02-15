@@ -545,12 +545,16 @@ padding:5px;
           width: 100%; 
           height: 85px;
         }
+        .coment-post{
+          width: 100%;
+          height: 85px;
+        }
+        #postImgInput{
+          padding: 12px;
+        }
   
   /* media queries for css style */
-.coment-post{
-width: 100%;
-height: 85px;
-}
+
 
 @media (max-width: 868px){
 .footericons{
