@@ -449,6 +449,21 @@ padding:5px;
       display: none;
       margin-bottom: 50px;
     }
+    .savebiograph{
+
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      outline: 0;
+      background:rgb(146, 100, 165);
+      width: 50%;
+      border: 0;
+      padding: 10px;
+      color: #FFFFFF;
+      font-size: 12px;
+      -webkit-transition: all 0.3 ease;
+      transition: all 0.3 ease;
+      cursor: pointer;
+    }
     
     
     
@@ -546,7 +561,11 @@ padding:5px;
         }
         .coment-post{
           width: 100%;
-          height: 85px;
+          height: 45px;
+        }
+        .coment-biograph{
+          width: 100%;
+          height: 25px;
         }
         #postImgInput{
           font-size: 12px;
