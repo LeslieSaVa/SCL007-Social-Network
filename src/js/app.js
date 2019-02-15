@@ -31,6 +31,7 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
     },
     
     
+    
   }
 
   // Llave que identifica el nuevo post
