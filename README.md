@@ -122,23 +122,23 @@ Como el proyecto se trata de una red social pensamos en crear un menú con icono
 
 ### - Sketch 2. Pantalla Inicio (Home)
 
-![Sketch 1](src/IMG/pantallainicio.jpg)
+![Sketch 2](src/IMG/pantallainicio.jpg)
 
 ### - Sketch 3. Pantalla Perfil Usuario
 
-![Sketch 1](src/IMG/pantallaperfil.jpg)
+![Sketch 3](src/IMG/pantallaperfil.jpg)
 
 ### - Sketch 4. Pantalla Crear Post
 
-![Sketch 1](src/IMG/pantallapostear.jpg)
+![Sketch 4](src/IMG/pantallapostear.jpg)
 
 ### - Sketch 5. Pantalla Recetas 
 
-![Sketch 1](src/IMG/pantallarecetas.jpg)
+![Sketch 5](src/IMG/pantallarecetas.jpg)
 
 ### - Sketch 6. Pantalla Buscar 
 
-![Sketch 1](src/IMG/pantallabuscar.jpg)
+![Sketch 6](src/IMG/pantallabuscar.jpg)
 
 Una vez analizado los resultados de nuestra investigación y definido el usuario objetivo que queremos abarcar, concretamos el primer prototipo en base a las necesidades de nuestro público. 
 
@@ -156,4 +156,30 @@ Considerando las conversaciones con usuarios llegamos a la conclusión de que el
 
 La paleta de colores que se utilizó para realizar la aplicación tiene su explicación en que el morado en la nutrición es el color del equilibrio. Además los alimentos morados son ricos en antioxidantes que mantienen el sistema inmune protegido. Por lo tanto, las personas que padecen alergias alimentarias tienen que mantener un equilibrio en su alimentación. 
 
+## Desarrollo de contenidos
 
+En este apartado se define el contenido del sitio y toda la información relevante acerca del mismo:
+
+
+- a) La primera pantalla que se presenta corresponde a la pantalla del login, donde el usuario puede acceder a la aplicación con un mail y una contraseña o bien con su cuenta google o facebook como prefiera. El usuario para poder entrar a la app debe ingresar un correo válido.
+
+![Img Login usuario pantalla inicial](src/IMG/pantallalogin1.png)
+
+![Img Login usuario pantalla inicial correo válido](src/IMG/correovalido.png)
+
+- b) Luego de ingresar o registrarse en la página el usuario se encontrara con el inicio que corresponde al icono home en el menú que se encuentra en la parte inferior del dispositivo móvil, donde podra encontrar post de otros usuarios con sus recomendaciones, datos y recetas. Además podrá comentar estos post y darles like, generandose una interacción con los demás usuarios de la aplicación. 
+
+![Img inicio (home) de la aplicación, post ususarios](src/IMG/post1.png)
+
+- c) El siguiente icono del menú corresponde a un símbolo más (+). Es aquí donde el usuario realizara sus post, indicara los correspondientes hashtags asociados a su publicación, un título para esta y finalmente escribira el contenido del post. Cabe destacar que no se pueden realizar comentarios con algunos de los campos anteriores sin rellenar.
+Opcionalmente el usuario podrá seleccionar una imagen para acompañar su post.  
+
+![Img crear post](src/IMG/crearpost1.png)
+
+- d) En el apartado de recetas (icono de tenedor) el usuario podra encontrar todo los post que los usuarios de la aplicación hayan realizado con el hashtag receta, recetas o recetas saludables 
+
+![Img crear post](src/IMG/recetas1.png)
+
+- e) En el último icono del menú el usuario encontrar su perfil, donde podra cerrar sesión y además guardar una breve descripción de él en su biografía 
+
+![Img perfil usuario](src/IMG/perfilperfil1.png)
