@@ -26,7 +26,6 @@ window.onload = () =>{
     
 }
 
-
 const registerWithEmail =()=>{
 
     const email = textEmail.value;
@@ -324,9 +323,9 @@ const printLikes =(key, uid) =>{
      document.getElementById(`comentsPostHome${editPostID}`).value = datos.contenido; 
      
       //textarea donde se crear el comentario 
-  });
+  }); 
   document.getElementById('savechanges').innerHTML = `
-  <button  class='btn-likecoment savechanges' id='btn-savechanges' >Guardar Cambios</button>`
+  <button  class='btn-likecoment savechanges' id='btn-savechanges${editPostID}' value='${newPostKey}' >Guardar Cambios</button>`
   let btnSave = document.getElementsByClassName('savechanges');
   for(let i =0; i<btnSave.length; i++){
      btnSave[i].addEventListener('click', saveEdition);
@@ -334,11 +333,22 @@ const printLikes =(key, uid) =>{
 }
 
 const saveEdition = (e) => {
-    var editPostID =  e.currentTarget.getAttribute('id').slice(4);
-    var newPostKey =  e.currentTarget.getAttribute('value');
-    var firebaserefEdit = firebase.database().ref('posts/' + editPostID +'/coment/' + newPostKey);
+    var saveChangePostID =  e.currentTarget.getAttribute('id').slice(15);
+    console.log(saveChangePostID)
+    var newPostKey1 =  e.currentTarget.getAttribute('value');
+    console.log(newPostKey1)
+    var newContent;
+    var firebaserefEdit = firebase.database().ref('posts/' + saveChangePostID +'/coment/' + newPostKey1);
+   
+    firebaserefEdit.once('value', function(snap){
+        var datos = snap.val();
+        console.log(datos);
+       document.getElementById(`comentsPostHome${saveChangePostID}`).value = datos.contenido; 
+       newContent = datos.contenido;
+    
+    })
     firebaserefEdit.update({
-     coment: contenido.value,
+      contenido: newContent
     });
 }
 
@@ -554,7 +564,7 @@ ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function
     snapshot.forEach(function(childSnapshot) {
      let childData = childSnapshot.val();
     
-     console.log(childData)
+    // console.log(childData)
 
         document.getElementById('result_search').innerHTML=`
         

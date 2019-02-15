@@ -183,3 +183,9 @@ Opcionalmente el usuario podrá seleccionar una imagen para acompañar su post.
 - e) En el último icono del menú el usuario encontrar su perfil, donde podra cerrar sesión y además guardar una breve descripción de él en su biografía 
 
 ![Img perfil usuario](src/IMG/perfilperfil1.png)
+ 
+- f) En la opción buscar del menú inferior (icono lupa) el usuario a través de hashtag podra buscar el contenido de su interés
+
+![Img perfil usuario](src/IMG/buscar1.png)
+
+
