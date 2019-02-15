@@ -272,7 +272,25 @@ li a:hover:not(.active) {
   margin-top: 20px;
    color:#8d57a1;
  }
+.text-login{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.red{
+  color:red;
+}
 
+.comentar-post{
+  margin-top:10px;
+border: 1px solid purple;
+padding:5px;
+text-align: left;
+}
+.comentar-post p{
+
+padding:5px;
+
+}
 /*** CARD STLES ***/
 
 .cards-container{
