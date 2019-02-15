@@ -307,9 +307,8 @@ const printLikes =(key, uid) =>{
   <button  class='btn-likecoment savechanges' id='btn-savechanges' >Guardar Cambios</button>`
   let btnSave = document.getElementsByClassName('savechanges');
   for(let i =0; i<btnSave.length; i++){
-     btnSave[i].addEventListener('click', saveEdition, false);
+     btnSave[i].addEventListener('click', saveEdition);
   }
-//   modo = UPDATE;
 }
 
 const saveEdition = (e) => {
@@ -317,7 +316,7 @@ const saveEdition = (e) => {
     var newPostKey =  e.currentTarget.getAttribute('value');
     var firebaserefEdit = firebase.database().ref('posts/' + editPostID +'/coment/' + newPostKey);
     firebaserefEdit.update({
-     coment: coments.value,
+     coment: contenido.value,
     });
 }
 
@@ -421,7 +420,7 @@ const printCommentHome = (key,contenido,name,newPostKey) => {
 
         <div class='row'>
         <div class='col-6'>
-        <button  class='btn-likecoment edit' id='edit${key}' value='${newPostKey}'>Editar</button>
+        <button  class='btn-likecoment edit' id='edit${key}' value='${newPostKey}'><span class='icondeskopt'><i class='fa fa-edit'></i></span><p class='iconmovile'>Editar</p></button>
         </div>
         <div id='savechanges' class='col-6'></div>
         </div>   
