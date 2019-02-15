@@ -144,7 +144,7 @@ const readPostFromDatabase = () => {
                         <div class='box-buttons'>
                        <div class='row'>
                         <div class='col-4'>
-                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='fa fa-thumbs-up'></span>  <span id= 'countLike${coment.key}'></span> Like </button></div>
+                            <button class='btn-likecoment likes' id='likePost${coment.key}'><span class='icondeskopt'><i class='fa fa-thumbs-up'></i></span>  <span id= 'countLike${coment.key}'></span> <p class='iconmovile'>Like </p></button></div>
                             <div class='col-4'>
                             <button  class='btn-likecoment comments_home'id='${coment.key}'><span class='icondeskopt'><i class='far fa-comment'></i></span><p class='iconmovile'>Ver comentarios</p></button></div>
                             <div class='col-4'>
@@ -207,10 +207,10 @@ const readPostFromDatabase = () => {
                           <div class='box-buttons'>
                          <div class='row'>
                           <div class='col-4'>
-                              <button class='btn-likecoment likes' id='likPosRe${coment.key}'><span class='fa fa-thumbs-up'></span> <span id='countLikeRec${coment.key}'></span> Like </button></div>
+                              <button class='btn-likecoment likes' id='likPosRe${coment.key}'><span class='icondeskopt'><i class='fa fa-thumbs-up'></i></span> <span id='countLikeRec${coment.key}'></span> <p class='iconmovile'>Like</p> </button></div>
 
                            <div class='col-4'>
-                              <button  class='btn-likecoment comments' id='${coment.key}'><span class='ion-chatbox-working'></span>Ver Comentarios</button>
+                              <button  class='btn-likecoment comments' id='${coment.key}'><span class='icondeskopt'><i class='far fa-comment'></i></span><p class='iconmovile'>Ver Comentarios</p></button>
                             </div>
                                
                           <div class='col-4'>
