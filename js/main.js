@@ -106,7 +106,8 @@ btnFacebook.addEventListener('click', loginFacebook)
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg);
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg,);
+
     index.click();
  }
  
@@ -133,9 +134,9 @@ const readPostFromDatabase = () => {
                         <h3>${coment.val().title}</h3><br>
                         
                           <div class='content'>  
-
-                            <p>${coment.val().body}</p>
-                            <img src='${coment.val().postImage}' style=" width: 100px;">
+                          <img class="img-post" src='${coment.val().postImage}'>
+                          <p>${coment.val().body}</p>
+                           
                           </div><br>
                           <h4>${coment.val().hashtag}</h4><br>
                           <span> Creado: ${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>
@@ -198,8 +199,8 @@ const readPostFromDatabase = () => {
                           </div>
                           <div class='box-content'>
                           <h3>${coment.val().title}</h3><br>
-                            <div class='content'>                            
-                              <p>${coment.val().body}</p><br>
+                            <div class='content'>  
+                            <img class="img-post" src='${coment.val().postImage}'/>            <p>${coment.val().body}</p><br>
                             </div>
                             <h4>${coment.val().hashtag}</h4><br>
                             <span> Creado:${coment.val().date.d} / ${coment.val().date.m} / ${coment.val().date.y} </span>

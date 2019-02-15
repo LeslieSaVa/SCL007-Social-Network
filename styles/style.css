@@ -546,11 +546,22 @@ padding:5px;
           height: 85px;
         }
   
-  /* media queries for css style */
-.coment-post{
-width: 100%;
-height: 85px;
+.img-post{
+  width: 100%;
+ margin-top: 20px;
+ margin-bottom: 20px;
+
+
+
 }
+
+.coment-post{
+  width: 100%;
+  height: 85px;
+  }
+
+  /* media queries for css style */
+
 
 @media (max-width: 868px){
 .footericons{
@@ -621,7 +632,7 @@ label {
   padding: 20px;
 }
 #coments{
-  height:200px;
+  height:150px;
 }
 
 .label-coments {
