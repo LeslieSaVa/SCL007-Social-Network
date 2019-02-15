@@ -14,7 +14,7 @@ export const writeUserData = (uid, name, email, imageUrl) => {
   });
 }
 
-export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,postTag,day,month,year)=>{
+export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,postTag,day,month,year, postImg)=>{
   // Crear nuevo post
   const postData = {
     profile_picture: imageUrl,
@@ -23,11 +23,14 @@ export const enviarConvalidacionAFirebase =(imageUrl,uid,username,title,body,pos
     body: body,
     title: title,
     hashtag: postTag,
+    postImage: postImg,
+ 
     'date':{
       d:day,
       m:month,
       y: year,
     },
+    
     
     
   }
