@@ -578,10 +578,7 @@ ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function
                  </div> 
             </div>
         <div class='col-3 col-m-2 col-s-12'></div>
-         </div>` + document.getElementById('result_search').innerHTML;
-
-
-        
+         </div>` + document.getElementById('result_search').innerHTML;        
 
     });   
   })
@@ -597,8 +594,9 @@ ref.orderByChild('hashtag').equalTo(`${conditionSearch}`).once('value', function
 const inputLoader = document.getElementById('postImgInput');
 
 inputLoader.addEventListener('change', (e) => {
+  const uid = firebase.auth().currentUser.uid
   const file = e.target.files[0];
-  const storageRef = firebase.storage().ref('images/' + file.name);
+  const storageRef = firebase.storage().ref(uid + '/images/' + file.name);
   const uploadTask = storageRef.put(file);
 
   uploadTask.on('state_changed', function (snapshot) {
@@ -607,11 +605,11 @@ inputLoader.addEventListener('change', (e) => {
     },
     function complete() {
       storageRef.getDownloadURL().then(function (url) {
-        const imgKey = firebase.database().ref('myPostImages/').push().key;
+        const imgKey = firebase.database().ref('posts').push().key;
         const updates = {};
         const dataImg = {
           url: url,
-          data: document.getElementById('textEmail').value,
+          data: firebase.auth().currentUser.email,
         };
         updates['/myPostImages/' + imgKey] = dataImg;
         firebase.database().ref().update(updates);
