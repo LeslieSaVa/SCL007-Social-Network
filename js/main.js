@@ -96,7 +96,6 @@ const name = firebase.auth().currentUser.displayName;
     let user_photo= photoUser !== null ? photoUser: 'IMG/avatar-default.png';
     const userId = firebase.auth().currentUser.uid;
     const tags = hashtagsPost.value;
-
     let imagen = imgUrl;
     let imagenDef = 'IMG/blanco.png'
     let postImg = imagen !== null ? imagen: imagenDef;
@@ -121,7 +120,7 @@ const name = firebase.auth().currentUser.displayName;
     }if ( tags == ''){
         alert(` Se deben rellenar todos los campos para poder publicar` )
     } 
-    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year,postImg);
+    enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg);
     index.click();
 
 
@@ -138,7 +137,7 @@ const readPostFromDatabase = () => {
     root.style.display='block'
     
     readPost((coment)=>{ 
-        
+    
         newcoments.innerHTML = 
       `          
       <div class='row' id= ${coment.key}>  
@@ -218,7 +217,7 @@ const readPostFromDatabase = () => {
                           <div class='box-content'>
                           <h3>${coment.val().title}</h3><br>
                             <div class='content'>           
-                            <img class="img-post" src='${coment.val().postImage}'>                 
+                            <img class="img-post" src='${coment.val().imagen}'>                 
                              <p>${coment.val().body}</p><br>
                               
                             </div>
@@ -326,9 +325,25 @@ const printLikes =(key, uid) =>{
      
       //textarea donde se crear el comentario 
   });
-//   document.getElementById(`${coment.key}`).value = UPDATE;//btn que dice comentar 
+  document.getElementById('savechanges').innerHTML = `
+  <button  class='btn-likecoment savechanges' id='btn-savechanges' >Guardar Cambios</button>`
+  let btnSave = document.getElementsByClassName('savechanges');
+  for(let i =0; i<btnSave.length; i++){
+     btnSave[i].addEventListener('click', saveEdition, false);
+  }
 //   modo = UPDATE;
 }
+
+const saveEdition = (e) => {
+    var editPostID =  e.currentTarget.getAttribute('id').slice(4);
+    var newPostKey =  e.currentTarget.getAttribute('value');
+    var firebaserefEdit = firebase.database().ref('posts/' + editPostID +'/coment/' + newPostKey);
+    firebaserefEdit.update({
+     coment: coments.value,
+    });
+}
+
+
 
 const readComentsHome = (e) => {       
     
@@ -430,8 +445,13 @@ const printCommentHome = (key,contenido,name,newPostKey) => {
     <div id= ${key} style='border: 1px solid purple'>
         <p>${nombre}</p>
         <h3>${contenido}<h3> 
+
+        <div class='row'>
+        <div class='col-6'>
         <button  class='btn-likecoment edit' id='edit${key}' value='${newPostKey}'>Editar</button>
-            
+        </div>
+        <div id='savechanges' class='col-6'></div>
+        </div>   
     </div> 
     `
    + document.getElementById("printHome"+ key).innerHTML;
