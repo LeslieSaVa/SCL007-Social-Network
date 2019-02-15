@@ -552,7 +552,22 @@ padding:5px;
         #postImgInput{
           padding: 12px;
         }
-  
+
+.img-post{
+  width: 100%;
+ margin-top: 20px;
+ margin-bottom: 20px;
+
+
+
+}
+
+
+.coment-post{
+  width: 100%;
+  height: 85px;
+  }
+
   /* media queries for css style */
 
 
@@ -625,7 +640,7 @@ label {
   padding: 20px;
 }
 #coments{
-  height:200px;
+  height:150px;
 }
 
 .label-coments {
