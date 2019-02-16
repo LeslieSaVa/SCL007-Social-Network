@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/grid.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
  <title>Happy with Allergies</title>
@@ -117,7 +115,7 @@
                  
                         <div class="row">
                             <div class="col-3 label-coments">
-                                <label for="title">Titulo</label>
+                                <label name="title">Titulo</label>
                             </div>
                             <div class="col-9 input-coments">
                                 <input type="text" name="titulo" id="tituloaconvalidar" class="text">
@@ -126,7 +124,7 @@
                     
                         <div class="row">
                             <div class="col-3 label-coments">
-                                 <label for="title">Hashtags</label>
+                                 <label name="title">Hashtags</label>
                             </div>
                             <div class="col-9 input-coments">
                                  <input type="text" name="hashtags" id="hashtagsPost" class="text" placeholder="Recuerda siempre anteponer #">
@@ -137,14 +135,14 @@
                                 <label id="fileUpload" for="postImgInput" class="inputTitle">Escoger imagen</label>
                             </div>
                             <div class="col-12 input-coments">
-                                <input type="file" value="upload" id="postImgInput">
+                                <input type="file"  id="postImgInput">
                             </div>
                         </div>
                         
 
                         <div class="row">
                             <div class="col-3 label-coments">
-                              <label for="subject">Escribe tu Post</label>
+                              <label name="subject">Escribe tu Post</label>
                             </div>
                             <div class="col-9 input-coments">
                               <textarea name="comentario" id="coments" ></textarea>
@@ -252,6 +250,8 @@
         
 
 <!-- scripts -->
+<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
 <script>
  // Initialize Firebase
  var config = {
