@@ -122,9 +122,6 @@ const name = firebase.auth().currentUser.displayName;
     } 
     enviarConvalidacionAFirebase(user_photo,userId, name,title,coment,tags, day , month, year, postImg);
     index.click();
-
-
-    
     
  }
  
@@ -393,7 +390,7 @@ const readComentsHome = (e) => {
                         </div>
                  ` + document.getElementById(`print${keyRecipes}`).innerHTML;                 
                 
-               }}   
+               }}   k 
         })
 
    }
